@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="6dp"
+    android:background="#e4e3e3"
+    android:weightSum="2">
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <ImageView
+            android:id="@+id/iv_voucher_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            android:src="@drawable/coupon_blue" />
+
+        <com.ogma.dealshaiapp.utility.OpenSansFontSemibold
+            android:id="@+id/tv_referral_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:letterSpacing="0.05"
+            android:text="REFER100"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_medium"
+            tools:ignore="UnusedAttribute" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/margin_16"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.ogma.dealshaiapp.utility.OpenSansFontBold
+                android:id="@+id/tv_voucher_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="₹500"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/text_medium" />
+
+            <com.ogma.dealshaiapp.utility.OpenSansFontRegular
+                android:id="@+id/tv_voucher_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="@dimen/margin_10"
+                android:drawableStart="@drawable/red_dot"
+                android:text=" Expired"
+                android:gravity="center_vertical"
+                android:textColor="@color/red_dot_color" />
+        </RelativeLayout>
+
+
+        <com.ogma.dealshaiapp.utility.OpenSansFontRegular
+            android:id="@+id/tv_voucher_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:text="Expire on: 12-10-2018"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/text_small" />
+
+    </LinearLayout>
+
+</LinearLayout>

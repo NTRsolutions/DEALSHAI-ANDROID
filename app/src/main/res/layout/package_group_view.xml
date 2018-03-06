@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/parentPanel"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <View
+        android:id="@+id/view1"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin_15"
+        android:background="@android:color/white" />
+
+    <View
+        android:id="@+id/view2"
+        android:layout_below="@+id/view1"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/colorPrimaryDark" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_below="@+id/view2"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin_15"
+        android:background="@android:color/white" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/view"
+        android:background="@color/colorPrimaryDark"
+        android:gravity="center_vertical"
+        android:padding="5dp">
+
+        <com.ogma.dealshaiapp.utility.OpenSansFontBold
+            android:id="@+id/tv_new_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/margin_5"
+            android:background="@drawable/shape_signup_background"
+            android:padding="5dp"
+            android:text="₹ 500"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <com.ogma.dealshaiapp.utility.OpenSansFontBold
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:text="DEALSHAI+"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <com.ogma.dealshaiapp.utility.OpenSansFontBold
+            android:id="@+id/tv_old_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@+id/tv_new_price"
+            android:gravity="center"
+            android:text="₹2500"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_small" />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>
+

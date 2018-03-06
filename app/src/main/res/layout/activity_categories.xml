@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/parentPanel"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/shape_gray_gradient_background"
+    android:orientation="vertical"
+    android:padding="5dp"
+    tools:context="com.ogma.dealshaiapp.fragment.FragmentMoreCategories">
+
+    <FrameLayout
+        android:id="@+id/error_screen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg"
+        android:visibility="gone" />
+
+    <com.ogma.dealshaiapp.utility.OpenSansFontBold
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingBottom="5dp"
+        android:paddingEnd="5dp"
+        android:paddingStart="5dp"
+        android:text="Categories"
+        android:textAllCaps="true"
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
+
+    <GridView
+        android:id="@+id/gv_categories"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="start|center"
+        android:horizontalSpacing="10dp"
+        android:numColumns="2"
+        android:scrollbars="none"
+        android:verticalSpacing="10dp">
+
+    </GridView>
+
+    <!--<LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:weightSum="2">
+
+       <LinearLayout
+           android:layout_width="0dp"
+           android:layout_height="wrap_content"
+           android:layout_margin="5dp"
+           android:layout_weight="1"
+           android:background="@drawable/shape_curved_rectangle_background2"
+           android:gravity="start|center"
+           android:padding="6dp">
+
+           <ImageView
+               android:layout_width="36dp"
+               android:layout_height="36dp"
+               android:layout_marginEnd="5dp"
+               android:src="@drawable/shooping_icon" />
+
+        com.dealshaiappiappiapp.utility.OpenSansFontBold
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="  Shopping"
+               android:textColor="@android:color/black"
+               android:textSize="16sp"
+               android:textStyle="bold" />
+
+       </LinearLayout>
+
+       <LinearLayout
+           android:layout_width="0dp"
+           android:layout_height="wrap_content"
+           android:layout_margin="5dp"
+           android:layout_weight="1"
+           android:background="@drawable/shape_curved_rectangle_background2"
+           android:gravity="start|center"
+           android:padding="6dp">
+
+           <ImageView
+               android:layout_width="36dp"
+               android:layout_height="36dp"
+               android:layout_marginEnd="5dp"
+               android:src="@drawable/education_icon" />
+
+           <android.support.v7.widget.AppCompatTextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="  Education"
+               android:textColor="@android:color/black"
+               android:textSize="16sp"
+               android:textStyle="bold" />
+
+       </LinearLayout>
+
+   </LinearLayout>
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:weightSum="2">
+
+       <LinearLayout
+           android:layout_width="0dp"
+           android:layout_height="wrap_content"
+           android:layout_margin="5dp"
+           android:layout_weight="1"
+           android:background="@drawable/shape_curved_rectangle_background2"
+           android:gravity="start|center"
+           android:padding="6dp">
+
+           <ImageView
+               android:layout_width="36dp"
+               android:layout_height="36dp"
+               android:layout_marginEnd="5dp"
+               android:src="@drawable/spa_icon" />
+
+           <android.support.v7.widget.AppCompatTextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="  Spa"
+               android:textColor="@android:color/black"
+               android:textSize="16sp"
+               android:textStyle="bold" />
+
+       </LinearLayout>
+
+       <LinearLayout
+           android:layout_width="0dp"
+           android:layout_height="wrap_content"
+           android:layout_margin="5dp"
+           android:layout_weight="1"
+           android:background="@drawable/shape_curved_rectangle_background2"
+           android:gravity="start|center"
+           android:padding="6dp">
+
+           <ImageView
+               android:layout_width="36dp"
+               android:layout_height="36dp"
+               android:layout_marginEnd="5dp"
+               android:src="@drawable/fun_time" />
+
+           <android.support.v7.widget.AppCompatTextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="  Fun Time"
+               android:textColor="@android:color/black"
+               android:textSize="16sp"
+               android:textStyle="bold" />
+
+       </LinearLayout>
+
+   </LinearLayout>
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:weightSum="2">
+
+       <LinearLayout
+           android:layout_width="0dp"
+           android:layout_height="wrap_content"
+           android:layout_margin="5dp"
+           android:layout_weight="1"
+           android:background="@drawable/shape_curved_rectangle_background2"
+           android:gravity="start|center"
+           android:padding="6dp">
+
+           <ImageView
+               android:layout_width="36dp"
+               android:layout_height="36dp"
+               android:layout_marginEnd="5dp"
+               android:src="@drawable/foodie_icon" />
+
+           <android.support.v7.widget.AppCompatTextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="  Shopping"
+               android:textColor="@android:color/black"
+               android:textSize="16sp"
+               android:textStyle="bold" />
+
+       </LinearLayout>
+
+       <LinearLayout
+           android:layout_width="0dp"
+           android:layout_height="wrap_content"
+           android:layout_margin="5dp"
+           android:layout_weight="1"
+           android:background="@drawable/shape_curved_rectangle_background2"
+           android:gravity="start|center"
+           android:padding="6dp">
+
+           <ImageView
+               android:layout_width="36dp"
+               android:layout_height="36dp"
+               android:layout_marginEnd="5dp"
+               android:src="@drawable/cinema_icon" />
+
+           <android.support.v7.widget.AppCompatTextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="  Education"
+               android:textColor="@android:color/black"
+               android:textSize="16sp"
+               android:textStyle="bold" />
+
+       </LinearLayout>
+
+   </LinearLayout>
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:weightSum="2">
+
+       <LinearLayout
+           android:layout_width="0dp"
+           android:layout_height="wrap_content"
+           android:layout_margin="5dp"
+           android:layout_weight="1"
+           android:background="@drawable/shape_curved_rectangle_background2"
+           android:gravity="start|center"
+           android:padding="6dp">
+
+           <ImageView
+               android:layout_width="36dp"
+               android:layout_height="36dp"
+               android:layout_marginEnd="5dp"
+               android:src="@drawable/sheesha_icon" />
+
+           <android.support.v7.widget.AppCompatTextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="  Sheesha"
+               android:textColor="@android:color/black"
+               android:textSize="16sp"
+               android:textStyle="bold" />
+
+       </LinearLayout>
+
+       <LinearLayout
+           android:layout_width="0dp"
+           android:layout_height="wrap_content"
+           android:layout_margin="5dp"
+           android:layout_weight="1"
+           android:background="@drawable/shape_curved_rectangle_background2"
+           android:gravity="start|center"
+           android:padding="6dp">
+
+           <ImageView
+               android:layout_width="36dp"
+               android:layout_height="36dp"
+               android:layout_marginEnd="5dp"
+               android:src="@drawable/salon" />
+
+           <android.support.v7.widget.AppCompatTextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="  Salon"
+               android:textColor="@android:color/black"
+               android:textSize="16sp"
+               android:textStyle="bold" />
+
+       </LinearLayout>
+
+   </LinearLayout>
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:weightSum="2">
+
+       <LinearLayout
+           android:layout_width="0dp"
+           android:layout_height="wrap_content"
+           android:layout_margin="5dp"
+           android:layout_weight="1"
+           android:background="@drawable/shape_curved_rectangle_background2"
+           android:gravity="start|center"
+           android:padding="6dp">
+
+           <ImageView
+               android:layout_width="36dp"
+               android:layout_height="36dp"
+               android:layout_marginEnd="5dp"
+               android:src="@drawable/event_icon" />
+
+           <android.support.v7.widget.AppCompatTextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="  Events"
+               android:textColor="@android:color/black"
+               android:textSize="16sp"
+               android:textStyle="bold" />
+
+       </LinearLayout>
+
+
+   </LinearLayout>-->
+
+</LinearLayout>

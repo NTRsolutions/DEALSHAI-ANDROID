@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/parentPanel"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    tools:context="com.ogma.dealshaiapp.activity.CheckOut">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorHeaderBar"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Dark"
+            app:titleTextColor="@android:color/black" />
+    </android.support.design.widget.AppBarLayout>
+
+    <ScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tv_btn_proceed"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/app_bar">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <com.ogma.dealshaiapp.utility.OpenSansFontSemibold
+                android:id="@+id/merchant_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:gravity="center_vertical"
+                android:padding="5dp"
+                android:text="Restaurant"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/text_medium" />
+
+            <com.ogma.dealshaiapp.utility.OpenSansFontRegular
+                android:id="@+id/tv_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/merchant_title"
+                android:gravity="center_vertical"
+                android:padding="5dp"
+                android:text="Details"
+                android:textSize="@dimen/text_medium" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.2dp"
+                android:layout_below="@+id/tv_details"
+                android:background="@color/black_overlay" />
+
+            <LinearLayout
+                android:id="@+id/ll_purchase_items"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_details"
+                android:background="#DCDEDC"
+                android:orientation="vertical"
+                android:paddingEnd="5dp"
+                android:paddingStart="5dp"
+                android:paddingTop="5dp">
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:visibility="visible"
+                android:id="@+id/tv_promo_code"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ll_purchase_items">
+
+                <com.ogma.dealshaiapp.utility.OpenSansFontSemibold
+                    android:id="@+id/textView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:padding="5dp"
+                    android:text="Apply Promo Code"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/text_medium" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/textView1"
+                    android:background="@drawable/shape_plain_rectangle_background"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <android.support.v7.widget.AppCompatEditText
+                        android:id="@+id/et_promo_code"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.7"
+                        android:background="@android:color/transparent"
+                        android:inputType="textNoSuggestions"
+                        android:padding="5dp" />
+
+                    <com.ogma.dealshaiapp.utility.OpenSansFontBold
+                        android:id="@+id/tv_btn_apply"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.3"
+                        android:background="@color/colorTheme"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="Apply"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/text_medium" />
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="match_parent"
+                android:layout_height="0.2dp"
+                android:layout_below="@+id/rl_total_amount"
+                android:layout_marginTop="5dp"
+                android:background="@color/black_overlay" />
+
+            <RelativeLayout
+                android:id="@+id/rl_total_amount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/tv_promo_code"
+                android:layout_marginTop="10dp">
+
+                <com.ogma.dealshaiapp.utility.OpenSansFontSemibold
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:padding="5dp"
+                    android:text="Total Payable"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/text_medium" />
+
+                <com.ogma.dealshaiapp.utility.OpenSansFontBold
+                    android:id="@+id/tv_total_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="5dp"
+                    android:gravity="center_vertical"
+                    android:padding="5dp"
+                    android:text="$1500"
+                    android:textColor="@color/colorTheme"
+                    android:textSize="@dimen/text_medium" />
+            </RelativeLayout>
+
+            <View
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="0.2dp"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/textView2"
+                android:background="@color/black_overlay" />
+
+            <com.ogma.dealshaiapp.utility.OpenSansFontSemibold
+                android:visibility="gone"
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rl_total_amount"
+                android:gravity="center_vertical"
+                android:padding="5dp"
+                android:text="Save more using payment offers"
+                android:textSize="@dimen/text_medium" />
+
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/offers_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textView2"
+                android:layout_margin="5dp"
+                android:background="#DCDEDC"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/state_bank" />
+
+                    <com.ogma.dealshaiapp.utility.OpenSansFontSemibold
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="State Bank Offers"
+                        android:textSize="@dimen/text_medium" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/airtel" />
+
+                    <com.ogma.dealshaiapp.utility.OpenSansFontSemibold
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="Airtel Money Offers"
+                        android:textSize="@dimen/text_medium" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/mobikwik" />
+
+                    <com.ogma.dealshaiapp.utility.OpenSansFontSemibold
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="Mobikwik Offers"
+                        android:textSize="@dimen/text_medium" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+    <com.ogma.dealshaiapp.utility.OpenSansFontBold
+        android:id="@+id/tv_btn_proceed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorTheme"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="Proceed to pay"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/text_large" />
+
+    <FrameLayout
+        android:id="@+id/error_screen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg"
+        android:visibility="gone" />
+
+</RelativeLayout>

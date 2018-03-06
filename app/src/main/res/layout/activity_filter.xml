@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="@dimen/margin_10"
+    android:layout_marginTop="60dp"
+    android:layout_marginBottom="50dp"
+    android:background="@android:color/white"
+    android:scrollbars="none">
+
+    <com.ogma.dealshaiapp.utility.OpenSansFontSemibold
+        android:id="@+id/title_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/margin_5"
+        android:background="@color/colorThemeBlue"
+        android:text="Filters"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/text_large" />
+
+    <ExpandableListView
+        android:id="@+id/exlv_filters"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title_header"
+        android:layout_above="@+id/relativeLayout3"
+        android:dividerHeight="2dp"
+        android:scrollbars="none"
+        android:padding="@dimen/margin_5" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:padding="@dimen/margin_5">
+
+        <com.ogma.dealshaiapp.utility.OpenSansFontBold
+            android:id="@+id/tv_btn_apply"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/tv_btn_cancel"
+            android:layout_alignBottom="@+id/tv_btn_cancel"
+            android:layout_marginEnd="10dp"
+            android:layout_toStartOf="@+id/tv_btn_cancel"
+            android:background="@color/colorTheme"
+            android:padding="@dimen/margin_5"
+            android:text="APPLY"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_medium"
+            android:visibility="invisible" />
+
+
+        <com.ogma.dealshaiapp.utility.OpenSansFontBold
+            android:id="@+id/tv_btn_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:background="@color/colorPrimaryDark"
+            android:padding="@dimen/margin_5"
+            android:text="CANCEL"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_medium" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

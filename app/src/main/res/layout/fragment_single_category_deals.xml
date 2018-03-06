@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/parentPanel"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.ogma.dealshaiapp.fragment.FragmentIndivisualCategories">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_scrollFlags="scroll|enterAlways">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#e7e9e9"
+                android:orientation="vertical"
+                android:padding="@dimen/margin_5">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:padding="5dp">
+
+                    <ImageView
+                        android:id="@+id/iv_filter"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignTop="@+id/iv_sort"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_filter"
+                        android:tint="@color/colorTheme" />
+
+                    <com.ogma.dealshaiapp.utility.OpenSansFontSemibold
+                        android:id="@+id/tv_filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@+id/iv_sort"
+                        android:layout_gravity="start"
+                        android:layout_toEndOf="@+id/iv_filter"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:paddingBottom="3dp"
+                        android:paddingEnd="15dp"
+                        android:paddingStart="5dp"
+                        android:paddingTop="3dp"
+                        android:text="Filter"
+                        android:textColor="#232323"
+                        android:textSize="@dimen/text_medium"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:id="@+id/iv_sort"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_sort"
+                        android:tint="@color/colorTheme" />
+
+                    <android.support.v7.widget.AppCompatSpinner
+                        android:id="@+id/spinner_sort"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toStartOf="@+id/iv_sort"
+                        android:background="@null">
+
+                    </android.support.v7.widget.AppCompatSpinner>
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/margin_5" />
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+    <FrameLayout
+        android:id="@+id/error_screen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg"
+        android:visibility="gone" />
+
+</android.support.design.widget.CoordinatorLayout>

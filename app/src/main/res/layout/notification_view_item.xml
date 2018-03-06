@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:layout_marginBottom="2dp">
+
+    <com.ogma.dealshaiapp.utility.OpenSansFontSemibold
+        android:id="@+id/tv_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/margin_5"
+        android:text="Men and Women: Complete Thyroid Checkup Men and Women: Complete Thyroid Checkup"
+        android:textColor="@color/textBlack"
+        android:background="@android:color/white"
+        android:textSize="@dimen/text_medium" />
+
+</LinearLayout>

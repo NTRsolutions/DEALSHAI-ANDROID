@@ -1,0 +1,44 @@
+<resources>
+    <string name="app_name">Dealshai</string>
+
+    <string name="facebook_app_id">500344570329113</string>
+    <string name="fb_login_protocol_scheme">fb500344570329113</string>
+    <!--<string name="google_api_key">AIzaSyBq85wZMoc2VhxJc0NAl7pg5EclcTgHN34</string>-->
+    <string name="google_api_key">AIzaSyAxM66ZAq4slRWv04YKMOzOyFM-8c7siYI</string>
+    <string name="sha">1D:63:05:29:AD:B6:54:D0:05:DF:EE:5B:59:18:3F:3B:37:AB:E2:0C</string>
+
+    <string name="title_activity_welcome_screen">WelcomeScreen</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="password">Password</string>
+    <string name="show_password">show_password</string>
+    <string name="username">Username</string>
+    <string name="username_email">Username / Email</string>
+    <string name="email">Email</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="sign_ip">Sign In</string>
+    <string name="lost_your_password">Lost your password?</string>
+    <string name="app_logo">app_logo</string>
+    <string name="forgot_your_password">Forgot your password?</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="login">Login</string>
+    <string name="resend">Resend</string>
+    <string name="title_activity_try">Try</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="ok">Ok</string>
+    <string name="exit">Exit</string>
+    <string name="no_internet_connection">No Internet Connection</string>
+    <string name="price">₹0</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="call">Call</string>
+    <string name="cancel">Cancel</string>
+    <string name="contact">Contact</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

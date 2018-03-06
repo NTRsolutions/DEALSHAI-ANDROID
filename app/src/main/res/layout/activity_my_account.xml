@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/parentPanel"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical"
+    tools:context="com.ogma.dealshaiapp.activity.MyAccount">
+
+    <FrameLayout
+        android:id="@+id/error_screen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        android:background="@color/colorPrimary"
+        android:gravity="center">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_image"
+            android:layout_width="128dp"
+            android:layout_height="128dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/pf_male" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_img_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/profile_image"
+            android:layout_alignEnd="@+id/profile_image"
+            android:src="@drawable/icon_camera"
+            android:tint="@android:color/white"
+            app:backgroundTint="@color/colorPrimaryDark"
+            app:fabSize="mini" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@android:color/white"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:background="#f4f4f4"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/margin_5">
+
+            <com.ogma.dealshaiapp.utility.OpenSansFontBold
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Basic Info"
+                android:textColor="#030303"
+                android:textSize="@dimen/text_large" />
+
+            <ImageView
+                android:id="@+id/iv_info_edit"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_alignParentEnd="true"
+                android:padding="@dimen/margin_5"
+                android:src="@drawable/ic_edit"
+                android:tint="@android:color/black" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:background="#f4f4f4"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/margin_5">
+
+            <ImageView
+                android:id="@+id/iv_name"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:padding="@dimen/margin_5"
+                android:src="@drawable/user_icon"
+                android:tint="@android:color/black" />
+
+            <com.ogma.dealshaiapp.utility.OpenSansFontSemibold
+                android:id="@+id/et_profile_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/iv_name"
+                android:layout_toEndOf="@+id/iv_name"
+                android:background="#f4f4f4"
+                android:enabled="false"
+                android:hint="Name"
+                android:inputType="text"
+                android:padding="@dimen/margin_5"
+                android:textColor="#030303"
+                android:textColorHint="#030303"
+                android:textSize="@dimen/text_medium"
+                tools:ignore="LabelFor" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:background="#f4f4f4"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/margin_5">
+
+            <ImageView
+                android:id="@+id/iv_contact"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:padding="@dimen/margin_5"
+                android:src="@drawable/ic_mobie"
+                android:tint="@android:color/black" />
+
+            <com.ogma.dealshaiapp.utility.OpenSansFontSemibold
+                android:id="@+id/contact_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/iv_contact"
+                android:layout_toEndOf="@+id/iv_contact"
+                android:background="#f4f4f4"
+                android:enabled="false"
+                android:hint="Mobile No."
+                android:inputType="phone"
+                android:padding="@dimen/margin_5"
+                android:textColor="#030303"
+                android:textColorHint="#030303"
+                android:textSize="@dimen/text_medium"
+                tools:ignore="LabelFor" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:background="#f4f4f4"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/margin_5">
+
+            <ImageView
+                android:id="@+id/iv_email"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:padding="@dimen/margin_5"
+                android:src="@drawable/ic_email"
+                android:tint="@android:color/black" />
+
+            <com.ogma.dealshaiapp.utility.OpenSansFontSemibold
+                android:id="@+id/et_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/iv_email"
+                android:layout_toEndOf="@+id/iv_email"
+                android:background="#f4f4f4"
+                android:enabled="false"
+                android:hint="Email Id"
+                android:inputType="textEmailAddress"
+                android:padding="@dimen/margin_5"
+                android:textColor="#030303"
+                android:textColorHint="#030303"
+                android:textSize="@dimen/text_medium"
+                tools:ignore="LabelFor" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:background="#f4f4f4"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/margin_5">
+
+            <ImageView
+                android:id="@+id/iv_gender"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:padding="@dimen/margin_5"
+                android:src="@drawable/ic_gender"
+                android:tint="@android:color/black" />
+
+            <com.ogma.dealshaiapp.utility.OpenSansFontSemibold
+                android:id="@+id/et_gender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/iv_gender"
+                android:layout_toEndOf="@+id/iv_gender"
+                android:background="#f4f4f4"
+                android:enabled="false"
+                android:hint="Gender"
+                android:inputType="textEmailAddress"
+                android:padding="@dimen/margin_5"
+                android:textColor="#030303"
+                android:textColorHint="#030303"
+                android:textSize="@dimen/text_medium"
+                tools:ignore="LabelFor" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:background="#f4f4f4"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/margin_5">
+
+            <ImageView
+                android:id="@+id/iv_birthday"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:padding="@dimen/margin_5"
+                android:src="@drawable/ic_birthday"
+                android:tint="@android:color/black" />
+
+            <com.ogma.dealshaiapp.utility.OpenSansFontSemibold
+                android:id="@+id/et_dob"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/iv_birthday"
+                android:layout_toEndOf="@+id/iv_birthday"
+                android:background="#f4f4f4"
+                android:hint="Date of Birth"
+                android:padding="@dimen/margin_5"
+                android:textColor="#030303"
+                android:textColorHint="#030303"
+                android:textSize="@dimen/text_medium" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

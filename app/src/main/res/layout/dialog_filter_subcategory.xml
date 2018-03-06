@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:background="#F5EED5"
+    android:padding="@dimen/margin_5"
+    android:layout_marginStart="@dimen/margin_10">
+
+    <com.ogma.dealshaiapp.utility.OpenSansFontBold
+        android:id="@+id/tv_child_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Sub Category"
+        android:textSize="@dimen/text_medium"
+        android:textColor="@color/colorTheme"
+        android:textColorHint="#030303"
+        android:padding="@dimen/margin_5" />
+
+</LinearLayout>
+
+
+
+

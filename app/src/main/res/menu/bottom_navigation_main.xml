@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/nav_1"
+        android:orderInCategory="100"
+        android:title="Home"
+        android:icon="@drawable/foodie_icon"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/nav_2"
+        android:orderInCategory="100"
+        android:title="Like"
+        android:icon="@drawable/like_thumb"
+        app:showAsAction="collapseActionView" />
+
+    <item
+        android:id="@+id/nav_3"
+        android:orderInCategory="102"
+        android:title="Purchase"
+        android:icon="@drawable/purchase_icon"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/nav_4"
+        android:orderInCategory="103"
+        android:title="Rate"
+        android:icon="@drawable/app_icon"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/nav_5"
+        android:orderInCategory="104"
+        android:title="Logout"
+        android:icon="@drawable/logout_icon"
+        app:showAsAction="ifRoom" />
+
+
+</menu>

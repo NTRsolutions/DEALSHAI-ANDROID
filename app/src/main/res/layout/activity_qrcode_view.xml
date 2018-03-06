@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/parentPanel"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:orientation="vertical"
+    app:cardCornerRadius="8dp"
+    android:layout_margin="@dimen/margin_10"
+    tools:context="com.ogma.dealshaiapp.dialog.QRCodeView">
+
+    <FrameLayout
+        android:id="@+id/error_screen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:orientation="vertical">
+
+        <com.ogma.dealshaiapp.utility.OpenSansFontBold
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="QR Code"
+            android:textColor="@android:color/black"
+            android:layout_alignParentTop="true"
+            android:textSize="18sp"
+            android:id="@+id/openSansFontBold2" />
+
+        <ImageView
+            android:id="@+id/index_banner"
+            android:layout_width="256dp"
+            android:layout_height="256dp"
+            android:layout_below="@+id/openSansFontBold2"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:background="@drawable/shape_stork_rectangle_background" />
+
+        <com.ogma.dealshaiapp.utility.OpenSansFontBold
+            android:id="@+id/tv_unique_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/openSansFontBold3"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:background="#969696"
+            android:gravity="center"
+            android:paddingEnd="@dimen/margin_15"
+            android:paddingStart="@dimen/margin_15"
+            android:text="Unique Code"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_large" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/tv_unique_code"
+            android:layout_marginTop="22dp"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FDF2E1"
+                android:orientation="vertical"
+                android:paddingEnd="@dimen/margin_5"
+                android:paddingStart="@dimen/margin_5">
+
+                <com.ogma.dealshaiapp.utility.OpenSansFontBold
+                    android:id="@+id/tv_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:text="Food"
+                    android:textAllCaps="true"
+                    android:textColor="@color/textBlack"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <com.ogma.dealshaiapp.utility.OpenSansFontSemibold
+                    android:id="@+id/openSansFontBold4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/tv_title"
+                    android:gravity="center"
+                    android:text="Qty:"
+                    android:textSize="@dimen/text_small" />
+
+                <com.ogma.dealshaiapp.utility.OpenSansFontBold
+                    android:id="@+id/tv_quantity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/openSansFontBold4"
+                    android:layout_alignBottom="@+id/openSansFontBold4"
+                    android:layout_marginStart="@dimen/margin_10"
+                    android:layout_toEndOf="@+id/openSansFontBold4"
+                    android:gravity="center"
+                    android:text="0"
+                    android:textSize="@dimen/text_medium" />
+
+                <com.ogma.dealshaiapp.utility.OpenSansFontSemibold
+                    android:id="@+id/openSansFontBold5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/tv_price"
+                    android:layout_alignParentStart="true"
+                    android:gravity="center"
+                    android:text="Price:"
+                    android:textSize="@dimen/text_small" />
+
+                <com.ogma.dealshaiapp.utility.OpenSansFontBold
+                    android:id="@+id/tv_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_quantity"
+                    android:layout_marginStart="@dimen/margin_10"
+                    android:layout_toEndOf="@+id/openSansFontBold5"
+                    android:gravity="center"
+                    android:text="0"
+                    android:textSize="@dimen/text_medium" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorHeaderBar"
+                android:gravity="center|end"
+                android:padding="5dp">
+
+                <com.ogma.dealshaiapp.utility.OpenSansFontSemibold
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginStart="0dp"
+                    android:gravity="center"
+                    android:text="Total Amount:"
+                    android:textColor="#101010"
+                    android:textSize="@dimen/text_medium"
+                    android:textStyle="bold" />
+
+                <com.ogma.dealshaiapp.utility.OpenSansFontBold
+                    android:id="@+id/tv_total_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textColor="@color/colorTheme"
+                    android:textSize="@dimen/text_medium"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <com.ogma.dealshaiapp.utility.OpenSansFontBold
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/index_banner"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_marginTop="7dp"
+            android:text="Or"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/text_medium"
+            android:id="@+id/openSansFontBold3" />
+
+        <ImageView
+            android:id="@+id/iv_esc"
+            android:layout_alignParentEnd="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/cross_icon"
+            android:layout_marginEnd="@dimen/margin_5"
+            android:layout_marginTop="@dimen/margin_5" />
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

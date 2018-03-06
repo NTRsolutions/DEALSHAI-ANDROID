@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:background="#eceaea"
+    android:padding="@dimen/margin_5">
+
+    <com.ogma.dealshaiapp.utility.OpenSansFontBold
+        android:id="@+id/tv_group_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Category"
+        android:textAllCaps="true"
+        android:textSize="@dimen/text_medium"
+        android:textColor="#030303"
+        android:textColorHint="#030303"
+        android:padding="@dimen/margin_5" />
+
+    <LinearLayout
+        android:id="@+id/ll_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/tv_group_name"
+        android:layout_centerVertical="true"
+        android:gravity="end">
+
+        <ImageView
+            android:id="@+id/iv_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_arrow_next" />
+    </LinearLayout>
+
+</RelativeLayout>
+
+
+
+
