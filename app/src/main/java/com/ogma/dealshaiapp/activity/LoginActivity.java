@@ -94,21 +94,17 @@ LoginActivity extends AppCompatActivity implements View.OnClickListener {
                 NetworkConnection connection = new NetworkConnection(LoginActivity.this);
                 if (connection.isNetworkConnected()) {
                     if (btn_signIn.getText().toString().equalsIgnoreCase("Get OTP")) {
-                        if (isValid()) {
+                        if (isValidEmail()) {
                             userLogin();
-                            btn_signIn.setText("Sign In");
-                            ll_lower.setVisibility(View.VISIBLE);
-                            rl_TnC.setVisibility(View.GONE);
                         }
                     } else if (btn_signIn.getText().toString().equalsIgnoreCase("Sign In")) {
                         checkOTP();
                     } else {
-                        name = et_name.getText().toString().trim();
-                        referral_code = et_rereferral_code.getText().toString().trim();
-                        if (name != null && !name.equals("")) {
-                            addName(name, referral_code);
-                        } else {
-                            et_name.setError("Please enter your full name");
+                        if (isValid()) {
+                            name = et_name.getText().toString().trim();
+                            referral_code = et_rereferral_code.getText().toString().trim();
+                            mobile = et_mobile_number.getText().toString().trim();
+                            addName(name, mobile, referral_code);
                         }
                     }
                 } else {
@@ -144,24 +140,20 @@ LoginActivity extends AppCompatActivity implements View.OnClickListener {
     }
 
     private boolean isValid() {
-        if (et_mobile_number.getText().toString().equals("")) {
+        if (et_name.getText().toString().trim().equals("")) {
+            et_name.setError("Please enter your full name");
+            return false;
+        } else if (et_mobile_number.getText().toString().equals("")) {
             et_mobile_number.setError("Please enter a your mobile number.");
             return false;
         } else if (et_mobile_number.getText().toString().trim().length() < 10) {
             et_mobile_number.setError("Please enter a valid mobile number.");
             return false;
-        } else {
-            if (isValidEmail()) {
-                return true;
-            } else {
-                et_email.setError("Please enter a valid email id.");
-                return false;
-            }
-        }
+        } else
+            return true;
     }
 
     public boolean isValidEmail() {
-
         CharSequence target = et_email.getText().toString().trim();
         if (target.equals("")) {
             et_email.setError("Please enter your email id.");
@@ -172,9 +164,7 @@ LoginActivity extends AppCompatActivity implements View.OnClickListener {
     }
 
     private void userLogin() {
-        mobile = et_mobile_number.getText().toString().trim();
         emailId = et_email.getText().toString().trim();
-
         WebServiceHandler webServiceHandler = new WebServiceHandler(LoginActivity.this);
         webServiceHandler.serviceListener = new WebServiceListener() {
             @Override
@@ -189,6 +179,9 @@ LoginActivity extends AppCompatActivity implements View.OnClickListener {
                                 public void run() {
                                     ll_mobile_email.setVisibility(View.GONE);
                                     ll_otp.setVisibility(View.VISIBLE);
+                                    btn_signIn.setText("Sign In");
+                                    ll_lower.setVisibility(View.VISIBLE);
+                                    rl_TnC.setVisibility(View.GONE);
                                 }
                             });
                         }
@@ -198,13 +191,12 @@ LoginActivity extends AppCompatActivity implements View.OnClickListener {
                 }
             }
         };
-        webServiceHandler.loginUser(mobile, emailId);
+        webServiceHandler.loginUser(emailId);
     }
 
     private void checkOTP() {
         otp = et_otp.getText().toString().trim();
         user = session.getUserDetails();
-        mobile = user.get(Session.KEY_CONTACT_NUMBER);
         emailId = user.get(Session.KEY_EMAIL);
         WebServiceHandler webServiceHandler = new WebServiceHandler(LoginActivity.this);
         webServiceHandler.serviceListener = new WebServiceListener() {
@@ -233,10 +225,10 @@ LoginActivity extends AppCompatActivity implements View.OnClickListener {
                 }
             }
         };
-        webServiceHandler.checkOTP(otp, mobile, emailId);
+        webServiceHandler.checkOTP(otp, emailId);
     }
 
-    private void addName(final String name, String referral_code) {
+    private void addName(final String name, final String mobile, String referral_code) {
         user = session.getUserDetails();
         userId = user.get(Session.KEY_ID);
         WebServiceHandler webServiceHandler = new WebServiceHandler(LoginActivity.this);
@@ -263,7 +255,7 @@ LoginActivity extends AppCompatActivity implements View.OnClickListener {
                 }
             }
         };
-        webServiceHandler.add_name_and_referral_code(userId, name, referral_code);
+        webServiceHandler.add_name_and_referral_code(userId, name, referral_code, mobile);
     }
 
     private void nextStep(String userType, JSONObject userDetails, String name) {
@@ -271,8 +263,7 @@ LoginActivity extends AppCompatActivity implements View.OnClickListener {
         try {
             userId = userDetails.getString("id");
             emailId = userDetails.getString("email");
-            mobile = userDetails.getString("phone");
-            session.saveUserLoginSession(userId, name, mobile, emailId, null, "", null);
+            session.saveUserLoginSession(userId, name, "", emailId, null, "", null);
         } catch (JSONException e) {
             e.printStackTrace();
         }

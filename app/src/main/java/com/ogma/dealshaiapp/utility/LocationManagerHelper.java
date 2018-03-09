@@ -72,7 +72,6 @@ public class LocationManagerHelper {
         return null;
     }
 
-
     public LocationManagerHelper(Context context) {
         if (context instanceof Activity) {
             this.context = context;

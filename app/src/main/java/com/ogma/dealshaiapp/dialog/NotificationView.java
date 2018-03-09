@@ -34,10 +34,12 @@ public class NotificationView extends Dialog {
     private Activity activity;
     private JSONArray notifications;
     private RecyclerView recycler_view;
+    private Context context;
 
 
     public NotificationView(@NonNull Activity context, String userId) {
         super(context);
+        this.context = context;
         this.activity = context;
         this.userId = userId;
     }
@@ -81,7 +83,7 @@ public class NotificationView extends Dialog {
     }
 
     private void getNotification(String userId) {
-        WebServiceHandler webServiceHandler = new WebServiceHandler(getContext());
+        WebServiceHandler webServiceHandler = new WebServiceHandler(context);
         webServiceHandler.serviceListener = new WebServiceListener() {
             @Override
             public void onResponse(String response) {

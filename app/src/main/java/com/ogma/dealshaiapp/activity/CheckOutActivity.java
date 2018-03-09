@@ -53,12 +53,12 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
     private VouchersListAdapter adapter;
     private ArrayList<Vouchers> vouchersArrayList = new ArrayList<>();
     private String discountAmount;
-    private String promoId;
-    private String promoAmount;
-    private String voucherId;
-    private String promoType;
-    private String voucherType;
-    private String promoCode;
+    private String promoId = "";
+    private String promoType = "";
+    private String promoCode = "";
+    private String promoAmount = "";
+    private String voucherId = "";
+    private String voucherType = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +68,6 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
         Toolbar toolbar = findViewById(R.id.toolbar);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             toolbar.setTitle("CHECKOUT");
-            // toolbar.setBackgroundColor();
         }
         setSupportActionBar(toolbar);
 
@@ -107,14 +106,14 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
         recycler_view.setItemAnimator(new DefaultItemAnimator());
         adapter = new VouchersListAdapter(CheckOutActivity.this, CheckOutActivity.this, vouchersArrayList);
         recycler_view.setAdapter(adapter);
+
+        rl_discount.setVisibility(View.GONE);
+        tv_voucher_message.setVisibility(View.GONE);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        rl_discount.setVisibility(View.GONE);
-        tv_voucher_message.setVisibility(View.GONE);
-
         NetworkConnection connection = new NetworkConnection(CheckOutActivity.this);
         if (connection.isNetworkConnected()) {
             getVoucherItemList(userId);
@@ -182,7 +181,7 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
                 }
             }
         };
-        webServiceHandler.applyPromoCode(userId, promoCode, totalAmount);
+        webServiceHandler.applyPromoCode(userId, promoCode, totalAmount, promoId, promoType, voucherId, voucherType);
     }
 
     private void getVoucherItemList(String userId) {
@@ -232,7 +231,7 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
         webServiceHandler.getVoucherList(userId);
     }
 
-    private void applyVoucher(String voucherId, String voucherType, final String totalAmount) {
+    private void applyVoucher(final String voucherId, String voucherType, final String totalAmount) {
         WebServiceHandler webServiceHandler = new WebServiceHandler(CheckOutActivity.this);
         webServiceHandler.serviceListener = new WebServiceListener() {
             @Override
@@ -244,7 +243,6 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
                     String msg = jsonObject.getString("msg");
                     if (err.equals("0")) {
                         discountAmount = jsonObject.getString("amount");
-
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -263,7 +261,7 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
                 }
             }
         };
-        webServiceHandler.applyVoucher(userId, voucherId, voucherType, totalAmount);
+        webServiceHandler.applyVoucher(userId, voucherId, voucherType, totalAmount, promoId, promoType);
     }
 
     private class VouchersListAdapter extends RecyclerView.Adapter<VouchersListAdapter.ViewHolder> {

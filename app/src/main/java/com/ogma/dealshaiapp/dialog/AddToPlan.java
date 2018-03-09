@@ -281,20 +281,6 @@ public class AddToPlan extends Dialog implements View.OnClickListener {
             offerPrice = String.valueOf(couponsDetails.getNewPrice());
             quantity = Integer.parseInt(String.valueOf(couponsDetails.getQuantity()));
 
-            /*try {
-                JSONObject object = cupons.getJSONObject(position);
-                title = object.getString("title");
-                coupon_id = object.getString("id");
-                description = object.getString("description");
-                valid_for = object.getString("valid_for_person");
-                valid_on = object.getString("valid_on");
-                original_price = object.getString("price");
-                new_price = object.getString("our_price");
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }*/
-
             holder.coupon_no.setText(String.valueOf(position + 1));
             holder.coupon_title.setText(title);
             holder.coupon_details.setText(description);
@@ -304,26 +290,6 @@ public class AddToPlan extends Dialog implements View.OnClickListener {
             holder.coupon_valid_on.setText(valid_on);
             holder.coupon_quantity.setText(String.valueOf(quantity));
             holder.coupon_old_price.setPaintFlags(holder.coupon_old_price.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-
-            /*holder.iv_plus.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    quantity = Integer.parseInt(holder.coupon_quantity.getText().toString().trim());
-                    quantity++;
-                    holder.coupon_quantity.setText(String.valueOf(quantity));
-                }
-            });
-
-            holder.iv_minus.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    quantity = Integer.parseInt(holder.coupon_quantity.getText().toString().trim());
-                    if (quantity > 0) {
-                        quantity--;
-                    }
-                    holder.coupon_quantity.setText(String.valueOf(quantity));
-                }
-            });*/
         }
 
         @Override

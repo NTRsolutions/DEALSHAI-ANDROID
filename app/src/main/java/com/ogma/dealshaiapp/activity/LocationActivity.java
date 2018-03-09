@@ -23,6 +23,7 @@ import com.ogma.dealshaiapp.model.LocationModel;
 import com.ogma.dealshaiapp.network.NetworkConnection;
 import com.ogma.dealshaiapp.network.WebServiceHandler;
 import com.ogma.dealshaiapp.network.WebServiceListener;
+import com.ogma.dealshaiapp.utility.CheckLocationServiceEnabled;
 import com.ogma.dealshaiapp.utility.LocationManagerHelper;
 import com.ogma.dealshaiapp.utility.Session;
 
@@ -200,6 +201,13 @@ public class LocationActivity extends AppCompatActivity implements View.OnClickL
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        CheckLocationServiceEnabled serviceEnabled = new CheckLocationServiceEnabled(LocationActivity.this);
+        serviceEnabled.checkLocationEnabled();
+    }
+
+    @Override
     public void onClick(View v) {
         session = new Session(LocationActivity.this);
         switch (v.getId()) {
@@ -216,6 +224,7 @@ public class LocationActivity extends AppCompatActivity implements View.OnClickL
                 finish();
                 break;
             case R.id.btn_detect:
+
                 startLocationManager();
                 break;
         }

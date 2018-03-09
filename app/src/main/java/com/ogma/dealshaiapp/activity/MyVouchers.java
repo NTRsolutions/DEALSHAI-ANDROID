@@ -50,8 +50,8 @@ public class MyVouchers extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             toolbar.setTitle("My Vouchers");
             toolbar.setTitleTextColor(Color.BLACK);
-            // toolbar.setBackgroundColor();
         }
+
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
@@ -68,7 +68,6 @@ public class MyVouchers extends AppCompatActivity {
         adapter = new VouchersListAdapter(MyVouchers.this, MyVouchers.this, vouchersArrayList);
         recycler_view.setAdapter(adapter);
     }
-
 
     @Override
     protected void onResume() {
@@ -97,7 +96,8 @@ public class MyVouchers extends AppCompatActivity {
                             obj.setVoucherId(object.getString("id"));
                             obj.setVoucherAmount(object.getString("amount"));
                             obj.setVoucherType(object.getString("type"));
-                            obj.setVoucherDate(object.getString("created"));
+                            obj.setVoucherDate(object.getString("expire_date"));
+                            obj.setVoucherStaus(object.getString("status"));
                             vouchersArrayList.add(obj);
                         }
                         runOnUiThread(new Runnable() {
@@ -135,6 +135,7 @@ public class MyVouchers extends AppCompatActivity {
             private TextView tv_voucher_amount;
             private TextView tv_voucher_date;
             private ImageView iv_voucher_type;
+            private TextView tv_voucher_status;
 
             ViewHolder(View itemView) {
                 super(itemView);
@@ -142,6 +143,7 @@ public class MyVouchers extends AppCompatActivity {
                 tv_voucher_amount = itemView.findViewById(R.id.tv_voucher_amount);
                 tv_voucher_date = itemView.findViewById(R.id.tv_voucher_date);
                 iv_voucher_type = itemView.findViewById(R.id.iv_voucher_type);
+                tv_voucher_status = itemView.findViewById(R.id.tv_voucher_status);
             }
         }
 
@@ -152,10 +154,11 @@ public class MyVouchers extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(VouchersListAdapter.ViewHolder holder, int position) {
+
             Vouchers vouchers = vouchersArrayList.get(position);
             holder.tv_referral_code.setText(vouchers.getVoucherType());
             holder.tv_voucher_amount.setText("₹ " + vouchers.getVoucherAmount());
-            holder.tv_voucher_date.setText("Earn Date: " + vouchers.getVoucherDate());
+            holder.tv_voucher_date.setText("Expire on: " + vouchers.getVoucherDate());
             switch (vouchers.getVoucherType()) {
                 case "U":
                     holder.iv_voucher_type.setImageResource(R.drawable.coupon_blue);
@@ -171,7 +174,17 @@ public class MyVouchers extends AppCompatActivity {
                     break;
                 default:
                     break;
-
+            }
+            holder.tv_voucher_status.setText(" " + vouchers.getVoucherStaus());
+            switch (vouchers.getVoucherStaus()) {
+                case "active":
+                    holder.tv_voucher_status.setTextColor(getResources().getColor(R.color.green_dot_color));
+                    holder.tv_voucher_status.setCompoundDrawablesWithIntrinsicBounds(R.drawable.green_dot, 0, 0, 0);
+                    break;
+                case "inactive":
+                    holder.tv_voucher_status.setTextColor(getResources().getColor(R.color.red_dot_color));
+                    holder.tv_voucher_status.setCompoundDrawablesWithIntrinsicBounds(R.drawable.red_dot, 0, 0, 0);
+                    break;
             }
         }
 
