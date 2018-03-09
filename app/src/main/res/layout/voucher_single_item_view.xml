@@ -26,9 +26,9 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:letterSpacing="0.05"
-            android:text="REFER100"
+            android:gravity="center"
             android:textColor="@android:color/white"
-            android:textSize="@dimen/text_medium"
+            android:textSize="@dimen/text_small"
             tools:ignore="UnusedAttribute" />
     </RelativeLayout>
 
@@ -47,7 +47,6 @@
                 android:id="@+id/tv_voucher_amount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="₹500"
                 android:textColor="@color/colorAccent"
                 android:textSize="@dimen/text_medium" />
 
@@ -58,7 +57,6 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="@dimen/margin_10"
                 android:drawableStart="@drawable/red_dot"
-                android:text=" Expired"
                 android:gravity="center_vertical"
                 android:textColor="@color/red_dot_color" />
         </RelativeLayout>
@@ -70,7 +68,6 @@
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:maxLines="1"
-            android:text="Expire on: 12-10-2018"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/text_small" />
 

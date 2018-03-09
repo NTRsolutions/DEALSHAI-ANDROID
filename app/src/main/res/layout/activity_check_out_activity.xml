@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:focusable="true"
     android:focusableInTouchMode="true"
-    tools:context="com.ogma.dealshaiapp.activity.CheckOut">
+    tools:context="com.ogma.dealshaiapp.activity.CheckOutActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"

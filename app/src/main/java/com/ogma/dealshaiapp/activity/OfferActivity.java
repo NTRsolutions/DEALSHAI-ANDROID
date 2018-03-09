@@ -201,13 +201,6 @@ public class OfferActivity extends AppCompatActivity implements View.OnClickList
                     startActivity(new Intent(OfferActivity.this, CheckOutActivity.class)
                             .putExtra("couponList", arrayList)
                             .putExtra("totalAmount", String.valueOf(totalAmount)));
-
-//                    startActivity(new Intent(OfferActivity.this, CheckOut.class)
-//                            .putExtra("couponList", arrayList)
-//                            .putExtra("merchant_id", merchantId)
-//                            .putExtra("totalAmount", String.valueOf(totalAmount))
-//                            .putExtra("merchantName", merchantName)
-//                            .putExtra("description", description));
                 } else {
                     Snackbar.make(parentPanel, "Please add a deals into cart please!", Snackbar.LENGTH_SHORT).show();
                 }

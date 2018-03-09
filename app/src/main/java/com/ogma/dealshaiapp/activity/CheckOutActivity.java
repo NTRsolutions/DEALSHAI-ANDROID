@@ -204,6 +204,7 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
                             obj.setVoucherType(object.getString("type"));
                             obj.setVoucherDate(object.getString("expire_date"));
                             obj.setVoucherStaus(object.getString("status"));
+                            obj.setMinPurchase(object.getString("min_purchase"));
                             vouchersArrayList.add(obj);
                         }
                         runOnUiThread(new Runnable() {
@@ -312,7 +313,7 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
         public void onBindViewHolder(VouchersListAdapter.ViewHolder holder, int position) {
 
             Vouchers vouchers = vouchersArrayList.get(position);
-            holder.tv_referral_code.setText(vouchers.getVoucherType());
+            holder.tv_referral_code.setText("Min Purchase \n₹ " + vouchers.getMinPurchase());
             holder.tv_voucher_amount.setText("₹ " + vouchers.getVoucherAmount());
             holder.tv_voucher_date.setText("Expire on: " + vouchers.getVoucherDate());
             switch (vouchers.getVoucherType()) {

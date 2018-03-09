@@ -11,6 +11,7 @@ public class Vouchers {
     private String voucherDate;
     private String promoCode;
     private String voucherStaus;
+    private String minPurchase;
 
     public String getVoucherId() {
         return voucherId;
@@ -58,5 +59,13 @@ public class Vouchers {
 
     public void setVoucherStaus(String voucherStaus) {
         this.voucherStaus = voucherStaus;
+    }
+
+    public String getMinPurchase() {
+        return minPurchase;
+    }
+
+    public void setMinPurchase(String minPurchase) {
+        this.minPurchase = minPurchase;
     }
 }
