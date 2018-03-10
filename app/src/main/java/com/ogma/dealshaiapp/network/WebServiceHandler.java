@@ -311,6 +311,7 @@ public class WebServiceHandler {
     }
 
     public void getLocationInfo(String lat, String lng) {
+        progressDialog.show();
         Map<String, String> params = new HashMap<>();
         params.put("lat", lat);
         params.put("lng", lng);

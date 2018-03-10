@@ -220,7 +220,7 @@ public class PrePaymentClass {
 
             @Override
             public void networkNotAvailable() {
-                Toast.makeText(context, "Your payment is canceled.", Toast.LENGTH_LONG).show();
+                Toast.makeText(context, "Your payment is cancelled.", Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -240,12 +240,12 @@ public class PrePaymentClass {
 
             @Override
             public void onBackPressedCancelTransaction() {
-                Toast.makeText(context, "Transaction is Cancel Manually", Toast.LENGTH_LONG).show();
+                Toast.makeText(context, "Transaction is Cancelled Manually", Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onTransactionCancel(String s, Bundle bundle) {
-                Toast.makeText(context, "Your Transaction is canceled.", Toast.LENGTH_LONG).show();
+                Toast.makeText(context, "Your Transaction is cancelled.", Toast.LENGTH_LONG).show();
             }
         });
     }

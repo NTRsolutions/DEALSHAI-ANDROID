@@ -299,18 +299,17 @@ public class OfferActivity extends AppCompatActivity implements View.OnClickList
                 try {
                     main = new JSONObject(response);
                     is_error = main.getString("err");
-                    shareUrl = main.getString("share_link");
                     if (is_error == null || Integer.parseInt(is_error) == 1) {
                         Snackbar.make(parentPanel, "No data found", Snackbar.LENGTH_SHORT).show();
                         OfferActivity.this.runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
                                 error_screen.setVisibility(View.VISIBLE);
-
                             }
                         });
                     } else {
                         try {
+                            shareUrl = main.getString("share_link");
                             banner = main.getJSONArray("slider");
                             if (banner.length() > 0) {
                                 slidingViewAdapter = new BannerAdapter(fragmentManager, banner);

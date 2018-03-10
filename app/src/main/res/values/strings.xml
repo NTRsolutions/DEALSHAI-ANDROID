@@ -44,4 +44,6 @@
     <string name="gps_network_not_enabled">Location service not enabled. Please turn on device location.</string>
     <string name="open_location_settings">Open location settings</string>
     <string name="Cancel">Cancel</string>
+    <string name="yes">Yes</string>
+    <string name="not">No</string>
 </resources>

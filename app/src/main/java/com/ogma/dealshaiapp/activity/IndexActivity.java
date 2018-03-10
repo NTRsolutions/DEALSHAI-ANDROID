@@ -85,6 +85,7 @@ public class IndexActivity extends AppCompatActivity implements View.OnClickList
     private ImageView pf_imge;
     private String referMessage = "";
     private String shareUrl = "";
+    private AlertDialog alertDialog;
 
     public interface OnBackPressedListener {
         void doBack();
@@ -342,10 +343,10 @@ public class IndexActivity extends AppCompatActivity implements View.OnClickList
                 manager.beginTransaction().replace(R.id.index_frame, fragmentIndex).addToBackStack(null).commit();
                 break;
             case R.id.tv_my_purchase:
-                startActivity(new Intent(getApplicationContext(), MyPurchases.class));
+                startActivity(new Intent(IndexActivity.this, MyPurchases.class));
                 break;
             case R.id.tv_liked:
-                startActivity(new Intent(getApplicationContext(), LikedProductActivity.class));
+                startActivity(new Intent(IndexActivity.this, LikedProductActivity.class));
                 break;
             case R.id.tv_refer:
                 shareReferCode(userId);
@@ -426,25 +427,40 @@ public class IndexActivity extends AppCompatActivity implements View.OnClickList
                 manager.beginTransaction().replace(R.id.index_frame, fragmentIndex, FragmentIndex.class.getSimpleName()).addToBackStack(null).commit();
                 break;
             case R.id.my_purchases:
-                startActivity(new Intent(getApplicationContext(), MyPurchases.class));
+                startActivity(new Intent(IndexActivity.this, MyPurchases.class));
                 break;
             case R.id.vouchers:
-                startActivity(new Intent(getApplicationContext(), MyVouchers.class));
+                startActivity(new Intent(IndexActivity.this, MyVouchers.class));
                 break;
             case R.id.account:
-                startActivity(new Intent(getApplicationContext(), MyAccount.class));
+                startActivity(new Intent(IndexActivity.this, MyAccount.class));
                 break;
             case R.id.liked:
-                startActivity(new Intent(getApplicationContext(), LikedProductActivity.class));
+                startActivity(new Intent(IndexActivity.this, LikedProductActivity.class));
                 break;
             case R.id.logout:
-                session = new Session(getApplicationContext());
-                session.saveUserLoginSession(null, null, null, null, null, null, null);
-                /*session.revokeSession();
-                session.clearPref();*/
-                session.setLocationDetails(null, null, null, null);
-//                LoginManager.getInstance().logOut();
-                startActivity(new Intent(getApplicationContext(), WelcomeActivity.class));
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+                alertDialogBuilder.setTitle("Logout");
+                alertDialogBuilder.setMessage("Are you sure you want to logout?");
+                alertDialogBuilder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        session = new Session(IndexActivity.this);
+                        session.saveUserLoginSession(null, null, null, null, null, null, null);
+                        session.setLocationDetails(null, null, null, null);
+                        startActivity(new Intent(IndexActivity.this, WelcomeActivity.class));
+                        IndexActivity.this.finish();
+                    }
+                })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                alertDialog.dismiss();
+                            }
+                        });
+                alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
+                alertDialog.setCanceledOnTouchOutside(false);
                 break;
             case R.id.refer_a_friend:
                 shareReferCode(userId);

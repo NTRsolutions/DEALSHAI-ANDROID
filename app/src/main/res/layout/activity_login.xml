@@ -333,8 +333,9 @@
 
     </LinearLayout>
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/rl_TnC"
+        android:layout_marginTop="@dimen/margin_5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
@@ -349,11 +350,11 @@
             android:textColor="@android:color/white"
             android:textSize="@dimen/text_medium" />
 
-        <LinearLayout
+        <!--<LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/textView"
-            android:layout_centerHorizontal="true">
+            android:layout_centerHorizontal="true">-->
 
             <com.ogma.dealshaiapp.utility.OpenSansFontLight
 
@@ -378,8 +379,8 @@
                 android:text="Privacy Policy"
                 android:textColor="@color/colorAccent"
                 android:textSize="@dimen/text_medium" />
-        </LinearLayout>
+        <!--</LinearLayout>-->
 
-    </RelativeLayout>
+    </LinearLayout>
 
 </LinearLayout>

@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -59,6 +60,7 @@ public class FragmentIndivisualCategories extends Fragment implements IndexActiv
     private ArrayAdapter<String> dataAdapter;
     private SwipeRefreshLayout swipe_refresh_layout;
     private CoordinatorLayout parentPanel;
+    private FrameLayout error_screen;
 
     @Nullable
     @Override
@@ -77,6 +79,8 @@ public class FragmentIndivisualCategories extends Fragment implements IndexActiv
         HashMap<String, String> locationDetails = session.getLocationDetails();
         latitude = locationDetails.get(Session.KEY_LATITUDE);
         longitude = locationDetails.get(Session.KEY_LONGITUDE);
+
+        error_screen = view.findViewById(R.id.error_screen);
 
         parentPanel = view.findViewById(R.id.parentPanel);
         Spinner spinner_sort = view.findViewById(R.id.spinner_sort);
@@ -214,7 +218,14 @@ public class FragmentIndivisualCategories extends Fragment implements IndexActiv
                 }
                 if (is_error == null || Integer.parseInt(is_error) == 1) {
                     Snackbar.make(parentPanel, "No data found", Snackbar.LENGTH_SHORT).show();
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            error_screen.setVisibility(View.VISIBLE);
+                        }
+                    });
                 } else {
+
                     JSONArray merchant = null;
                     try {
                         merchant = main.getJSONArray("merchant");
@@ -237,6 +248,7 @@ public class FragmentIndivisualCategories extends Fragment implements IndexActiv
                             getActivity().runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
+                                    error_screen.setVisibility(View.GONE);
                                     recyclerViewAdapter.notifyDataSetChanged();
                                 }
                             });
@@ -333,9 +345,16 @@ public class FragmentIndivisualCategories extends Fragment implements IndexActiv
                     Snackbar.make(parentPanel, "No sorting parameter found for this category.", Snackbar.LENGTH_SHORT).show();
                 }
                 if (is_error == null || Integer.parseInt(is_error) == 1) {
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            error_screen.setVisibility(View.VISIBLE);
+                        }
+                    });
                     Snackbar.make(parentPanel, "No data found", Snackbar.LENGTH_SHORT).show();
                 } else {
                     JSONArray merchant = null;
+
                     try {
                         merchant = main.getJSONArray("merchant");
                         if (merchant.length() > 0) {
@@ -358,6 +377,7 @@ public class FragmentIndivisualCategories extends Fragment implements IndexActiv
                                 @Override
                                 public void run() {
                                     recyclerViewAdapter.notifyDataSetChanged();
+                                    error_screen.setVisibility(View.GONE);
                                 }
                             });
                         }

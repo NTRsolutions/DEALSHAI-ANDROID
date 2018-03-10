@@ -54,7 +54,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:padding="5dp"
-                        android:text="Please tick the desired Categories and Click Proceed"
+                        android:text="Please tick the desired Categories and Click 'GO'"
                         android:textSize="@dimen/text_small"
                         android:textStyle="bold" />
                 </LinearLayout>

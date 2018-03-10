@@ -55,6 +55,7 @@ public class LocationActivity extends AppCompatActivity implements View.OnClickL
     private LinearLayout parentPanel;
     private String cityName;
     private String areaName;
+    private String areaId;
     private TextView tv_city;
     private TextView tv_area;
     private RelativeLayout rl_area;
@@ -418,7 +419,7 @@ public class LocationActivity extends AppCompatActivity implements View.OnClickL
         }
     };
 
-    private void getLocationInfo(String lat, String lng) {
+    private void getLocationInfo(final String lat, String lng) {
         WebServiceHandler webServiceHandler = new WebServiceHandler(LocationActivity.this);
         webServiceHandler.serviceListener = new WebServiceListener() {
             @Override
@@ -438,11 +439,12 @@ public class LocationActivity extends AppCompatActivity implements View.OnClickL
                             Snackbar.make(parentPanel, jsonObject.getString("msg") + "", Snackbar.LENGTH_LONG).show();
                         } else {
                             try {
-                                JSONObject location = jsonObject.getJSONObject("location");
+                                final JSONObject location = jsonObject.getJSONObject("location");
                                 if (location != null) {
                                     cityName = location.getString("city_name");
                                     cityLatitude = location.getString("lat");
                                     cityLongitude = location.getString("lng");
+                                    areaId = location.getString("area_id");
                                     areaName = "";
                                     areaLatitude = "";
                                     areaLongitude = "";
@@ -484,7 +486,29 @@ public class LocationActivity extends AppCompatActivity implements View.OnClickL
                                                 if (subLocationList.size() > 0) {
                                                     rl_area.setVisibility(View.VISIBLE);
                                                 }
+                                                String area_name = "";
+                                                String lat = "";
+                                                String lng = "";
                                                 subLocationAdapter.notifyDataSetChanged();
+                                                for (int i = 0; i < locationModelCityArea.size(); i++) {
+                                                    LocationModel locationModel = locationModelCityArea.get(i);
+                                                    if (locationModel.getId().equals(areaId)) {
+                                                        area_name = locationModel.getName();
+                                                        lat = locationModel.getLat();
+                                                        lng = locationModel.getLng();
+                                                        break;
+                                                    }
+                                                }
+                                                if (!areaId.equals("0")) {
+                                                    actv_sub_location.setText(area_name);
+                                                    tv_area.setText(area_name);
+                                                    ll_area.setVisibility(View.VISIBLE);
+                                                    areaLatitude = lat;
+                                                    areaLongitude = lng;
+                                                    areaName = area_name;
+
+                                                }
+
                                             }
                                         });
 
@@ -495,7 +519,6 @@ public class LocationActivity extends AppCompatActivity implements View.OnClickL
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-
                         }
                     }
                 } catch (JSONException e) {

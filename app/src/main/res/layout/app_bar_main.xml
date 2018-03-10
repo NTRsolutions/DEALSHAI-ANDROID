@@ -128,7 +128,11 @@
                 android:layout_height="match_parent"
                 android:layout_weight="0.75"
                 android:background="@android:color/white"
-                android:padding="1dp" />
+                android:imeOptions="actionDone"
+                android:inputType="text"
+                android:maxLines="1"
+                android:padding="1dp"
+                android:paddingStart="4dp" />
 
             <com.ogma.dealshaiapp.utility.OpenSansFontSemibold
                 android:id="@+id/tv_search"
@@ -164,8 +168,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:gravity="bottom|center_horizontal"
         android:background="@color/colorTheme"
+        android:gravity="bottom|center_horizontal"
         android:paddingTop="5dp">
 
         <com.ogma.dealshaiapp.utility.OpenSansFontSemibold

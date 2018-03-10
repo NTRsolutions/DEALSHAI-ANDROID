@@ -103,7 +103,15 @@
         android:id="@+id/error_screen"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/bg"
-        android:visibility="gone" />
+        android:visibility="gone">
+
+        <com.ogma.dealshaiapp.utility.OpenSansFontBold
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="COMING SOON"
+            android:layout_gravity="center"
+            android:textSize="28sp" />
+
+    </FrameLayout>
 
 </android.support.design.widget.CoordinatorLayout>

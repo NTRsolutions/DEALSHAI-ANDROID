@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,6 +46,7 @@ public class AddToPlan extends Dialog implements View.OnClickListener {
     private ArrayList<CouponsDetails> arrayList;
     private int totalAmount;
     private RecyclerView recycler_view;
+    private FrameLayout error_screen;
 
 
     public AddToPlan(@NonNull Activity activity, int merchantId) {
@@ -63,6 +65,7 @@ public class AddToPlan extends Dialog implements View.OnClickListener {
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         getWindow().setGravity(Gravity.CENTER);
         getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
 
         NetworkConnection connection = new NetworkConnection(getContext());
         if (connection.isNetworkConnected()) {
@@ -85,6 +88,7 @@ public class AddToPlan extends Dialog implements View.OnClickListener {
         recycler_view.setScrollbarFadingEnabled(false);
         coupons = new JSONArray();
 
+        error_screen = findViewById(R.id.error_screen);
         TextView tv_buy_now = findViewById(R.id.tv_add_to_plan);
         ImageView iv_esc = findViewById(R.id.iv_esc);
         tv_buy_now.setOnClickListener(this);
@@ -97,55 +101,59 @@ public class AddToPlan extends Dialog implements View.OnClickListener {
             @Override
             public void onResponse(String response) {
                 JSONObject jsonObject = null;
+                int is_err = 2;
                 try {
                     jsonObject = new JSONObject(response);
+                    is_err = jsonObject.getInt("err");
+                    if (is_err == 0) {
+                        try {
+                            merchantId = Integer.parseInt(jsonObject.getString("merchant_id"));
+                            merchantName = jsonObject.getString("place_name");
+                            merchantDescription = jsonObject.getString("description");
+                            coupons = jsonObject.getJSONArray("cupons");
+
+                            arrayList = new ArrayList<>();
+                            for (int i = 0; i < coupons.length(); i++) {
+                                CouponsDetails couponsDetails = new CouponsDetails();
+                                JSONObject object = coupons.getJSONObject(i);
+                                couponsDetails.setCouponId(object.getString("id"));
+                                couponsDetails.setMerchantId(String.valueOf(merchantId));
+                                couponsDetails.setCouponTitle(object.getString("title"));
+                                couponsDetails.setCouponDescription(object.getString("description"));
+                                couponsDetails.setCouponValidOn(object.getString("valid_on"));
+                                couponsDetails.setCouponValidForPerson(object.getString("valid_for_person"));
+                                couponsDetails.setNewPrice(Integer.parseInt(object.getString("our_price")));
+                                couponsDetails.setOriginalPrice(Integer.parseInt(object.getString("price")));
+                                arrayList.add(couponsDetails);
+                            }
+
+                            activity.runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    error_screen.setVisibility(View.GONE);
+                                    quickViewItemsAdapter = new QuickViewItemsAdapter(getContext(), coupons, arrayList);
+                                    recycler_view.setAdapter(quickViewItemsAdapter);
+                                    quickViewItemsAdapter.notifyDataSetChanged();
+                                }
+                            });
+                        } catch (final JSONException e) {
+                            e.printStackTrace();
+                        }
+                    } else {
+                        Toast.makeText(getContext(), "No coupons are available for this merchant", Toast.LENGTH_LONG).show();
+                        activity.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                error_screen.setVisibility(View.VISIBLE);
+                            }
+                        });
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                     activity.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             Toast.makeText(getContext(), "Server Response Error", Toast.LENGTH_LONG).show();
-                        }
-                    });
-                }
-                try {
-                    if (jsonObject != null) {
-                        merchantId = Integer.parseInt(jsonObject.getString("merchant_id"));
-                        merchantName = jsonObject.getString("place_name");
-                        merchantDescription = jsonObject.getString("description");
-                        coupons = jsonObject.getJSONArray("cupons");
-                    }
-                    arrayList = new ArrayList<>();
-                    for (int i = 0; i < coupons.length(); i++) {
-                        CouponsDetails couponsDetails = new CouponsDetails();
-                        JSONObject object = coupons.getJSONObject(i);
-                        couponsDetails.setCouponId(object.getString("id"));
-                        couponsDetails.setMerchantId(String.valueOf(merchantId));
-                        couponsDetails.setCouponTitle(object.getString("title"));
-                        couponsDetails.setCouponDescription(object.getString("description"));
-                        couponsDetails.setCouponValidOn(object.getString("valid_on"));
-                        couponsDetails.setCouponValidForPerson(object.getString("valid_for_person"));
-                        couponsDetails.setNewPrice(Integer.parseInt(object.getString("our_price")));
-                        couponsDetails.setOriginalPrice(Integer.parseInt(object.getString("price")));
-                        arrayList.add(couponsDetails);
-                    }
-
-                    activity.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            quickViewItemsAdapter = new QuickViewItemsAdapter(getContext(), coupons, arrayList);
-                            recycler_view.setAdapter(quickViewItemsAdapter);
-                            quickViewItemsAdapter.notifyDataSetChanged();
-                        }
-                    });
-                } catch (final JSONException e) {
-                    e.printStackTrace();
-                    activity.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-
-                            Toast.makeText(getContext(), "" + e, Toast.LENGTH_LONG).show();
-                            Toast.makeText(getContext(), "No coupons are available for this merchant", Toast.LENGTH_LONG).show();
                         }
                     });
                 }

@@ -92,10 +92,12 @@
 
         <android.support.v7.widget.AppCompatAutoCompleteTextView
             android:id="@+id/actv_city"
+            android:imeOptions="actionNone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_marginStart="@dimen/margin_10"
+            android:maxLines="1"
             android:layout_toEndOf="@+id/imageView4"
             android:background="@android:color/transparent"
             android:gravity="center_vertical"
@@ -132,6 +134,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
+            android:imeOptions="actionNone"
+            android:maxLines="1"
             android:layout_marginStart="@dimen/margin_10"
             android:layout_toEndOf="@+id/imageView5"
             android:background="@android:color/transparent"

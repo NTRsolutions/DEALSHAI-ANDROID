@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,7 +44,7 @@ LoginActivity extends AppCompatActivity implements View.OnClickListener {
     private LinearLayout ll_lower;
     private HashMap<String, String> user;
     private EditText et_rereferral_code;
-    private RelativeLayout rl_TnC;
+    private LinearLayout rl_TnC;
     private TextView tv_TnC;
     private TextView tv_prv_plc;
 
