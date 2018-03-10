@@ -167,7 +167,6 @@ public class IndexActivity extends AppCompatActivity implements View.OnClickList
     private final LocationListener locationListener = new LocationListener() {
         public void onLocationChanged(Location location) {
             session = new Session(IndexActivity.this);
-            locationManagerHelper.getLocationManager().removeUpdates(this);
             double longitude = location.getLongitude();
             double latitude = location.getLatitude();
             session.setLocationDetails(cityName, areaName, String.valueOf(latitude), String.valueOf(longitude));
@@ -403,16 +402,14 @@ public class IndexActivity extends AppCompatActivity implements View.OnClickList
         double longitude;
         double latitude;
 
-        if (lat.equals("")) {
-            Location location = locationManagerHelper.getLastKnownLocation();
-            if (location == null)
-                locationManagerHelper.getLocation(locationListener);
-            else {
-                longitude = location.getLongitude();
-                latitude = location.getLatitude();
-                session.setLocationDetails(cityName, areaName, String.valueOf(latitude), String.valueOf(longitude));
-                getCurrentLocationInfo(String.valueOf(latitude), String.valueOf(longitude));
-            }
+        Location location = locationManagerHelper.getLastKnownLocation();
+        if (location == null)
+            locationManagerHelper.getLocation(locationListener);
+        else {
+            longitude = location.getLongitude();
+            latitude = location.getLatitude();
+            session.setLocationDetails(cityName, areaName, String.valueOf(latitude), String.valueOf(longitude));
+            getCurrentLocationInfo(String.valueOf(latitude), String.valueOf(longitude));
         }
     }
 
