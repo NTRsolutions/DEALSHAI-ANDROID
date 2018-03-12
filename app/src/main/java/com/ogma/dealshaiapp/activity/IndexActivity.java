@@ -10,6 +10,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -147,6 +148,7 @@ public class IndexActivity extends AppCompatActivity implements View.OnClickList
 
         tv_home.setOnClickListener(this);
         tv_my_purchase.setOnClickListener(this);
+        findViewById(R.id.tv_help).setOnClickListener(this);
         findViewById(R.id.tv_refer).setOnClickListener(this);
         findViewById(R.id.frameLayout).setOnClickListener(this);
     }
@@ -333,7 +335,7 @@ public class IndexActivity extends AppCompatActivity implements View.OnClickList
                     startActivity(new Intent(IndexActivity.this, SearchResultActivity.class)
                             .putExtra("searchText", searchText));
                     et_search.setText("");
-                    et_search.setCursorVisible(false);
+                    et_search.setFocusable(false);
                 } else
                     et_search.setError("Please type something");
                 break;
@@ -351,7 +353,22 @@ public class IndexActivity extends AppCompatActivity implements View.OnClickList
             case R.id.tv_refer:
                 shareReferCode(userId);
                 break;
+            case R.id.tv_help:
+                addNewContact();
+                break;
         }
+    }
+
+    private void addNewContact() {
+        // Creates a new Intent to insert a contact
+        Intent intent = new Intent(ContactsContract.Intents.Insert.ACTION);
+        intent.setType(ContactsContract.RawContacts.CONTENT_TYPE);
+        intent.putExtra(ContactsContract.Intents.Insert.NAME, "Dealshai Help");
+        intent.putExtra(ContactsContract.Intents.Insert.PHONE, "8910069131");
+        intent.putExtra(ContactsContract.Intents.Insert.PHONE_TYPE, ContactsContract.CommonDataKinds.Phone.TYPE_WORK);
+        intent.putExtra(ContactsContract.Intents.Insert.EMAIL, "help@dealshai.in");
+        intent.putExtra(ContactsContract.Intents.Insert.EMAIL_TYPE, ContactsContract.CommonDataKinds.Email.TYPE_WORK);
+        startActivity(intent);
     }
 
     private void shareReferCode(String userId) {
@@ -459,6 +476,9 @@ public class IndexActivity extends AppCompatActivity implements View.OnClickList
                 alertDialog = alertDialogBuilder.create();
                 alertDialog.show();
                 alertDialog.setCanceledOnTouchOutside(false);
+                break;
+            case R.id.help:
+                addNewContact();
                 break;
             case R.id.refer_a_friend:
                 shareReferCode(userId);

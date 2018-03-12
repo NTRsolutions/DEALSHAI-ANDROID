@@ -75,7 +75,6 @@ public class AddToPlan extends Dialog implements View.OnClickListener {
                 @Override
                 public void run() {
                     Toast.makeText(getContext(), "Network connection not available", Toast.LENGTH_SHORT).show();
-//                    Snackbar.make(,"Your cart is empty. Please add items to buy.",Snackbar.LENGTH_LONG).show();
                 }
             });
         }
@@ -140,13 +139,14 @@ public class AddToPlan extends Dialog implements View.OnClickListener {
                             e.printStackTrace();
                         }
                     } else {
-                        Toast.makeText(getContext(), "No coupons are available for this merchant", Toast.LENGTH_LONG).show();
                         activity.runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
                                 error_screen.setVisibility(View.VISIBLE);
+                                Toast.makeText(getContext(), "No coupons are available for this merchant", Toast.LENGTH_LONG).show();
                             }
                         });
+
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

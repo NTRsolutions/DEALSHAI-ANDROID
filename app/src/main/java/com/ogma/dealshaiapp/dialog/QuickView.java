@@ -2,6 +2,7 @@ package com.ogma.dealshaiapp.dialog;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
@@ -50,6 +51,7 @@ public class QuickView extends Dialog implements View.OnClickListener {
     private RecyclerView recycler_view;
     private RelativeLayout parentPanel;
     private FrameLayout error_screen;
+    private ProgressDialog progressDialog;
 
     public QuickView(@NonNull Activity activity, int merchantId) {
         super(activity);
@@ -67,6 +69,8 @@ public class QuickView extends Dialog implements View.OnClickListener {
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         getWindow().setGravity(Gravity.TOP);
         getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+
+        progressDialog = new ProgressDialog(getContext());
 
         NetworkConnection connection = new NetworkConnection(getContext());
         if (connection.isNetworkConnected()) {
@@ -102,7 +106,6 @@ public class QuickView extends Dialog implements View.OnClickListener {
         webServiceHandler.serviceListener = new WebServiceListener() {
             @Override
             public void onResponse(String response) {
-
                 JSONObject jsonObject = null;
                 int is_err = 2;
                 try {
