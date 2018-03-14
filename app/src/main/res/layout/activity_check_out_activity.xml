@@ -196,8 +196,6 @@
             android:layout_marginTop="@dimen/margin_16"
             android:background="#FFFFFF"
             android:gravity="center_vertical"
-            android:text="You get a voucher worth ₹100 after successful purchase."
-            android:textColor="#026c07"
             android:textSize="@dimen/text_medium" />
 
         <com.ogma.dealshaiapp.utility.OpenSansFontSemibold

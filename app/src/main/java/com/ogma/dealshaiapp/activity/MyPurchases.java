@@ -100,6 +100,7 @@ public class MyPurchases extends AppCompatActivity {
                         active = jsonObject.getJSONArray("active");
                     }
                     if (active != null) {
+                        arrayList.clear();
                         for (int i = 0; i < active.length(); i++) {
                             OrderedItems orderedItems = new OrderedItems();
                             JSONObject deals = active.getJSONObject(i);

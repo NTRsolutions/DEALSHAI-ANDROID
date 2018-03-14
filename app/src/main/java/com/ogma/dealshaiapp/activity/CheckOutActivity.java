@@ -2,6 +2,7 @@ package com.ogma.dealshaiapp.activity;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -168,12 +169,20 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                tv_voucher_message.setText(msg);
                                 tv_voucher_message.setVisibility(View.VISIBLE);
+                                tv_voucher_message.setText(msg);
+                                tv_voucher_message.setTextColor(Color.GREEN);
                             }
                         });
                     } else {
-                        Snackbar.make(parentPanel, msg, Snackbar.LENGTH_LONG).show();
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                tv_voucher_message.setVisibility(View.VISIBLE);
+                                tv_voucher_message.setTextColor(Color.RED);
+                                tv_voucher_message.setText(msg);
+                            }
+                        });
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -254,7 +263,7 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
                             }
                         });
                     } else {
-//                        Snackbar.make(parentPanel, msg, Snackbar.LENGTH_LONG).show();
+                        Snackbar.make(parentPanel, msg, Snackbar.LENGTH_LONG).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
