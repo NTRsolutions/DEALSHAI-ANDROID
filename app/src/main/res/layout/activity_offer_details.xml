@@ -59,12 +59,12 @@
                     android:id="@+id/tv_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_toStartOf="@+id/iv_share"
                     android:layout_above="@+id/tv_location"
-                    android:maxLines="1"
-                    android:layout_marginEnd="@dimen/margin_5"
                     android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginEnd="@dimen/margin_5"
+                    android:layout_toStartOf="@+id/iv_share"
+                    android:maxLines="1"
                     android:text="Merchant"
                     android:textColor="@color/textBlack"
                     android:textSize="@dimen/text_large"
@@ -245,22 +245,24 @@
 
     </RelativeLayout>
 
-    <LinearLayout
+    <RelativeLayout
+        android:id="@+id/ll_coupon"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/ll_main"
         android:layout_above="@+id/ll_buy_now"
+        android:layout_below="@+id/ll_main"
         android:layout_margin="@dimen/margin_5"
         android:background="#eae4e4"
         android:orientation="vertical"
         android:padding="@dimen/margin_5">
 
         <LinearLayout
+            android:id="@+id/ll1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:orientation="vertical"
-            android:layout_marginStart="@dimen/margin_5">
+            android:layout_marginStart="@dimen/margin_5"
+            android:orientation="vertical">
 
             <com.ogma.dealshaiapp.utility.OpenSansFontBold
                 android:id="@+id/tv_item_title"
@@ -336,6 +338,8 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ll2"
+            android:layout_below="@id/ll1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="5dp"
@@ -404,7 +408,24 @@
             </LinearLayout>
         </LinearLayout>
 
-    </LinearLayout>
+        <FrameLayout
+            android:id="@+id/no_coupons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_16"
+            android:layout_gravity="center"
+            android:visibility="gone">
+
+            <com.ogma.dealshaiapp.utility.OpenSansFontBold
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Coupons Not Available"
+                android:textSize="28sp" />
+
+        </FrameLayout>
+
+    </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/ll_buy_now"

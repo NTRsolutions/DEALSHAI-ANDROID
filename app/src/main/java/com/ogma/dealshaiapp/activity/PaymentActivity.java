@@ -1,3 +1,4 @@
+/*
 package com.ogma.dealshaiapp.activity;
 
 import android.content.Intent;
@@ -245,3 +246,4 @@ public class PaymentActivity extends AppCompatActivity {
         webServiceHandler.getOrderDetails(userId, totalAmount, deals);
     }
 }
+*/

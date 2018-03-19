@@ -180,6 +180,7 @@ public class ViewPlan extends Dialog implements View.OnClickListener {
             case R.id.tv_buy_now:
                 if (totalAmount > 0) {
                     Intent intent = new Intent(activity, CheckOutActivity.class)
+                            .putExtra("flag", "PlanKarle")
                             .putExtra("couponList", mainArrayList)
                             .putExtra("totalAmount", String.valueOf(totalAmount));
                     activity.startActivity(intent);

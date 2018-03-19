@@ -2,7 +2,6 @@ package com.ogma.dealshaiapp.activity;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -15,9 +14,12 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.ogma.dealshaiapp.R;
@@ -35,12 +37,11 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
-public class CheckOutActivity extends AppCompatActivity implements View.OnClickListener {
+public class CheckOutActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
-    private Session session;
     private String userId;
-    private boolean flag;
     private ArrayList<CouponsDetails> couponsDetails;
     private String payableAmount;
     private String totalAmount;
@@ -53,13 +54,22 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
     private TextView tv_vouchers;
     private VouchersListAdapter adapter;
     private ArrayList<Vouchers> vouchersArrayList = new ArrayList<>();
-    private String discountAmount;
+    private String discountAmount = "0";
     private String promoId = "";
     private String promoType = "";
     private String promoCode = "";
     private String promoAmount = "";
     private String voucherId = "";
     private String voucherType = "";
+    private String flag = "";
+    private RelativeLayout rl_package_qty;
+    private Spinner spinner_qty;
+    private int quantity = 1;
+    private TextView tv_total_amount;
+    private int actualPrice = 0;
+    private TextView tv_remove_vouchers;
+    private TextView tv_reset_promo_code;
+    private RelativeLayout rl_vouchers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,32 +84,62 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        session = new Session(CheckOutActivity.this);
+        Session session = new Session(CheckOutActivity.this);
         HashMap<String, String> user = session.getUserDetails();
         userId = user.get(Session.KEY_ID);
+
+        List<String> quantity = new ArrayList<>();
+        quantity.add("1");
+        quantity.add("2");
+        quantity.add("3");
+        quantity.add("4");
+        quantity.add("5");
+        quantity.add("6");
+        quantity.add("7");
+        quantity.add("8");
+        quantity.add("9");
+        quantity.add("10");
 
         couponsDetails = new ArrayList<>();
         couponsDetails = (ArrayList<CouponsDetails>) getIntent().getSerializableExtra("couponList");
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             totalAmount = bundle.getString("totalAmount");
+            actualPrice = Integer.parseInt(totalAmount);
             payableAmount = totalAmount;
+            flag = bundle.getString("flag");
         }
 
         parentPanel = findViewById(R.id.parentPanel);
         rl_discount = findViewById(R.id.rl_discount);
-        TextView tv_total_amount = findViewById(R.id.tv_total_amount);
+        tv_total_amount = findViewById(R.id.tv_total_amount);
         tv_discount_amount = findViewById(R.id.tv_discount_amount);
         tv_payable_amount = findViewById(R.id.tv_payable_amount);
         tv_voucher_message = findViewById(R.id.tv_voucher_message);
         et_promo_code = findViewById(R.id.et_promo_code);
         tv_vouchers = findViewById(R.id.tv_vouchers);
+        rl_vouchers = findViewById(R.id.rl_vouchers);
+        tv_remove_vouchers = findViewById(R.id.tv_remove_vouchers);
+        tv_reset_promo_code = findViewById(R.id.tv_reset_promo_code);
+
+        rl_package_qty = findViewById(R.id.rl_package_qty);
+        spinner_qty = findViewById(R.id.spinner_qty);
+
 
         findViewById(R.id.tv_btn_apply).setOnClickListener(this);
         findViewById(R.id.tv_btn_proceed).setOnClickListener(this);
+        findViewById(R.id.tv_remove_vouchers).setOnClickListener(this);
+        findViewById(R.id.tv_reset_promo_code).setOnClickListener(this);
+
 
         tv_total_amount.setText("₹ " + totalAmount);
         tv_payable_amount.setText("₹ " + payableAmount);
+
+        if (flag.equals("DealshaiPlus")) {
+            rl_package_qty.setVisibility(View.VISIBLE);
+        } else {
+            rl_package_qty.setVisibility(View.GONE);
+        }
 
         RecyclerView recycler_view = findViewById(R.id.recycler_view);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(CheckOutActivity.this);
@@ -107,9 +147,16 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
         recycler_view.setItemAnimator(new DefaultItemAnimator());
         adapter = new VouchersListAdapter(CheckOutActivity.this, CheckOutActivity.this, vouchersArrayList);
         recycler_view.setAdapter(adapter);
-
         rl_discount.setVisibility(View.GONE);
         tv_voucher_message.setVisibility(View.GONE);
+        tv_reset_promo_code.setVisibility(View.GONE);
+
+        // Creating adapter for spinner
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, quantity);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner_qty.setAdapter(dataAdapter);
+
+        spinner_qty.setOnItemSelectedListener(this);
     }
 
     @Override
@@ -135,8 +182,26 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
                 }
                 break;
             case R.id.tv_btn_proceed:
-                PrePaymentClass prePaymentClass = new PrePaymentClass(CheckOutActivity.this, CheckOutActivity.this, couponsDetails, payableAmount, userId, voucherId, voucherType, promoId, promoType, totalAmount);
+                PrePaymentClass prePaymentClass = new PrePaymentClass(CheckOutActivity.this, CheckOutActivity.this, couponsDetails, payableAmount, userId, voucherId, voucherType, promoId, promoType, totalAmount, quantity);
                 prePaymentClass.startTransaction();
+                break;
+            case R.id.tv_remove_vouchers:
+                voucherType = "";
+                voucherId = "";
+                discountAmount = "0";
+                rl_discount.setVisibility(View.GONE);
+                payableAmount = String.valueOf(Integer.parseInt(totalAmount) - Integer.parseInt(discountAmount));
+                tv_payable_amount.setText("₹ " + payableAmount);
+                tv_remove_vouchers.setVisibility(View.GONE);
+                break;
+            case R.id.tv_reset_promo_code:
+                promoType = "";
+                payableAmount = "";
+                promoId = "";
+                promoCode = "";
+                et_promo_code.setText("");
+                tv_voucher_message.setVisibility(View.GONE);
+                tv_reset_promo_code.setVisibility(View.GONE);
                 break;
         }
     }
@@ -169,18 +234,20 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+                                tv_reset_promo_code.setVisibility(View.VISIBLE);
                                 tv_voucher_message.setVisibility(View.VISIBLE);
                                 tv_voucher_message.setText(msg);
-                                tv_voucher_message.setTextColor(Color.GREEN);
+                                tv_voucher_message.setTextColor(getResources().getColor(R.color.colorDarkGreen));
                             }
                         });
                     } else {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+                                tv_reset_promo_code.setVisibility(View.VISIBLE);
                                 tv_voucher_message.setVisibility(View.VISIBLE);
-                                tv_voucher_message.setTextColor(Color.RED);
                                 tv_voucher_message.setText(msg);
+                                tv_voucher_message.setTextColor(getResources().getColor(R.color.colorDarkRed));
                             }
                         });
                     }
@@ -228,7 +295,7 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                tv_vouchers.setVisibility(View.GONE);
+                                rl_vouchers.setVisibility(View.GONE);
                             }
                         });
                     }
@@ -257,6 +324,7 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
                             @Override
                             public void run() {
                                 rl_discount.setVisibility(View.VISIBLE);
+                                tv_remove_vouchers.setVisibility(View.VISIBLE);
                                 tv_discount_amount.setText("₹ " + discountAmount);
                                 payableAmount = String.valueOf(Integer.parseInt(totalAmount) - Integer.parseInt(discountAmount));
                                 tv_payable_amount.setText("₹ " + payableAmount);
@@ -264,6 +332,7 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
                         });
                     } else {
                         Snackbar.make(parentPanel, msg, Snackbar.LENGTH_LONG).show();
+                        tv_remove_vouchers.setVisibility(View.GONE);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -272,6 +341,22 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
             }
         };
         webServiceHandler.applyVoucher(userId, voucherId, voucherType, totalAmount, promoId, promoType);
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        String item = parent.getItemAtPosition(position).toString();
+//        Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
+        quantity = Integer.parseInt(item);
+        totalAmount = String.valueOf(actualPrice * quantity);
+        payableAmount = String.valueOf(Integer.parseInt(totalAmount) - Integer.parseInt(discountAmount));
+        tv_payable_amount.setText("₹ " + payableAmount);
+        tv_total_amount.setText("₹ " + totalAmount);
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 
     private class VouchersListAdapter extends RecyclerView.Adapter<VouchersListAdapter.ViewHolder> {
@@ -359,5 +444,4 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
             return vouchersArrayList.size();
         }
     }
-
 }

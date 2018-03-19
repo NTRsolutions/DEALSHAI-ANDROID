@@ -67,8 +67,9 @@ public class PrePaymentClass {
     private String voucherType;
     private String promoId;
     private String promoType;
+    private int quantity;
 
-    public PrePaymentClass(CheckOutActivity activity, CheckOutActivity context, ArrayList<CouponsDetails> couponsDetails, String payableAmount, String userId, String voucherId, String voucherType, String promoId, String promoType, String totalAmount) {
+    public PrePaymentClass(CheckOutActivity activity, CheckOutActivity context, ArrayList<CouponsDetails> couponsDetails, String payableAmount, String userId, String voucherId, String voucherType, String promoId, String promoType, String totalAmount, int quantity) {
         this.context = context;
         this.couponsDetails = couponsDetails;
         this.payableAmount = payableAmount;
@@ -79,6 +80,7 @@ public class PrePaymentClass {
         this.promoId = promoId;
         this.promoType = promoType;
         this.totalAmount = totalAmount;
+        this.quantity = quantity;
     }
 
     public void startTransaction() {
@@ -147,12 +149,11 @@ public class PrePaymentClass {
                 }
             }
         };
-        webServiceHandler.getOrderDetails(userId, payableAmount, deals);
+        webServiceHandler.getOrderDetails(userId, payableAmount, deals, quantity);
     }
 
     public void onStartTransaction() {
         PaytmPGService Service = PaytmPGService.getProductionService();
-
         Map<String, String> paramMap = new HashMap<String, String>();
         paramMap.put("MID", mid);
         paramMap.put("ORDER_ID", order_id);

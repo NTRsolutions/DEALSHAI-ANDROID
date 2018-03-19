@@ -376,13 +376,14 @@ public class WebServiceHandler {
         newCall(parameter, ServicesURls.GetCurrentLocation);
     }
 
-    public void getOrderDetails(String userId, String totalAmount, JSONArray deals) {
+    public void getOrderDetails(String userId, String totalAmount, JSONArray deals, int quantity) {
         progressDialog.show();
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("user_id", userId);
             jsonObject.put("total_price", totalAmount);
             jsonObject.put("deals", deals);
+            jsonObject.put("quantity", quantity);
         } catch (JSONException e) {
             e.printStackTrace();
         }

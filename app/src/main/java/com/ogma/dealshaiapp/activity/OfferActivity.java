@@ -1,15 +1,23 @@
 package com.ogma.dealshaiapp.activity;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Paint;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -17,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ogma.dealshaiapp.R;
+import com.ogma.dealshaiapp.dialog.MoreInfoView;
 import com.ogma.dealshaiapp.fragment.FragmentDetailsPageBanner;
 import com.ogma.dealshaiapp.model.CouponsDetails;
 import com.ogma.dealshaiapp.network.NetworkConnection;
@@ -72,7 +81,17 @@ public class OfferActivity extends AppCompatActivity implements View.OnClickList
     private RelativeLayout parentPanel;
     private String merchant_id;
     private LinearLayout error_screen;
+    private FrameLayout no_coupons;
+    private RelativeLayout ll_coupon;
     private String shareUrl = "https://www.dealshai.in/";
+    private TextView tv_btn_contact;
+    private TextView tv_more_info;
+    private String content;
+    private String contact;
+    private static String[] PERMISSIONS_CALL = {Manifest.permission.CALL_PHONE};
+    private static final int REQUEST_CALL = 1;
+    private AlertDialog alertDialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,6 +121,8 @@ public class OfferActivity extends AppCompatActivity implements View.OnClickList
         tv_title = findViewById(R.id.tv_title);
         tv_location = findViewById(R.id.tv_location);
         tv_outlets = findViewById(R.id.tv_outlets);
+        tv_btn_contact = findViewById(R.id.tv_btn_contact);
+        tv_more_info = findViewById(R.id.tv_more_info);
         TextView tv_btn_menu = findViewById(R.id.tv_btn_menu);
         TextView tv_btn_contact = findViewById(R.id.tv_btn_contact);
         TextView tv_more_info = findViewById(R.id.tv_more_info);
@@ -109,6 +130,9 @@ public class OfferActivity extends AppCompatActivity implements View.OnClickList
         ImageView iv_share = findViewById(R.id.iv_share);
         ImageView iv_like = findViewById(R.id.iv_like);
         TextView tv_btn_buy_now = findViewById(R.id.tv_btn_buy_now);
+
+        no_coupons = findViewById(R.id.no_coupons);
+        ll_coupon = findViewById(R.id.ll_coupon);
 
         coupon_title = findViewById(R.id.tv_item_title);
         coupon_details = findViewById(R.id.tv_item_details);
@@ -155,6 +179,9 @@ public class OfferActivity extends AppCompatActivity implements View.OnClickList
             }
         });
 
+        no_coupons.setVisibility(View.GONE);
+        ll_coupon.setVisibility(View.VISIBLE);
+
         iv_back.setOnClickListener(this);
         iv_share.setOnClickListener(this);
         iv_like.setOnClickListener(this);
@@ -163,7 +190,8 @@ public class OfferActivity extends AppCompatActivity implements View.OnClickList
         iv_plus.setOnClickListener(this);
         iv_minus.setOnClickListener(this);
         tv_outlets.setOnClickListener(this);
-
+        tv_more_info.setOnClickListener(this);
+        tv_btn_contact.setOnClickListener(this);
     }
 
     @Override
@@ -199,6 +227,7 @@ public class OfferActivity extends AppCompatActivity implements View.OnClickList
                     int totalAmount = Integer.parseInt(tv_total_amount.getText().toString().trim());
 
                     startActivity(new Intent(OfferActivity.this, CheckOutActivity.class)
+                            .putExtra("flag", "OfferActivity")
                             .putExtra("couponList", arrayList)
                             .putExtra("totalAmount", String.valueOf(totalAmount)));
                 } else {
@@ -264,6 +293,43 @@ public class OfferActivity extends AppCompatActivity implements View.OnClickList
 
             case R.id.tv_outlets:
                 startActivity(new Intent(OfferActivity.this, MapsActivity.class).putExtra("merchantId", String.valueOf(merchantId)));
+                break;
+            case R.id.tv_more_info:
+                if (content != null) {
+                    new MoreInfoView(OfferActivity.this, content).show();
+                }
+                break;
+            case R.id.tv_btn_contact:
+                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                    requestCallPermission();
+                } else {
+
+                    if (contact != null) {
+                        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+                        alertDialogBuilder.setTitle(R.string.contact);
+                        alertDialogBuilder.setMessage(contact);
+                        alertDialogBuilder.setPositiveButton(R.string.call, new DialogInterface.OnClickListener() {
+                            @SuppressLint("MissingPermission")
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                Intent callIntent = new Intent(Intent.ACTION_CALL);
+                                callIntent.setData(Uri.parse("tel:" + contact));
+                                startActivity(callIntent);
+                            }
+                        })
+                                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        alertDialog.dismiss();
+                                    }
+                                });
+                        alertDialog = alertDialogBuilder.create();
+                        alertDialog.show();
+                        alertDialog.setCanceledOnTouchOutside(false);
+                    } else
+                        Snackbar.make(parentPanel, "No contact available", Snackbar.LENGTH_SHORT).show();
+                }
                 break;
         }
     }
@@ -337,8 +403,8 @@ public class OfferActivity extends AppCompatActivity implements View.OnClickList
                                 final String city = merchant.getString("area");
                                 description = merchant.getString("description");
                                 totalLike = Integer.parseInt(merchant.getString("likes"));
-                                String contact = merchant.getString("contact");
-                                String moreInfo = merchant.getString("more");
+                                contact = merchant.getString("contact");
+                                content = merchant.getString("more");
 
                                 OfferActivity.this.runOnUiThread(new Runnable() {
                                     @Override
@@ -386,6 +452,13 @@ public class OfferActivity extends AppCompatActivity implements View.OnClickList
                                 @Override
                                 public void run() {
                                     Snackbar.make(parentPanel, "No coupons available for this merchant.", Snackbar.LENGTH_SHORT).show();
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            no_coupons.setVisibility(View.VISIBLE);
+                                            ll_coupon.setVisibility(View.GONE);
+                                        }
+                                    });
                                 }
                             });
                         }
@@ -447,6 +520,19 @@ public class OfferActivity extends AppCompatActivity implements View.OnClickList
         @Override
         public int getCount() {
             return banner.length();
+        }
+    }
+
+    private void requestCallPermission() {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.CALL_PHONE)) {
+            Snackbar.make(parentPanel, "Call Permission Required.", Snackbar.LENGTH_INDEFINITE).setAction(android.R.string.ok, new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ActivityCompat.requestPermissions(OfferActivity.this, PERMISSIONS_CALL, REQUEST_CALL);
+                }
+            }).show();
+        } else {
+            ActivityCompat.requestPermissions(this, PERMISSIONS_CALL, REQUEST_CALL);
         }
     }
 

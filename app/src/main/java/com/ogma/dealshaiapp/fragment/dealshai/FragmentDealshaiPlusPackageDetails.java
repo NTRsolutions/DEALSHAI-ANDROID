@@ -172,8 +172,10 @@ public class FragmentDealshaiPlusPackageDetails extends Fragment implements Inde
     public void onClick(View v) {
 
         startActivity(new Intent(getContext(), CheckOutActivity.class)
+                .putExtra("flag", "DealshaiPlus")
                 .putExtra("couponList", arrayList)
                 .putExtra("totalAmount", String.valueOf(totalPrice)));
+
 
 //        PrePaymentClass prePaymentClass = new PrePaymentClass((AppCompatActivity) getActivity(), getContext(), arrayList, totalPrice, userId);
 //        prePaymentClass.startTransaction();

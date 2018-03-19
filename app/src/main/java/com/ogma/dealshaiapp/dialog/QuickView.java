@@ -181,6 +181,7 @@ public class QuickView extends Dialog implements View.OnClickListener {
                 if (totalAmount > 0) {
                     arrayList = quickViewItemsAdapter.getCouponsDetails();
                     activity.startActivity(new Intent(activity, CheckOutActivity.class)
+                            .putExtra("flag", "QuickView")
                             .putExtra("couponList", arrayList)
                             .putExtra("totalAmount", String.valueOf(totalAmount)));
                     dismiss();

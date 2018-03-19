@@ -36,6 +36,29 @@
         android:orientation="vertical"
         android:padding="8dp">
 
+        <RelativeLayout
+            android:id="@+id/rl_package_qty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.ogma.dealshaiapp.utility.OpenSansFontSemibold
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:padding="5dp"
+                android:text="Package Quantity"
+                android:textColor="@color/textBlack"
+                android:textSize="@dimen/text_medium" />
+
+            <android.support.v7.widget.AppCompatSpinner
+                android:id="@+id/spinner_qty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true">
+
+            </android.support.v7.widget.AppCompatSpinner>
+        </RelativeLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -156,6 +179,18 @@
                 android:textColor="@color/textBlack"
                 android:textSize="@dimen/text_medium" />
 
+            <com.ogma.dealshaiapp.utility.OpenSansFontSemibold
+                android:visibility="gone"
+                android:id="@+id/tv_reset_promo_code"
+                android:layout_alignParentEnd="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:padding="5dp"
+                android:text="Reset"
+                android:textColor="@color/red_dot_color"
+                android:textSize="@dimen/text_medium" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -198,14 +233,32 @@
             android:gravity="center_vertical"
             android:textSize="@dimen/text_medium" />
 
-        <com.ogma.dealshaiapp.utility.OpenSansFontSemibold
-            android:id="@+id/tv_vouchers"
+        <RelativeLayout
+            android:id="@+id/rl_vouchers"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="6dp"
-            android:layout_marginTop="@dimen/margin_10"
-            android:text="Available Vouchers"
-            android:textColor="@color/textBlack" />
+
+            android:layout_marginTop="@dimen/margin_10">
+
+            <com.ogma.dealshaiapp.utility.OpenSansFontSemibold
+                android:id="@+id/tv_vouchers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Available Vouchers"
+                android:textColor="@color/textBlack" />
+
+            <com.ogma.dealshaiapp.utility.OpenSansFontSemibold
+                android:visibility="gone"
+                android:id="@+id/tv_remove_vouchers"
+                android:layout_width="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_height="wrap_content"
+                android:text="Remove vouchers"
+                android:padding="6dp"
+                android:textColor="@color/red_dot_color" />
+
+        </RelativeLayout>
+
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view"

@@ -452,7 +452,6 @@ public class FragmentIndex extends Fragment implements View.OnClickListener, Ind
         }
 
         class ViewHolder extends RecyclerView.ViewHolder {
-
             private ImageView cat_img;
             private TextView cat_title;
             private TextView cat_range;

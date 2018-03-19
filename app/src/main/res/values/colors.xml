@@ -13,6 +13,8 @@
     <color name="colorButterWhite">#fcf3e5</color>
     <color name="textBlack">#3b3b3b</color>
     <color name="colorGreen">#0b8900</color>
+    <color name="colorDarkGreen">#095303</color>
+    <color name="colorDarkRed">#79020a</color>
     <color name="green_dot_color">#17C604</color>
     <color name="red_dot_color">#DD0E0E</color>
 </resources>

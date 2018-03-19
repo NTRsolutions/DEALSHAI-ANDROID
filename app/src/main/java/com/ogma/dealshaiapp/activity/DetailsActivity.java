@@ -24,6 +24,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -83,6 +84,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
     private String content;
     private String contact;
     private Dialog alertDialog;
+    private FrameLayout error_screen;
     private static String[] PERMISSIONS_CALL = {Manifest.permission.CALL_PHONE};
     private static final int REQUEST_CALL = 1;
 
@@ -108,6 +110,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
         parentPanel = findViewById(R.id.parentPanel);
         ImageView iv_back = findViewById(R.id.iv_back);
         banner_view_pager = findViewById(R.id.banner_view_pager);
+        error_screen = findViewById(R.id.error_screen);
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
 
         title_header = findViewById(R.id.title_header);
@@ -166,6 +169,9 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
             }
         });
 
+        error_screen.setVisibility(View.GONE);
+        tv_terms_and_condition.setVisibility(View.VISIBLE);
+
         iv_back.setOnClickListener(this);
         iv_share.setOnClickListener(this);
         iv_like.setOnClickListener(this);
@@ -209,6 +215,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
                 } else {
                     couponsDetails = recyclerViewAdapter.getCouponsDetails();
                     startActivity(new Intent(DetailsActivity.this, CheckOutActivity.class)
+                            .putExtra("flag", "DetailsActivity")
                             .putExtra("couponList", couponsDetails)
                             .putExtra("totalAmount", String.valueOf(totalAmount)));
                 }
@@ -237,7 +244,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
                     if (contact != null) {
                         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
                         alertDialogBuilder.setTitle(R.string.contact);
-                        alertDialogBuilder.setMessage("Contact with our concerned person." + "\n" + contact);
+                        alertDialogBuilder.setMessage(contact);
                         alertDialogBuilder.setPositiveButton(R.string.call, new DialogInterface.OnClickListener() {
                             @SuppressLint("MissingPermission")
                             @Override
@@ -346,6 +353,13 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
                             }
                         } else {
                             Snackbar.make(parentPanel, "No Coupons found for this merchant.", Snackbar.LENGTH_SHORT).show();
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    error_screen.setVisibility(View.VISIBLE);
+                                    tv_terms_and_condition.setVisibility(View.GONE);
+                                }
+                            });
                         }
 
 
