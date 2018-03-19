@@ -48,7 +48,8 @@ public class WelcomeActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         if ((userId != null && !userId.equals("")) && (name != null) && !name.equals("")) {
-                            Intent intent = new Intent(WelcomeActivity.this, IndexActivity.class);
+                            Intent intent = new Intent(WelcomeActivity.this, IndexActivity.class)
+                                    .putExtra("Flag", true);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);
                             WelcomeActivity.this.finish();

@@ -158,8 +158,8 @@
                             android:layout_alignParentStart="true"
                             android:layout_alignTop="@+id/tv_quick_view"
                             android:background="@drawable/shape_ecclipse_background"
-                            android:paddingEnd="10dp"
-                            android:paddingStart="10dp"
+                            android:paddingEnd="6dp"
+                            android:paddingStart="6dp"
                             android:paddingTop="2.5dp"
                             android:paddingBottom="2.5dp"
                             android:text="60% off"
@@ -176,8 +176,8 @@
                             android:layout_centerHorizontal="true"
                             android:background="@drawable/shape_curved_rectangle_background"
                             android:gravity="center"
-                            android:paddingEnd="10dp"
-                            android:paddingStart="10dp"
+                            android:paddingEnd="6dp"
+                            android:paddingStart="6dp"
                             android:paddingBottom="2.5dp"
                             android:paddingTop="2.5dp"
                             android:text="Quick View"
@@ -194,7 +194,7 @@
                             android:layout_marginEnd="5dp"
                             android:text="$2000"
                             android:textColor="#db2b97"
-                            android:textSize="@dimen/text_medium"
+                            android:textSize="14sp"
                             android:textStyle="bold" />
 
                         <com.ogma.dealshaiapp.utility.OpenSansFontSemibold
@@ -205,7 +205,7 @@
                             android:layout_marginEnd="5dp"
                             android:layout_toStartOf="@+id/tv_new_price"
                             android:text="$5000"
-                            android:textSize="@dimen/text_small"
+                            android:textSize="12sp"
                             android:textStyle="bold" />
                     </RelativeLayout>
 

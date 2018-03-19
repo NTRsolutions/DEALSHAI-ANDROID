@@ -247,7 +247,7 @@
                         <cn.trinea.android.view.autoscrollviewpager.AutoScrollViewPager
                             android:id="@+id/banner_view_pager"
                             android:layout_width="match_parent"
-                            android:layout_height="156dp"
+                            android:layout_height="200dp"
                             android:layout_alignParentStart="true"
                             android:layout_alignParentTop="true"
                             android:overScrollMode="never">

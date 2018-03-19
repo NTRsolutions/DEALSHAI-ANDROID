@@ -137,11 +137,13 @@ public class FragmentDealshaiPlusPackages extends Fragment implements IndexActiv
                                     String title = deal.getString("title");
                                     String city = deal.getString("area");
                                     String description = deal.getString("description");
+                                    String qty = deal.getString("qty");
 
                                     singleDealsDetails.setTitle(title);
                                     singleDealsDetails.setCity(city);
                                     singleDealsDetails.setDescription(description);
                                     singleDealsDetails.setImg(img);
+                                    singleDealsDetails.setQuantty(qty);
                                     dealsDetails.add(singleDealsDetails);
                                 }
                                 packageDetails.setPackageId(packageId);
@@ -166,9 +168,7 @@ public class FragmentDealshaiPlusPackages extends Fragment implements IndexActiv
                     }
                 }
             }
-        }
-
-        ;
+        };
         webServiceHandler.getDealshaiData();
     }
 
@@ -298,6 +298,7 @@ public class FragmentDealshaiPlusPackages extends Fragment implements IndexActiv
                 mHolder.tv_title = v.findViewById(R.id.tv_title);
                 mHolder.tv_address = v.findViewById(R.id.tv_address);
                 mHolder.tv_description = v.findViewById(R.id.tv_description);
+                mHolder.qty = v.findViewById(R.id.qty);
                 v.setTag(mHolder);
             } else
                 mHolder = (ViewHolderChild) v.getTag();
@@ -318,6 +319,7 @@ public class FragmentDealshaiPlusPackages extends Fragment implements IndexActiv
             mHolder.tv_title.setText(child.getTitle());
             mHolder.tv_address.setText(" " + child.getCity());
             mHolder.tv_description.setText(child.getDescription());
+            mHolder.qty.setText(child.getQuantty());
 
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -360,6 +362,7 @@ public class FragmentDealshaiPlusPackages extends Fragment implements IndexActiv
             TextView tv_title;
             TextView tv_address;
             TextView tv_description;
+            TextView qty;
         }
     }
 }

@@ -10,6 +10,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -179,6 +180,8 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
                 if (connection.isNetworkConnected()) {
                     if (!promoCode.equals(""))
                         applyCouponCode(userId, promoCode, totalAmount);
+                    else
+                        Snackbar.make(parentPanel, "Please enter a valid promo code.", Snackbar.LENGTH_LONG).show();
                 }
                 break;
             case R.id.tv_btn_proceed:
@@ -224,6 +227,7 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
                 JSONObject jsonObject = null;
                 try {
                     jsonObject = new JSONObject(response);
+                    Log.e("Response", response);
                     String err = String.valueOf(jsonObject.getInt("err"));
                     final String msg = jsonObject.getString("msg");
                     if (err.equals("0")) {
@@ -316,6 +320,7 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
                 JSONObject jsonObject = null;
                 try {
                     jsonObject = new JSONObject(response);
+                    Log.e("Response", response);
                     String err = String.valueOf(jsonObject.getInt("err"));
                     String msg = jsonObject.getString("msg");
                     if (err.equals("0")) {
@@ -332,6 +337,8 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
                         });
                     } else {
                         Snackbar.make(parentPanel, msg, Snackbar.LENGTH_LONG).show();
+                        CheckOutActivity.this.voucherId = "";
+                        CheckOutActivity.this.voucherType = "";
                         tv_remove_vouchers.setVisibility(View.GONE);
                     }
                 } catch (JSONException e) {

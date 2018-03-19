@@ -43,9 +43,8 @@
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:maxLines="2"
-            android:padding="5dp"
-            android:paddingBottom="5dp"
+            android:maxLines="1"
+            android:padding="4dp"
             android:text="Food"
             android:textAllCaps="true"
             android:textColor="@color/textBlack"
@@ -58,23 +57,17 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_title"
             android:orientation="horizontal"
-            android:paddingBottom="5dp"
-            android:paddingTop="5dp">
-
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:src="@drawable/location_icon" />
+            android:paddingBottom="5dp">
 
             <com.ogma.dealshaiapp.utility.OpenSansFontSemibold
                 android:id="@+id/tv_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:drawablePadding="6dp"
+                android:drawableStart="@drawable/location_icon"
                 android:gravity="start|center"
                 android:maxLines="1"
-                android:text=" Address"
+                android:text="Address"
                 android:textColor="#020202"
                 android:textSize="@dimen/text_small" />
 
@@ -86,9 +79,26 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/ll_address"
             android:maxLines="2"
-            android:padding="5dp"
             android:text="40% of on Entry and Adventure"
             android:textSize="16sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_description">
+
+            <com.ogma.dealshaiapp.utility.OpenSansFontRegular
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Quantity:  " />
+
+            <com.ogma.dealshaiapp.utility.OpenSansFontSemibold
+                android:id="@+id/qty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:textColor="@android:color/black" />
+        </LinearLayout>
 
     </RelativeLayout>
 

@@ -87,6 +87,7 @@ public class IndexActivity extends AppCompatActivity implements View.OnClickList
     private String referMessage = "";
     private String shareUrl = "";
     private AlertDialog alertDialog;
+    private boolean flag = false;
 
     public interface OnBackPressedListener {
         void doBack();
@@ -102,6 +103,10 @@ public class IndexActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_index);
         session = new Session(IndexActivity.this);
 
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            flag = bundle.getBoolean("Flag");
+        }
         locationManagerHelper = new LocationManagerHelper(IndexActivity.this);
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
@@ -109,7 +114,8 @@ public class IndexActivity extends AppCompatActivity implements View.OnClickList
             requestLocationPermissions();
             locationManagerHelper.requestLocationPermission();
         } else {
-            startLocationManager();
+            if (flag)
+                startLocationManager();
         }
 
         drawer_layout = findViewById(R.id.drawer_layout);
@@ -123,6 +129,7 @@ public class IndexActivity extends AppCompatActivity implements View.OnClickList
         tv_location = findViewById(R.id.tv_location);
         tv_area = findViewById(R.id.tv_area);
         pf_imge = header.findViewById(R.id.pf_imge);
+
         TextView tv_liked = findViewById(R.id.tv_liked);
         TextView tv_search = findViewById(R.id.tv_search);
         ImageView iv_notification = findViewById(R.id.iv_notification);
@@ -335,7 +342,6 @@ public class IndexActivity extends AppCompatActivity implements View.OnClickList
                     startActivity(new Intent(IndexActivity.this, SearchResultActivity.class)
                             .putExtra("searchText", searchText));
                     et_search.setText("");
-                    et_search.setFocusable(false);
                 } else
                     et_search.setError("Please type something");
                 break;
@@ -360,42 +366,30 @@ public class IndexActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void addNewContact() {
-        // Creates a new Intent to insert a contact
-        Intent intent = new Intent(ContactsContract.Intents.Insert.ACTION);
-        intent.setType(ContactsContract.RawContacts.CONTENT_TYPE);
-        intent.putExtra(ContactsContract.Intents.Insert.NAME, "Dealshai Help");
-        intent.putExtra(ContactsContract.Intents.Insert.PHONE, "8910069131");
-        intent.putExtra(ContactsContract.Intents.Insert.PHONE_TYPE, ContactsContract.CommonDataKinds.Phone.TYPE_WORK);
-        intent.putExtra(ContactsContract.Intents.Insert.EMAIL, "help@dealshai.in");
-        intent.putExtra(ContactsContract.Intents.Insert.EMAIL_TYPE, ContactsContract.CommonDataKinds.Email.TYPE_WORK);
-        startActivity(intent);
-    }
 
-    private void shareReferCode(String userId) {
-        WebServiceHandler webServiceHandler = new WebServiceHandler(IndexActivity.this);
-        webServiceHandler.serviceListener = new WebServiceListener() {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        View view = getLayoutInflater().inflate(R.layout.help_popup, null, false);
+        dialog.setView(view);
+
+        ImageView btn_wtsp_us = view.findViewById(R.id.btn_wtsp_us);
+        btn_wtsp_us.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onResponse(String response) {
-                JSONObject jsonObject = null;
-                int is_error;
-                try {
-                    jsonObject = new JSONObject(response);
-                    is_error = jsonObject.getInt("err");
-                    if (is_error == 0) {
-                        referMessage = jsonObject.getString("text");
-                        shareUrl = jsonObject.getString("link");
-                        if (shareUrl != null) {
-                            referMessage = referMessage + "\n" + shareUrl;
-                        }
-                        share_via_app(referMessage);
-                    } else
-                        Snackbar.make(drawer_layout, jsonObject.getString("msg") + "", Snackbar.LENGTH_LONG).show();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+            public void onClick(View v) {
+                // Creates a new Intent to insert a contact
+                Intent intent = new Intent(ContactsContract.Intents.Insert.ACTION);
+                intent.setType(ContactsContract.RawContacts.CONTENT_TYPE);
+                intent.putExtra(ContactsContract.Intents.Insert.NAME, "Dealshai Help");
+                intent.putExtra(ContactsContract.Intents.Insert.PHONE, "8335083753");
+                intent.putExtra(ContactsContract.Intents.Insert.PHONE_TYPE, ContactsContract.CommonDataKinds.Phone.TYPE_WORK);
+                intent.putExtra(ContactsContract.Intents.Insert.EMAIL, "help@dealshai.in");
+                intent.putExtra(ContactsContract.Intents.Insert.EMAIL_TYPE, ContactsContract.CommonDataKinds.Email.TYPE_WORK);
+                startActivity(intent);
+                alertDialog.dismiss();
             }
-        };
-        webServiceHandler.getReferralMessage(userId);
+        });
+        alertDialog = dialog.create();
+        alertDialog.show();
+        alertDialog.setCanceledOnTouchOutside(false);
     }
 
     @Override
@@ -586,6 +580,33 @@ public class IndexActivity extends AppCompatActivity implements View.OnClickList
         sendIntent.putExtra(Intent.EXTRA_TEXT, referMessage);
         sendIntent.setType("text/plain");
         startActivity(sendIntent);
+    }
+
+    private void shareReferCode(String userId) {
+        WebServiceHandler webServiceHandler = new WebServiceHandler(IndexActivity.this);
+        webServiceHandler.serviceListener = new WebServiceListener() {
+            @Override
+            public void onResponse(String response) {
+                JSONObject jsonObject = null;
+                int is_error;
+                try {
+                    jsonObject = new JSONObject(response);
+                    is_error = jsonObject.getInt("err");
+                    if (is_error == 0) {
+                        referMessage = jsonObject.getString("text");
+                        shareUrl = jsonObject.getString("link");
+                        if (shareUrl != null) {
+                            referMessage = referMessage + "\n" + shareUrl;
+                        }
+                        share_via_app(referMessage);
+                    } else
+                        Snackbar.make(drawer_layout, jsonObject.getString("msg") + "", Snackbar.LENGTH_LONG).show();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        webServiceHandler.getReferralMessage(userId);
     }
 
     private void checkLocationEnabled() {

@@ -12,6 +12,7 @@ public class SingleDealsDetails {
     private String title;
     private String description;
     private String img;
+    private String quantty;
 
     public String getId() {
         return id;
@@ -59,5 +60,13 @@ public class SingleDealsDetails {
 
     public void setImg(String img) {
         this.img = img;
+    }
+
+    public String getQuantty() {
+        return quantty;
+    }
+
+    public void setQuantty(String quantty) {
+        this.quantty = quantty;
     }
 }

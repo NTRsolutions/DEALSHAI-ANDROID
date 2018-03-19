@@ -1,9 +1,11 @@
 package com.ogma.dealshaiapp.network;
 
-import android.app.ProgressDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.util.Log;
+import android.view.View;
 
+import com.ogma.dealshaiapp.R;
 import com.ogma.dealshaiapp.api.ServicesURls;
 
 import org.json.JSONArray;
@@ -28,7 +30,7 @@ import okhttp3.Response;
 public class WebServiceHandler {
     private Context context;
     private static final MediaType MEDIA_TYPE_ALL = MediaType.parse("image/*");
-    private ProgressDialog progressDialog;
+    private Dialog progressDialog;
     public WebServiceListener serviceListener;
 
     public WebServiceHandler(Context context) {
@@ -39,8 +41,9 @@ public class WebServiceHandler {
                 .readTimeout(80, TimeUnit.SECONDS)
                 .build();
 
-        progressDialog = new ProgressDialog(context);
-        progressDialog.setMessage("Please wait...");
+        progressDialog = new Dialog(context);
+        progressDialog.setContentView(View.inflate(context, R.layout.progress_dialog, null));
+        progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         progressDialog.setCancelable(false);
     }
 
@@ -514,6 +517,8 @@ public class WebServiceHandler {
                 .post(body)
                 .addHeader("content-type", "application/json; charset=utf-8")
                 .build();
+
+        Log.e("Request", String.valueOf(jsonObject));
 
         client.newCall(request).enqueue(new Callback() {
             @Override

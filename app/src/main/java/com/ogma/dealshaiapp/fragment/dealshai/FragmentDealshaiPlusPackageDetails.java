@@ -202,6 +202,7 @@ public class FragmentDealshaiPlusPackageDetails extends Fragment implements Inde
             TextView tv_valid_for;
             TextView tv_valid_on;
             TextView tv_t_and_c;
+            TextView qty;
 
             ViewHolder(View itemView) {
                 super(itemView);
@@ -212,6 +213,7 @@ public class FragmentDealshaiPlusPackageDetails extends Fragment implements Inde
                 tv_valid_on = itemView.findViewById(R.id.tv_valid_on);
                 tv_t_and_c = itemView.findViewById(R.id.tv_t_and_c);
                 index_banner = itemView.findViewById(R.id.index_banner);
+                qty = itemView.findViewById(R.id.qty);
 
             }
         }
@@ -230,6 +232,7 @@ public class FragmentDealshaiPlusPackageDetails extends Fragment implements Inde
             String imgUrl = "";
             String validFor = "";
             String validOn = "";
+            String quantity = "";
 
             imageLoader = ImageLoader.getInstance();
             if (!imageLoader.isInited()) {
@@ -250,6 +253,7 @@ public class FragmentDealshaiPlusPackageDetails extends Fragment implements Inde
                 validFor = object.getString("valid_for").trim();
                 validOn = object.getString("valid_on").trim();
                 imgUrl = object.getString("img");
+                quantity = object.getString("qty");
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -260,6 +264,7 @@ public class FragmentDealshaiPlusPackageDetails extends Fragment implements Inde
             holder.tv_valid_for.setText(validFor);
             holder.tv_valid_on.setText(validOn);
             holder.tv_t_and_c.setText(condition);
+            holder.qty.setText(quantity);
             imageLoader.displayImage(imgUrl, holder.index_banner, options);
         }
 
