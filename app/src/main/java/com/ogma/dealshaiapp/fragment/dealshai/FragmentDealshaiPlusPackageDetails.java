@@ -9,6 +9,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -58,6 +59,7 @@ public class FragmentDealshaiPlusPackageDetails extends Fragment implements Inde
     private RelativeLayout parentPanel;
     private boolean flag;
     private String userId;
+    private AlertDialog alertDialog;
 
 
     @Nullable
@@ -137,7 +139,7 @@ public class FragmentDealshaiPlusPackageDetails extends Fragment implements Inde
                                 JSONObject object = packageItems.getJSONObject(i);
                                 couponsDetails.setMerchantId(object.getString("merchant_id"));
                                 couponsDetails.setCouponId(object.getString("cupon_id"));
-                                couponsDetails.setQuantity(1);
+                                couponsDetails.setQuantity(object.getInt("qty"));
                                 arrayList.add(couponsDetails);
                             }
                         }
@@ -175,10 +177,6 @@ public class FragmentDealshaiPlusPackageDetails extends Fragment implements Inde
                 .putExtra("flag", "DealshaiPlus")
                 .putExtra("couponList", arrayList)
                 .putExtra("totalAmount", String.valueOf(totalPrice)));
-
-
-//        PrePaymentClass prePaymentClass = new PrePaymentClass((AppCompatActivity) getActivity(), getContext(), arrayList, totalPrice, userId);
-//        prePaymentClass.startTransaction();
     }
 
     private class PackageDetailsAdapter extends RecyclerView.Adapter<PackageDetailsAdapter.ViewHolder> {
@@ -203,6 +201,7 @@ public class FragmentDealshaiPlusPackageDetails extends Fragment implements Inde
             TextView tv_valid_on;
             TextView tv_t_and_c;
             TextView qty;
+            TextView tv_view_more;
 
             ViewHolder(View itemView) {
                 super(itemView);
@@ -214,6 +213,42 @@ public class FragmentDealshaiPlusPackageDetails extends Fragment implements Inde
                 tv_t_and_c = itemView.findViewById(R.id.tv_t_and_c);
                 index_banner = itemView.findViewById(R.id.index_banner);
                 qty = itemView.findViewById(R.id.qty);
+                tv_view_more = itemView.findViewById(R.id.tv_view_more);
+
+                tv_view_more.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String merchantName = "";
+                        String condition = "";
+
+                        try {
+                            JSONObject object = packageItems.getJSONObject(getAdapterPosition());
+                            merchantName = object.getString("merchant_name");
+                            condition = object.getString("condition");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+                        View view = getLayoutInflater().inflate(R.layout.view_t_and_c, null, false);
+                        alertDialogBuilder.setView(view);
+                        TextView tv_ok = view.findViewById(R.id.tv_ok);
+                        TextView tv_t_and_c = view.findViewById(R.id.tv_t_and_c);
+                        TextView tv_merchant_name = view.findViewById(R.id.tv_merchant_name);
+
+                        tv_merchant_name.setText(merchantName);
+                        tv_t_and_c.setText(condition);
+
+                        tv_ok.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                alertDialog.dismiss();
+                            }
+                        });
+
+                        alertDialog = alertDialogBuilder.create();
+                        alertDialog.show();
+                    }
+                });
 
             }
         }

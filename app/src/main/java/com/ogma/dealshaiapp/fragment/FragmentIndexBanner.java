@@ -83,7 +83,8 @@ public class FragmentIndexBanner extends Fragment implements View.OnClickListene
         int id = v.getId();
         switch (id) {
             case R.id.index_banner:
-                startActivity(new Intent(getActivity(), OfferActivity.class).putExtra("coupon_id", coupon_Id));
+                if (!coupon_Id.equals("0"))
+                    startActivity(new Intent(getActivity(), OfferActivity.class).putExtra("coupon_id", coupon_Id));
                 break;
 
         }

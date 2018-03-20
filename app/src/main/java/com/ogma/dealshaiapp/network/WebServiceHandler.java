@@ -379,14 +379,19 @@ public class WebServiceHandler {
         newCall(parameter, ServicesURls.GetCurrentLocation);
     }
 
-    public void getOrderDetails(String userId, String totalAmount, JSONArray deals, int quantity) {
+    public void getOrderDetails(String userId, String payableAmount, JSONArray deals, int quantity, String totalAmount, String voucherId, String voucherType, String promoId, String promoType) {
         progressDialog.show();
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("user_id", userId);
-            jsonObject.put("total_price", totalAmount);
+            jsonObject.put("total_price", payableAmount);
             jsonObject.put("deals", deals);
             jsonObject.put("quantity", quantity);
+            jsonObject.put("total_purchase_amount", totalAmount);
+            jsonObject.put("voucher_id", voucherId);
+            jsonObject.put("voucher_type", voucherType);
+            jsonObject.put("promo_id", promoId);
+            jsonObject.put("promo_type", promoType);
         } catch (JSONException e) {
             e.printStackTrace();
         }

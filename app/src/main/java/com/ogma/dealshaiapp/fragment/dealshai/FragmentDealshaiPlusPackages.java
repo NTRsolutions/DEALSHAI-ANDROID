@@ -291,8 +291,6 @@ public class FragmentDealshaiPlusPackages extends Fragment implements IndexActiv
             if (v == null) {
                 LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 v = layoutInflater.inflate(R.layout.activity_packages_deal_item, parent, false);
-//                 parentGroup.setBackgroundResource(R.drawable.fa_summ_report_main_item);
-//                v.setBackgroundResource(R.drawable.shape_fine_stroke_rectangle);
                 mHolder = new ViewHolderChild();
                 mHolder.index_banner = v.findViewById(R.id.index_banner);
                 mHolder.tv_title = v.findViewById(R.id.tv_title);

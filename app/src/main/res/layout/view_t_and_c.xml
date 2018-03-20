@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <com.ogma.dealshaiapp.utility.OpenSansFontSemibold
+        android:id="@+id/tv_merchant_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="6dp"
+        android:gravity="center"
+        android:padding="4dp"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/text_medium" />
+
+    <com.ogma.dealshaiapp.utility.OpenSansFontSemibold
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="4dp"
+        android:text="Terms and Conditions*"
+        android:textColor="#050505"
+        android:textSize="@dimen/text_small" />
+
+    <com.ogma.dealshaiapp.utility.OpenSansFontRegular
+        android:id="@+id/tv_t_and_c"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="100dp"
+        android:padding="4dp"
+        android:textColor="@color/textBlack" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.6dp"
+        android:background="@color/colorPrimaryDark" />
+
+    <com.ogma.dealshaiapp.utility.OpenSansFontRegular
+        android:id="@+id/tv_ok"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="4dp"
+        android:text="Ok"
+        android:textColor="@color/colorPrimaryDark" />
+</LinearLayout>

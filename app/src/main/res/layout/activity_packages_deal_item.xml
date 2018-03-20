@@ -17,10 +17,10 @@
 
     <android.support.v7.widget.CardView
         android:layout_width="0dp"
-        android:layout_height="128dp"
-        android:layout_marginBottom="7dp"
-        android:layout_marginTop="7dp"
-        android:layout_weight="1"
+        android:layout_height="148dp"
+        android:layout_marginBottom="6dp"
+        android:layout_marginTop="6dp"
+        android:layout_weight=".8"
         app:cardCornerRadius="10dp">
 
         <ImageView
@@ -33,10 +33,11 @@
     </android.support.v7.widget.CardView>
 
     <RelativeLayout
+        android:layout_marginTop="6dp"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_marginStart="5dp"
-        android:layout_weight="1.1"
+        android:layout_weight="1.2"
         android:orientation="vertical">
 
         <com.ogma.dealshaiapp.utility.OpenSansFontBold
@@ -44,43 +45,39 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:maxLines="1"
-            android:padding="4dp"
+
             android:text="Food"
             android:textAllCaps="true"
             android:textColor="@color/textBlack"
-            android:textSize="@dimen/text_medium"
+            android:textSize="@dimen/text_small"
             android:textStyle="bold" />
 
-        <LinearLayout
-            android:id="@+id/ll_address"
+        <com.ogma.dealshaiapp.utility.OpenSansFontSemibold
+            android:id="@+id/tv_address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
             android:layout_below="@+id/tv_title"
-            android:orientation="horizontal"
-            android:paddingBottom="5dp">
+            android:drawablePadding="4dp"
+            android:drawableStart="@drawable/location_icon"
+            android:gravity="start|center_vertical"
+            android:maxLines="1"
+            android:text="Address"
+            android:textColor="#020202"
+            android:textSize="@dimen/text_small" />
 
-            <com.ogma.dealshaiapp.utility.OpenSansFontSemibold
-                android:id="@+id/tv_address"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:drawablePadding="6dp"
-                android:drawableStart="@drawable/location_icon"
-                android:gravity="start|center"
-                android:maxLines="1"
-                android:text="Address"
-                android:textColor="#020202"
-                android:textSize="@dimen/text_small" />
-
-        </LinearLayout>
 
         <com.ogma.dealshaiapp.utility.OpenSansFontRegular
             android:id="@+id/tv_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/ll_address"
-            android:maxLines="2"
-            android:text="40% of on Entry and Adventure"
-            android:textSize="16sp" />
+            android:layout_below="@+id/tv_address"
+            android:maxLines="4"
+            android:text="40% of on Entry and Adventure
+40% of on Entry and Adventure
+40% of on Entry and Adventure
+40% of on Entry and Adventure"
+            android:textSize="14sp" />
 
         <LinearLayout
             android:layout_width="match_parent"

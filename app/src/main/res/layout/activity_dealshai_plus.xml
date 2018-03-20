@@ -44,8 +44,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:childDivider="#8B8A8A"
-            android:paddingStart="@dimen/margin_5"
             android:paddingEnd="@dimen/margin_5"
+            android:paddingStart="@dimen/margin_5"
+            android:paddingBottom="48dp"
             android:scrollbars="none">
 
         </ExpandableListView>

@@ -149,7 +149,7 @@ public class PrePaymentClass {
                 }
             }
         };
-        webServiceHandler.getOrderDetails(userId, payableAmount, deals, quantity);
+        webServiceHandler.getOrderDetails(userId, payableAmount, deals, quantity, totalAmount, voucherId, voucherType, promoId, promoType);
     }
 
     public void onStartTransaction() {
