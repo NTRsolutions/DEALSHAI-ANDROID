@@ -3,7 +3,7 @@ package com.ogma.dealshaiapp.api;
 public class ServicesURls {
     //    public static String BaseUrlLocal = "http://10.1.1.11/dealshai/api/";
 //    private static String BaseUrl = "http://www.ogmaconceptions.com/demo/dealshai/api/";
-    private static String BaseUrl = "https://www.dealshai.in/demo/demo/api/";
+    private static String BaseUrl = "https://www.dealshai.in/api/";
 
     public static String LoginApi = BaseUrl + "user_login";
     public static String CheckOtp = BaseUrl + "check_otp";

@@ -87,6 +87,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
     private FrameLayout error_screen;
     private static String[] PERMISSIONS_CALL = {Manifest.permission.CALL_PHONE};
     private static final int REQUEST_CALL = 1;
+    private String menuStr;
 
 
     @Override
@@ -127,6 +128,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
         TextView tv_btn_buy_now = findViewById(R.id.tv_btn_buy_now);
         ImageView iv_share = findViewById(R.id.iv_share);
         ImageView iv_like = findViewById(R.id.iv_like);
+
 
         banner_indicator = findViewById(R.id.banner_indicator);
         banner_view_pager.setInterval(4000);
@@ -169,6 +171,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
             }
         });
 
+        tv_btn_menu.setVisibility(View.GONE);
         error_screen.setVisibility(View.GONE);
         tv_terms_and_condition.setVisibility(View.VISIBLE);
 
@@ -178,6 +181,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
         tv_total_like.setOnClickListener(this);
         tv_btn_buy_now.setOnClickListener(this);
         tv_distance.setOnClickListener(this);
+        tv_btn_menu.setOnClickListener(this);
         tv_more_info.setOnClickListener(this);
         tv_btn_contact.setOnClickListener(this);
     }
@@ -205,6 +209,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     public void onClick(View v) {
         int id = v.getId();
+        AlertDialog.Builder alertDialogBuilder;
         switch (id) {
             case R.id.iv_back:
                 onBackPressed();
@@ -230,6 +235,14 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.tv_distance:
                 startActivity(new Intent(DetailsActivity.this, MapsActivity.class).putExtra("merchantId", merchant_id));
                 break;
+            case R.id.tv_btn_menu:
+                alertDialogBuilder = new AlertDialog.Builder(this);
+                alertDialogBuilder.setTitle("MENU");
+                alertDialogBuilder.setMessage(menuStr);
+                alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
+                alertDialog.setCanceledOnTouchOutside(true);
+                break;
 
             case R.id.tv_more_info:
                 if (content != null) {
@@ -242,7 +255,8 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
                 } else {
 
                     if (contact != null) {
-                        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+
+                        alertDialogBuilder = new AlertDialog.Builder(this);
                         alertDialogBuilder.setTitle(R.string.contact);
                         alertDialogBuilder.setMessage(contact);
                         alertDialogBuilder.setPositiveButton(R.string.call, new DialogInterface.OnClickListener() {
@@ -316,6 +330,8 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
                 try {
                     JSONObject main = new JSONObject(response);
                     String isErr = main.getString("err");
+                    int is_menu;
+
                     if (isErr != null && Integer.parseInt(isErr) == 1) {
                         Snackbar.make(parentPanel, main.getString("err_msg"), Snackbar.LENGTH_SHORT).show();
                     } else {
@@ -327,7 +343,11 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
                         totalLike = Integer.parseInt(main.getString("like"));
                         termsCondition = main.getString("condition");
                         shareUrl = main.getString("share_link");
-
+                        is_menu = main.getInt("is_menu");
+                        if (is_menu == 1) {
+                            menuStr = main.getString("menu");
+                            setMenu(menuStr);
+                        }
                         deals = main.getJSONArray("deals");
                         if (deals.length() > 0) {
                             couponsDetails.clear();
@@ -400,6 +420,15 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
             }
         };
         webServiceHandler.getDetailsData(merchant_id);
+    }
+
+    private void setMenu(String menuStr) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                tv_btn_menu.setVisibility(View.VISIBLE);
+            }
+        });
     }
 
     public void share_via_app() {
