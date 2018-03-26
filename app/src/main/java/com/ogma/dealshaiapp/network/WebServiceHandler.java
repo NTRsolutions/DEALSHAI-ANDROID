@@ -515,7 +515,12 @@ public class WebServiceHandler {
     private void newCall(JSONObject jsonObject, String api) {
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
-        OkHttpClient client = new OkHttpClient();
+//        OkHttpClient client = new OkHttpClient();
+        OkHttpClient client = new OkHttpClient.Builder()
+                .connectTimeout(60, TimeUnit.SECONDS)
+                .writeTimeout(60, TimeUnit.SECONDS)
+                .readTimeout(80, TimeUnit.SECONDS)
+                .build();
         RequestBody body = RequestBody.create(JSON, jsonObject.toString());
         Request request = new Request.Builder()
                 .url(api)

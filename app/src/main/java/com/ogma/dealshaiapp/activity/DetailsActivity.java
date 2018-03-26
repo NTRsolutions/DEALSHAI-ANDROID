@@ -369,6 +369,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
                                 couponDetails.setOriginalPrice(originalPrice);
                                 couponDetails.setCouponId(couponId);
                                 couponDetails.setMerchantId(merchant_id);
+                                couponDetails.setIsSinglePurchase(object.getInt("is_single_purchase"));
                                 couponsDetails.add(couponDetails);
                             }
                         } else {
@@ -513,8 +514,21 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
                     public void onClick(View v) {
                         CouponsDetails couponDetails = couponsDetails.get(getAdapterPosition());
                         int quantity = couponDetails.getQuantity();
-
-                        if (quantity < 10) {
+                        if (couponDetails.getIsSinglePurchase() == 1) {
+                            if (couponDetails.getQuantity() < 1) {
+                                quantity++;
+                                if (context instanceof DetailsActivity) {
+                                    int amount = couponDetails.getNewPrice();
+                                    ((DetailsActivity) context).setTotalPayable(amount);
+                                }
+                                couponDetails.setQuantity(quantity);
+                                if (couponDetails.getQuantity() > 0) {
+                                    couponDetails.setIsSelected(1);
+                                }
+                                notifyDataSetChanged();
+                            } else
+                                Toast.makeText(context, "R.string.not_more_than_one", Toast.LENGTH_SHORT).show();
+                        } else {
                             quantity++;
                             if (context instanceof DetailsActivity) {
                                 int amount = couponDetails.getNewPrice();
@@ -525,8 +539,8 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
                                 couponDetails.setIsSelected(1);
                             }
                             notifyDataSetChanged();
-                            //updateItemQuantity(quantity, getAdapterPosition());
                         }
+                        //updateItemQuantity(quantity, getAdapterPosition());
                     }
                 });
 

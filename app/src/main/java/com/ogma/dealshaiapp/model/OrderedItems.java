@@ -19,6 +19,8 @@ public class OrderedItems {
     private String redeemed;
     private String validOn;
     private String validFor;
+    private String orderId;
+    private String orderDate;
 
     public String getMerchantName() {
         return merchantName;
@@ -114,5 +116,21 @@ public class OrderedItems {
 
     public void setValidFor(String validFor) {
         this.validFor = validFor;
+    }
+
+    public String getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
+    }
+
+    public String getOrderDate() {
+        return orderDate;
+    }
+
+    public void setOrderDate(String orderDate) {
+        this.orderDate = orderDate;
     }
 }

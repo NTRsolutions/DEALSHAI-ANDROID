@@ -129,6 +129,7 @@ public class QuickView extends Dialog implements View.OnClickListener {
                                 couponsDetails.setNewPrice(Integer.parseInt(object.getString("our_price")));
                                 couponsDetails.setOriginalPrice(Integer.parseInt(object.getString("price")));
                                 couponsDetails.setMerchantId(String.valueOf(merchantId));
+                                couponsDetails.setIsSinglePurchase(object.getInt("is_single_purchase"));
                                 arrayList.add(couponsDetails);
                             }
 
@@ -251,7 +252,19 @@ public class QuickView extends Dialog implements View.OnClickListener {
                     public void onClick(View v) {
                         CouponsDetails couponDetails = arrayList.get(getAdapterPosition());
                         int quantity = couponDetails.getQuantity();
-                        if (quantity < 10) {
+                        if (couponDetails.getIsSinglePurchase() == 1) {
+                            if (couponDetails.getQuantity() < 1) {
+                                quantity++;
+                                int amount = couponDetails.getNewPrice();
+                                setTotalAmount(amount);
+                                couponDetails.setQuantity(quantity);
+                                if (couponDetails.getQuantity() > 0) {
+                                    couponDetails.setIsSelected(1);
+                                }
+                                notifyDataSetChanged();
+                            } else
+                                Toast.makeText(context, R.string.not_more_than_one, Toast.LENGTH_SHORT).show();
+                        } else {
                             quantity++;
                             int amount = couponDetails.getNewPrice();
                             setTotalAmount(amount);

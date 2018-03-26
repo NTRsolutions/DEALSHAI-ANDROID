@@ -170,12 +170,13 @@
         android:layout_alignParentBottom="true"
         android:background="@color/colorTheme"
         android:gravity="bottom|center_horizontal"
-        android:paddingTop="5dp">
+        android:paddingTop="8dp"
+        android:paddingBottom="4dp">
 
         <com.ogma.dealshaiapp.utility.OpenSansFontSemibold
             android:id="@+id/tv_home"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_weight="1"
             android:drawableTop="@drawable/ic_menu_home"
             android:gravity="bottom|center"
@@ -185,8 +186,8 @@
 
         <com.ogma.dealshaiapp.utility.OpenSansFontSemibold
             android:id="@+id/tv_my_purchase"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_gravity="center"
             android:layout_weight="1"
             android:drawableTop="@drawable/ic_menu_shopping"
@@ -197,8 +198,8 @@
 
         <com.ogma.dealshaiapp.utility.OpenSansFontSemibold
             android:id="@+id/tv_liked"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_gravity="center"
             android:layout_weight="1"
             android:drawableTop="@drawable/ic_menu_ok"
@@ -209,8 +210,8 @@
 
         <com.ogma.dealshaiapp.utility.OpenSansFontSemibold
             android:id="@+id/tv_help"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_gravity="center"
             android:layout_weight="1"
             android:drawableTop="@drawable/ic_menu_help"
@@ -221,8 +222,8 @@
 
         <com.ogma.dealshaiapp.utility.OpenSansFontSemibold
             android:id="@+id/tv_refer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_gravity="center"
             android:layout_weight="1"
             android:drawableTop="@drawable/ic_menu_share"

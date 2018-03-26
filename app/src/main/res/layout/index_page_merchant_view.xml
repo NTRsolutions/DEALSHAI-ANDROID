@@ -23,8 +23,7 @@
                 android:id="@+id/index_banner"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/image_max_height"
-                android:scaleType="centerCrop"
-                android:src="@drawable/fun_time_img1" />
+                android:scaleType="centerCrop" />
 
             <LinearLayout
                 android:id="@+id/linearLayout"

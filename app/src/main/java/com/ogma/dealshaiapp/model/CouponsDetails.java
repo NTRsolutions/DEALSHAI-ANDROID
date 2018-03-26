@@ -17,6 +17,7 @@ public class CouponsDetails implements Serializable {
     private int originalPrice;
     private int quantity = 0;
     private int isSelected = 0;
+    private int isSinglePurchase;
 
     public String getMerchantId() {
         return merchantId;
@@ -96,5 +97,13 @@ public class CouponsDetails implements Serializable {
 
     public void setIsSelected(int isSelected) {
         this.isSelected = isSelected;
+    }
+
+    public int getIsSinglePurchase() {
+        return isSinglePurchase;
+    }
+
+    public void setIsSinglePurchase(int isSinglePurchase) {
+        this.isSinglePurchase = isSinglePurchase;
     }
 }

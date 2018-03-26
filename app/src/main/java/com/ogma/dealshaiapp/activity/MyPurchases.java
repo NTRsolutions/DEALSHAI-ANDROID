@@ -116,6 +116,8 @@ public class MyPurchases extends AppCompatActivity {
                             orderedItems.setRedeemed(deals.getString("reedemed"));
                             orderedItems.setValidFor(deals.getString("valid_for"));
                             orderedItems.setValidOn(deals.getString("valid_on"));
+                            orderedItems.setOrderId(deals.getString("order_id"));
+                            orderedItems.setOrderDate(deals.getString("order_date"));
                             arrayList.add(orderedItems);
                         }
                     }
@@ -179,6 +181,8 @@ public class MyPurchases extends AppCompatActivity {
             TextView tv_valid_for;
             TextView tv_valid_on;
             TextView tv_total_amount;
+            TextView tv_order_id;
+            TextView tv_purchased_date;
             ImageView iv_qr_code;
 
             ViewHolder(View itemView) {
@@ -190,6 +194,8 @@ public class MyPurchases extends AppCompatActivity {
                 tv_valid_for = itemView.findViewById(R.id.tv_valid_for);
                 tv_valid_on = itemView.findViewById(R.id.tv_valid_on);
                 tv_total_amount = itemView.findViewById(R.id.tv_total_amount);
+                tv_purchased_date = itemView.findViewById(R.id.tv_purchased_date);
+                tv_order_id = itemView.findViewById(R.id.tv_order_id);
                 index_banner = itemView.findViewById(R.id.index_banner);
                 iv_redeemed = itemView.findViewById(R.id.iv_redeemed);
                 iv_qr_code = itemView.findViewById(R.id.iv_qr_code);
@@ -233,6 +239,8 @@ public class MyPurchases extends AppCompatActivity {
             holder.tv_total_amount.setText("₹" + orderedItems.getTotal_price());
             holder.tv_valid_for.setText(orderedItems.getValidFor());
             holder.tv_valid_on.setText(orderedItems.getValidOn());
+            holder.tv_purchased_date.setText(orderedItems.getOrderDate());
+            holder.tv_order_id.setText(orderedItems.getOrderId());
 
             imageLoader.displayImage(orderedItems.getImg(), holder.index_banner, options);
             if (orderedItems.getRedeemed().equals("1"))

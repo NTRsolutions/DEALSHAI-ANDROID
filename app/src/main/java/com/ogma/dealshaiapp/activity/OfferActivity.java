@@ -93,6 +93,7 @@ public class OfferActivity extends AppCompatActivity implements View.OnClickList
     private static final int REQUEST_CALL = 1;
     private AlertDialog alertDialog;
     private String menuStr = "";
+    private int maxQuantity;
 
 
     @Override
@@ -258,7 +259,14 @@ public class OfferActivity extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.iv_plus:
                 int quantity1 = Integer.parseInt(coupon_quantity.getText().toString().trim());
-                if (quantity1 < 10) {
+                if (maxQuantity == 1) {
+                    if (quantity1 < 1) {
+                        quantity1++;
+                        setTotalPayable(Integer.parseInt(offerPrice));
+                        coupon_quantity.setText(String.valueOf(quantity1));
+                    } else
+                        Snackbar.make(parentPanel, R.string.not_more_than_one, Snackbar.LENGTH_SHORT).show();
+                } else {
                     quantity1++;
                     setTotalPayable(Integer.parseInt(offerPrice));
                     coupon_quantity.setText(String.valueOf(quantity1));
@@ -450,6 +458,7 @@ public class OfferActivity extends AppCompatActivity implements View.OnClickList
                                 validOn = cupon.getString("valid_on");
                                 price = cupon.getString("price");
                                 offerPrice = cupon.getString("our_price");
+                                maxQuantity = cupon.getInt("is_single_purchase");
 
                                 OfferActivity.this.runOnUiThread(new Runnable() {
                                     @Override
