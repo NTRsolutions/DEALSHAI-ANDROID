@@ -420,7 +420,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
                 }
             }
         };
-        webServiceHandler.getDetailsData(merchant_id);
+        webServiceHandler.getDetailsData(merchant_id, userId);
     }
 
     private void setMenu(String menuStr) {
@@ -527,7 +527,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
                                 }
                                 notifyDataSetChanged();
                             } else
-                                Toast.makeText(context, "R.string.not_more_than_one", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, R.string.not_more_than_one, Toast.LENGTH_SHORT).show();
                         } else {
                             quantity++;
                             if (context instanceof DetailsActivity) {

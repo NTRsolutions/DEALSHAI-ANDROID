@@ -28,12 +28,14 @@ import com.ogma.dealshaiapp.model.CouponsDetails;
 import com.ogma.dealshaiapp.network.NetworkConnection;
 import com.ogma.dealshaiapp.network.WebServiceHandler;
 import com.ogma.dealshaiapp.network.WebServiceListener;
+import com.ogma.dealshaiapp.utility.Session;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class AddToPlan extends Dialog implements View.OnClickListener {
 
@@ -47,6 +49,7 @@ public class AddToPlan extends Dialog implements View.OnClickListener {
     private int totalAmount;
     private RecyclerView recycler_view;
     private FrameLayout error_screen;
+    private String userId;
 
 
     public AddToPlan(@NonNull Activity activity, int merchantId) {
@@ -66,6 +69,9 @@ public class AddToPlan extends Dialog implements View.OnClickListener {
         getWindow().setGravity(Gravity.CENTER);
         getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
+        Session session = new Session(getContext());
+        HashMap<String, String> user = session.getUserDetails();
+        userId = user.get(Session.KEY_ID);
 
         NetworkConnection connection = new NetworkConnection(getContext());
         if (connection.isNetworkConnected()) {
@@ -99,8 +105,8 @@ public class AddToPlan extends Dialog implements View.OnClickListener {
         webServiceHandler.serviceListener = new WebServiceListener() {
             @Override
             public void onResponse(String response) {
-                JSONObject jsonObject = null;
-                int is_err = 2;
+                JSONObject jsonObject;
+                int is_err;
                 try {
                     jsonObject = new JSONObject(response);
                     is_err = jsonObject.getInt("err");
@@ -160,7 +166,7 @@ public class AddToPlan extends Dialog implements View.OnClickListener {
                 }
             }
         };
-        webServiceHandler.getCoupons(merchantId);
+        webServiceHandler.getCoupons(merchantId, userId);
     }
 
     @Override

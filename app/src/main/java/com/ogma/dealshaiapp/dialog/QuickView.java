@@ -31,12 +31,14 @@ import com.ogma.dealshaiapp.model.CouponsDetails;
 import com.ogma.dealshaiapp.network.NetworkConnection;
 import com.ogma.dealshaiapp.network.WebServiceHandler;
 import com.ogma.dealshaiapp.network.WebServiceListener;
+import com.ogma.dealshaiapp.utility.Session;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class QuickView extends Dialog implements View.OnClickListener {
 
@@ -52,6 +54,7 @@ public class QuickView extends Dialog implements View.OnClickListener {
     private RelativeLayout parentPanel;
     private FrameLayout error_screen;
     private ProgressDialog progressDialog;
+    private String userId;
 
     public QuickView(@NonNull Activity activity, int merchantId) {
         super(activity);
@@ -71,6 +74,10 @@ public class QuickView extends Dialog implements View.OnClickListener {
         getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 
         progressDialog = new ProgressDialog(getContext());
+
+        Session session = new Session(getContext());
+        HashMap<String, String> user = session.getUserDetails();
+        userId = user.get(Session.KEY_ID);
 
         NetworkConnection connection = new NetworkConnection(getContext());
         if (connection.isNetworkConnected()) {
@@ -171,7 +178,7 @@ public class QuickView extends Dialog implements View.OnClickListener {
                 }
             }
         };
-        webServiceHandler.getCoupons(merchantId);
+        webServiceHandler.getCoupons(merchantId, userId);
     }
 
     @Override

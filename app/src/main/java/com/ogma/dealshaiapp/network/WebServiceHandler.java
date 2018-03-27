@@ -124,9 +124,10 @@ public class WebServiceHandler {
     }
 
     //Details and Coupon List of A Merchant
-    public void getDetailsData(String merchant_id) {
+    public void getDetailsData(String merchant_id, String userId) {
         progressDialog.show();
         Map<String, String> params = new HashMap<>();
+        params.put("user_id", userId);
         params.put("merchant_id", merchant_id);
         JSONObject parameter = new JSONObject(params);
 
@@ -134,9 +135,10 @@ public class WebServiceHandler {
     }
 
     //Merchant Coupons List
-    public void getCoupons(int merchantId) {
+    public void getCoupons(int merchantId, String userId) {
         progressDialog.show();
         Map<String, String> params = new HashMap<>();
+        params.put("user_id", String.valueOf(userId));
         params.put("merchant_id", String.valueOf(merchantId));
         JSONObject parameter = new JSONObject(params);
 
@@ -166,9 +168,10 @@ public class WebServiceHandler {
     }
 
     //Details from Index Page Banner
-    public void getOfferDetailsData(String couponId) {
+    public void getOfferDetailsData(String couponId, String userId) {
         progressDialog.show();
         Map<String, String> params = new HashMap<>();
+        params.put("user_id", userId);
         params.put("coupon_id", couponId);
         JSONObject parameter = new JSONObject(params);
 

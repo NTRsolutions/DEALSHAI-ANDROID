@@ -505,7 +505,7 @@ public class OfferActivity extends AppCompatActivity implements View.OnClickList
                 }
             }
         };
-        webServiceHandler.getOfferDetailsData(couponId);
+        webServiceHandler.getOfferDetailsData(couponId, userId);
     }
 
     private void setMenu(String menuStr) {
