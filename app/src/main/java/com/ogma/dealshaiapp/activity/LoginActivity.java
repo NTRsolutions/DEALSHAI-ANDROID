@@ -116,13 +116,13 @@ LoginActivity extends AppCompatActivity implements View.OnClickListener {
             case R.id.tv_TnC:
                 browserIntent = new Intent(
                         Intent.ACTION_VIEW,
-                        Uri.parse("https://www.dealshai.in/demo/demo/Home/terms_and_conditions?data=1520334671"));
+                        Uri.parse("https://www.dealshai.in/Home/terms_and_conditions?data=1522232397"));
                 startActivity(browserIntent);
                 break;
             case R.id.tv_prv_plc:
                 browserIntent = new Intent(
                         Intent.ACTION_VIEW,
-                        Uri.parse("https://www.dealshai.in/demo/demo/Home/privacy_policy?data=1520334679"));
+                        Uri.parse("https://www.dealshai.in/Home/privacy_policy?data=1522232397"));
                 startActivity(browserIntent);
                 break;
             case R.id.tv_btn_reset:

@@ -21,9 +21,9 @@ public class ServicesURls {
     public static String PlankarleStepTwo = BaseUrl + "plankarle_step2_get_category";
     public static String PlankarleStepTwoSub = BaseUrl + "plankarle_step2_get_merchant";
     public static String PlankarleViewPlan = BaseUrl + "view_plankarle_select_plan";
+    public static String PrePayment = BaseUrl + "prepayment";
     public static String Complete_Payment = BaseUrl + "complete_payment";
     public static String Complete_Paytm_Payment = BaseUrl + "complete_paytm_payment";
-    public static String PrePayment = BaseUrl + "prepayment";
     public static String Ordered_List = BaseUrl + "payment_details";
     public static String QRCode = BaseUrl + "payment_item_details";
     public static String City = BaseUrl + "city";
