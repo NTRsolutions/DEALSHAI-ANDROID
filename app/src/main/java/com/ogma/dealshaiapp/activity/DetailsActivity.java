@@ -21,6 +21,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -93,7 +94,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_details);
+        setContentView(R.layout.activity_details_modified);
 
         Session session = new Session(DetailsActivity.this);
         HashMap<String, String> user = session.getUserDetails();
@@ -329,6 +330,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
             public void onResponse(String response) {
                 try {
                     JSONObject main = new JSONObject(response);
+                    Log.e("Response", response);
                     String isErr = main.getString("err");
                     int is_menu;
 

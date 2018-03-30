@@ -267,30 +267,16 @@
 
         </android.support.design.widget.AppBarLayout>
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:color/white"
-                android:padding="5dp" />
-
-            <com.ogma.dealshaiapp.utility.OpenSansFontSemibold
-                android:layout_below="@+id/recycler_view"
-                android:id="@+id/tv_terms_and_condition"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="5dp" />
-
             <FrameLayout
                 android:id="@+id/error_screen"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginTop="@dimen/margin_16"
                 android:visibility="gone">
 
@@ -302,7 +288,23 @@
                     android:textSize="28sp" />
 
             </FrameLayout>
-        </RelativeLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@android:color/white"
+                android:padding="5dp" />
+
+            <com.ogma.dealshaiapp.utility.OpenSansFontSemibold
+                android:id="@+id/tv_terms_and_condition"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp" />
+
+
+        </LinearLayout>
 
     </android.support.design.widget.CoordinatorLayout>
 

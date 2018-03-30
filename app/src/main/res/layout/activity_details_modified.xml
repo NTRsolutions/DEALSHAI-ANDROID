@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/parentPanel"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    tools:context="com.ogma.dealshaiapp.activity.DetailsActivity">
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_above="@+id/ll_buy_now"
+        android:paddingBottom="@dimen/margin_5">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/app_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ececec"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingBottom="2.5dp"
+                android:paddingEnd="5dp"
+                android:paddingStart="5dp"
+                android:paddingTop="2.5dp"
+                app:layout_collapseMode="pin">
+
+                <ImageView
+                    android:id="@+id/iv_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:src="@drawable/arrow" />
+
+                <com.ogma.dealshaiapp.utility.OpenSansFontBold
+                    android:id="@+id/title_header"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/iv_back"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:text="Merchant"
+                    android:textColor="#0b114e"
+                    android:textSize="@dimen/text_medium"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/iv_like"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="5dp"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:src="@drawable/like_thumb" />
+
+                <com.ogma.dealshaiapp.utility.OpenSansFontBold
+                    android:id="@+id/tv_total_like"
+                    android:layout_width="34dp"
+                    android:layout_height="34dp"
+                    android:layout_alignEnd="@+id/iv_like"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="22dp"
+                    android:background="@drawable/shape_rounded_pink_shape"
+                    android:gravity="center"
+                    android:text="0"
+                    android:textColor="@android:color/white"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ECECEC"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white">
+
+                    <RelativeLayout
+                        android:id="@+id/rl_banner"
+                        android:layout_width="match_parent"
+                        android:layout_height="220dp">
+
+                        <cn.trinea.android.view.autoscrollviewpager.AutoScrollViewPager
+                            android:id="@+id/banner_view_pager"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentStart="true"
+                            android:overScrollMode="never">
+
+                        </cn.trinea.android.view.autoscrollviewpager.AutoScrollViewPager>
+
+                        <me.relex.circleindicator.CircleIndicator
+                            android:id="@+id/banner_indicator"
+                            android:layout_width="match_parent"
+                            android:layout_height="20dp"
+                            android:layout_alignParentBottom="true"
+                            android:background="@android:color/transparent"
+                            android:gravity="top"
+                            app:ci_height="5dp"
+                            app:ci_width="5dp" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rl_main"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/rl_banner"
+                        android:paddingBottom="10dp"
+                        android:paddingEnd="5dp"
+                        android:paddingStart="5dp">
+
+                        <com.ogma.dealshaiapp.utility.OpenSansFontBold
+                            android:id="@+id/title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_toStartOf="@+id/iv_share"
+                            android:padding="2.5dp"
+                            android:text="Merchant Name"
+                            android:textColor="#020202"
+                            android:textSize="@dimen/text_medium"
+                            android:textStyle="bold" />
+
+                        <com.ogma.dealshaiapp.utility.OpenSansFontBold
+                            android:id="@+id/tv_location"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_below="@+id/title"
+                            android:drawableStart="@drawable/pink_mapicon"
+                            android:gravity="center|start"
+                            android:maxLines="1"
+                            android:padding="2.5dp"
+                            android:text=" City"
+                            android:textColor="#515151"
+                            android:textSize="@dimen/text_small" />
+
+                        <com.ogma.dealshaiapp.utility.OpenSansFontRegular
+                            android:id="@+id/tv_distance"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_below="@+id/tv_location"
+                            android:layout_marginTop="5dp"
+                            android:drawableStart="@drawable/distance_icon_new"
+                            android:gravity="start|center"
+                            android:maxLines="1"
+                            android:padding="5dp"
+                            android:text=" Our Outlets"
+                            android:textColor="@color/textBlack"
+                            android:textSize="@dimen/text_small"
+                            android:visibility="visible" />
+
+                        <com.ogma.dealshaiapp.utility.OpenSansFontBold
+                            android:id="@+id/tv_rating"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginEnd="11dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_toStartOf="@+id/iv_share"
+                            android:background="@drawable/dealshai_logo"
+                            android:gravity="center|end"
+                            android:paddingEnd="15dp"
+                            android:paddingStart="0dp"
+                            android:text="3.2"
+                            android:textColor="@android:color/white"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:visibility="gone" />
+
+                        <ImageView
+                            android:id="@+id/iv_share"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginTop="@dimen/margin_5"
+                            android:src="@drawable/box_share" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tv_distance"
+                            android:layout_marginTop="5dp">
+
+                            <com.ogma.dealshaiapp.utility.OpenSansFontSemibold
+                                android:id="@+id/tv_btn_menu"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_marginEnd="10dp"
+                                android:layout_marginStart="5dp"
+                                android:layout_weight="1"
+                                android:background="#0C114A"
+                                android:gravity="center"
+                                android:padding="5dp"
+                                android:text="Menu"
+                                android:textColor="@android:color/white"
+                                android:textSize="16sp"
+                                android:visibility="gone" />
+
+                            <com.ogma.dealshaiapp.utility.OpenSansFontSemibold
+                                android:id="@+id/tv_btn_contact"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_marginEnd="10dp"
+                                android:layout_marginStart="10dp"
+                                android:layout_weight="1"
+                                android:background="#0C114A"
+                                android:gravity="center"
+                                android:text="Contact"
+                                android:textColor="@android:color/white"
+                                android:textSize="16sp" />
+
+                            <com.ogma.dealshaiapp.utility.OpenSansFontSemibold
+                                android:id="@+id/tv_more_info"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_marginEnd="5dp"
+                                android:layout_marginStart="10dp"
+                                android:layout_weight="1"
+                                android:background="#0C114A"
+                                android:gravity="center"
+                                android:text="More info"
+                                android:textColor="@android:color/white"
+                                android:textSize="16sp" />
+
+                        </LinearLayout>
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <FrameLayout
+                android:id="@+id/error_screen"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/margin_16"
+                android:visibility="gone">
+
+                <com.ogma.dealshaiapp.utility.OpenSansFontBold
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Coupons Not Available"
+                    android:textSize="28sp" />
+
+            </FrameLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                android:nestedScrollingEnabled="false"
+                android:padding="5dp" />
+
+            <com.ogma.dealshaiapp.utility.OpenSansFontSemibold
+                android:id="@+id/tv_terms_and_condition"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp" />
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+    <RelativeLayout
+        android:id="@+id/ll_buy_now"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
+        android:background="#1B2272">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginBottom="2.5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="2.5dp"
+            android:background="@drawable/shape_signup_background"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingEnd="5dp"
+            android:paddingStart="5dp">
+
+            <com.ogma.dealshaiapp.utility.OpenSansFontSemibold
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total Amount"
+                android:textColor="@android:color/white"
+                android:textSize="14sp" />
+
+            <com.ogma.dealshaiapp.utility.OpenSansFontBold
+                android:id="@+id/tv_total_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textColor="@android:color/white"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <com.ogma.dealshaiapp.utility.OpenSansFontExtraBold
+            android:id="@+id/tv_btn_buy_now"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="end"
+            android:drawableEnd="@drawable/left_arrow"
+            android:gravity="end|center"
+            android:padding="@dimen/margin_5"
+            android:text="Buy now   "
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -31,9 +31,10 @@
                 android:id="@+id/tv_item_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:maxLines="1"
+                android:maxLines="3"
                 android:paddingStart="@dimen/margin_5"
-                android:text="Men and Women: Complete Thyroid Checkup"
+                android:text=""
+                android:layout_marginBottom="@dimen/margin_5"
                 android:textColor="@android:color/black"
                 android:textSize="14sp" />
 
@@ -61,7 +62,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:maxLines="2"
-                    android:text="Lorem Ipsum is simply dummy text of the printing and"
+                    android:text=""
                     android:textColor="@android:color/black"
                     android:textSize="14sp" />
 
@@ -88,7 +89,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:paddingStart="5dp"
-                            android:text="1 Person"
+                            android:text=""
                             android:textAllCaps="true"
                             android:textColor="@color/colorTheme"
                             android:textSize="@dimen/text_small" />
@@ -114,7 +115,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/margin_5"
-                            android:text="Mon - Fri"
                             android:textAllCaps="true"
                             android:textColor="@color/colorTheme"
                             android:textSize="@dimen/text_small" />
