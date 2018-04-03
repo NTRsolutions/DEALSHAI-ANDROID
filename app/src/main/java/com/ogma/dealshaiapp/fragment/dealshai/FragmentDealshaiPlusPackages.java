@@ -80,7 +80,6 @@ public class FragmentDealshaiPlusPackages extends Fragment implements IndexActiv
 
         packagesListAdapter = new PackagesListAdapter(getContext(), packagesDetails);
         dealshai_packages.setAdapter(packagesListAdapter);
-
         return view;
     }
 

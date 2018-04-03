@@ -82,7 +82,7 @@ public class WebServiceHandler {
 
     //Home Page Information
     public void getIndexData(String latitude, String longitude, String userId) {
-        progressDialog.show();
+//        progressDialog.show();
         Map<String, String> params = new HashMap<>();
         params.put("lat", latitude);
         params.put("long", longitude);
@@ -373,7 +373,7 @@ public class WebServiceHandler {
     }
 
     public void getCurrentLocationInfo(String lat, String lng) {
-        progressDialog.show();
+//        progressDialog.show();
         Map<String, String> params = new HashMap<>();
         params.put("lat", lat);
         params.put("lng", lng);
