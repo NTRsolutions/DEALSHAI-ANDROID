@@ -2,17 +2,14 @@ package com.ogma.dealshaiapp.activity;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
-import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
-import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -82,8 +79,6 @@ public class IndexActivity extends AppCompatActivity implements View.OnClickList
     private String userId;
     private String total_unread;
     private FrameLayout frameLayout;
-    private String imgUri;
-    private String gender;
     private ImageView pf_imge;
     private String referMessage = "";
     private String shareUrl = "";
@@ -112,7 +107,7 @@ public class IndexActivity extends AppCompatActivity implements View.OnClickList
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            requestLocationPermissions();
+//            requestLocationPermissions();
             locationManagerHelper.requestLocationPermission();
         } else {
             if (flag)
@@ -159,18 +154,10 @@ public class IndexActivity extends AppCompatActivity implements View.OnClickList
         findViewById(R.id.tv_help).setOnClickListener(this);
         findViewById(R.id.tv_refer).setOnClickListener(this);
         findViewById(R.id.frameLayout).setOnClickListener(this);
-    }
 
-    private void requestLocationPermissions() {
-        if (ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) || ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
-            Snackbar.make(drawer_layout, "", Snackbar.LENGTH_INDEFINITE).setAction(android.R.string.ok, new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    ActivityCompat.requestPermissions(IndexActivity.this, PERMISSIONS_LOCATION, REQUEST_LOCATION);
-                }
-            }).show();
-        } else {
-            ActivityCompat.requestPermissions(this, PERMISSIONS_LOCATION, REQUEST_LOCATION);
+        NetworkConnection connection = new NetworkConnection(IndexActivity.this);
+        if (connection.isNetworkConnected()) {
+            getCountOfUnreadNotification(userId);
         }
     }
 
@@ -207,99 +194,24 @@ public class IndexActivity extends AppCompatActivity implements View.OnClickList
         HashMap<String, String> locationDetails = session.getLocationDetails();
         cityName = locationDetails.get(Session.KEY_CITY);
         areaName = locationDetails.get(Session.KEY_AREA);
-        if (cityName.equals(""))
-            tv_location.setText("Select City");
-        else
-            tv_location.setText(cityName);
+        if (cityName.equals("")) tv_location.setText("Select City");
+        else tv_location.setText(cityName);
 
-        if (areaName.equals(""))
-            tv_area.setText("Select Area  ");
-        else
-            tv_area.setText(areaName + " ");
+        if (areaName.equals("")) tv_area.setText("Select Area  ");
+        else tv_area.setText(areaName + " ");
 
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
             drawer_layout.closeDrawer(GravityCompat.START);
         }
 
-        NetworkConnection connection = new NetworkConnection(IndexActivity.this);
-        if (connection.isNetworkConnected()) {
-            getCountOfUnreadNotification(userId);
-        }
-
         HashMap<String, String> user = session.getUserDetails();
-        gender = user.get(Session.KEY_GENDER);
-        imgUri = user.get(Session.KEY_IMAGE);
-
-        switch (gender) {
-            case "Male":
-                options = new DisplayImageOptions.Builder()
-                        .showStubImage(R.drawable.pf_male)
-                        .showImageForEmptyUri(R.drawable.pf_male)
-                        .showImageOnFail(R.drawable.pf_male)
-                        .cacheInMemory()
-                        .cacheOnDisc()
-                        .build();
-                break;
-            case "Female":
-                options = new DisplayImageOptions.Builder()
-                        .showStubImage(R.drawable.pf_female)
-                        .showImageForEmptyUri(R.drawable.pf_female)
-                        .showImageOnFail(R.drawable.pf_female)
-                        .cacheInMemory()
-                        .cacheOnDisc()
-                        .build();
-                break;
-            default:
-                options = new DisplayImageOptions.Builder()
-                        .showStubImage(R.drawable.pf_male)
-                        .showImageForEmptyUri(R.drawable.pf_male)
-                        .showImageOnFail(R.drawable.pf_male)
-                        .cacheInMemory()
-                        .cacheOnDisc()
-                        .build();
-        }
+        String imgUri = user.get(Session.KEY_IMAGE);
 
         imageLoader = ImageLoader.getInstance();
-        if (!imageLoader.isInited()) {
+        if (!imageLoader.isInited())
             imageLoader.init(ImageLoaderConfiguration.createDefault(IndexActivity.this));
-        }
         if (imgUri != null)
             imageLoader.displayImage(imgUri, pf_imge, options);
-
-    }
-
-    private void getCountOfUnreadNotification(String userId) {
-        WebServiceHandler webServiceHandler = new WebServiceHandler(IndexActivity.this);
-        webServiceHandler.serviceListener = new WebServiceListener() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    JSONObject main = new JSONObject(response);
-                    String err = main.getString("err");
-                    if (err != null && err.equals("0")) {
-                        total_unread = main.getString("total_unread");
-                    }
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    Snackbar.make(drawer_layout, "No data found", Snackbar.LENGTH_SHORT).show();
-                }
-
-                if (total_unread != null) {
-                    IndexActivity.this.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            if (Integer.parseInt(total_unread) > 0) {
-                                frameLayout.setVisibility(View.VISIBLE);
-                                tv_notification.setText(total_unread);
-                            }
-                        }
-                    });
-                }
-
-            }
-        };
-        webServiceHandler.getUnreadNotification(userId);
     }
 
     @Override
@@ -363,66 +275,6 @@ public class IndexActivity extends AppCompatActivity implements View.OnClickList
             case R.id.tv_help:
                 addNewContact();
                 break;
-        }
-    }
-
-    private void addNewContact() {
-
-        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-        View view = getLayoutInflater().inflate(R.layout.help_popup, null, false);
-        dialog.setView(view);
-
-        ImageView btn_wtsp_us = view.findViewById(R.id.btn_wtsp_us);
-        btn_wtsp_us.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Creates a new Intent to insert a contact
-                Intent intent = new Intent(ContactsContract.Intents.Insert.ACTION);
-                intent.setType(ContactsContract.RawContacts.CONTENT_TYPE);
-                intent.putExtra(ContactsContract.Intents.Insert.NAME, "Dealshai Help");
-                intent.putExtra(ContactsContract.Intents.Insert.PHONE, "8335083753");
-                intent.putExtra(ContactsContract.Intents.Insert.PHONE_TYPE, ContactsContract.CommonDataKinds.Phone.TYPE_WORK);
-                intent.putExtra(ContactsContract.Intents.Insert.EMAIL, "help@dealshai.in");
-                intent.putExtra(ContactsContract.Intents.Insert.EMAIL_TYPE, ContactsContract.CommonDataKinds.Email.TYPE_WORK);
-                startActivity(intent);
-                alertDialog.dismiss();
-            }
-        });
-        alertDialog = dialog.create();
-        alertDialog.show();
-        alertDialog.setCanceledOnTouchOutside(false);
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == REQUEST_LOCATION) {
-            if (PermissionUtil.verifyPermissions(grantResults)) {
-                Snackbar.make(drawer_layout, "", Snackbar.LENGTH_SHORT).show();
-                startLocationManager();
-            } else {
-                Snackbar.make(drawer_layout, "", Snackbar.LENGTH_SHORT).show();
-            }
-        } else {
-            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        }
-    }
-
-    @SuppressLint("MissingPermission")
-    private void startLocationManager() {
-        session = new Session(IndexActivity.this);
-        HashMap<String, String> locationDetails = session.getLocationDetails();
-        String lat = locationDetails.get(Session.KEY_LATITUDE);
-        double longitude;
-        double latitude;
-
-        Location location = locationManagerHelper.getLastKnownLocation();
-        if (location == null)
-            locationManagerHelper.getLocation(locationListener);
-        else {
-            longitude = location.getLongitude();
-            latitude = location.getLatitude();
-            session.setLocationDetails(cityName, areaName, String.valueOf(latitude), String.valueOf(longitude));
-            getCurrentLocationInfo(String.valueOf(latitude), String.valueOf(longitude));
         }
     }
 
@@ -490,88 +342,189 @@ public class IndexActivity extends AppCompatActivity implements View.OnClickList
         return true;
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == REQUEST_LOCATION) {
+            if (PermissionUtil.verifyPermissions(grantResults)) {
+                Snackbar.make(drawer_layout, "", Snackbar.LENGTH_SHORT).show();
+                startLocationManager();
+            } else {
+                Snackbar.make(drawer_layout, "", Snackbar.LENGTH_SHORT).show();
+            }
+        } else {
+            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+    }
+
+    @SuppressLint("MissingPermission")
+    private void startLocationManager() {
+        session = new Session(IndexActivity.this);
+        double longitude;
+        double latitude;
+
+        Location location = locationManagerHelper.getLastKnownLocation();
+        if (location == null)
+            locationManagerHelper.getLocation(locationListener);
+        else {
+            longitude = location.getLongitude();
+            latitude = location.getLatitude();
+            session.setLocationDetails(cityName, areaName, String.valueOf(latitude), String.valueOf(longitude));
+            getCurrentLocationInfo(String.valueOf(latitude), String.valueOf(longitude));
+        }
+    }
+
+    public void share_via_app(String referMessage) {
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND_MULTIPLE);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, referMessage);
+        sendIntent.setType("text/plain");
+        startActivity(sendIntent);
+    }
+
+    private void addNewContact() {
+
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        View view = getLayoutInflater().inflate(R.layout.help_popup, null, false);
+        dialog.setView(view);
+
+        ImageView btn_wtsp_us = view.findViewById(R.id.btn_wtsp_us);
+        btn_wtsp_us.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Creates a new Intent to insert a contact
+                Intent intent = new Intent(ContactsContract.Intents.Insert.ACTION);
+                intent.setType(ContactsContract.RawContacts.CONTENT_TYPE);
+                intent.putExtra(ContactsContract.Intents.Insert.NAME, "Dealshai Help");
+                intent.putExtra(ContactsContract.Intents.Insert.PHONE, "8335083753");
+                intent.putExtra(ContactsContract.Intents.Insert.PHONE_TYPE, ContactsContract.CommonDataKinds.Phone.TYPE_WORK);
+                intent.putExtra(ContactsContract.Intents.Insert.EMAIL, "help@dealshai.in");
+                intent.putExtra(ContactsContract.Intents.Insert.EMAIL_TYPE, ContactsContract.CommonDataKinds.Email.TYPE_WORK);
+                startActivity(intent);
+                alertDialog.dismiss();
+            }
+        });
+        alertDialog = dialog.create();
+        alertDialog.show();
+        alertDialog.setCanceledOnTouchOutside(false);
+    }
+
+    private void getCountOfUnreadNotification(String userId) {
+        WebServiceHandler webServiceHandler = new WebServiceHandler(IndexActivity.this);
+        webServiceHandler.serviceListener = new WebServiceListener() {
+            @Override
+            public void onResponse(String response) {
+                String lat;
+                String lng;
+                String city;
+                String cityId;
+                try {
+                    JSONObject main = new JSONObject(response);
+                    String err = main.getString("err");
+                    if (err != null && err.equals("0")) {
+                        total_unread = main.getString("total_unread");
+                        JSONObject location = main.getJSONObject("location");
+                        cityName = location.getString("city_name");
+//                        cityId = location.getString("city_id");
+//                        latitude = location.getString("lat");
+//                        longitude = location.getString("lng");
+//                        session = new Session(IndexActivity.this);
+//                        if (cityName.equals("")) tv_location.setText("Select City");
+//                            session.setLocationDetails(cityName, "", latitude, longitude);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Snackbar.make(drawer_layout, "No new notifications.", Snackbar.LENGTH_SHORT).show();
+                }
+
+                if (total_unread != null) {
+                    IndexActivity.this.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (Integer.parseInt(total_unread) > 0) {
+                                frameLayout.setVisibility(View.VISIBLE);
+                                tv_notification.setText(total_unread);
+                            }
+                            if (cityName.equals("")) tv_location.setText("Select City");
+                            else tv_location.setText(cityName);
+                        }
+                    });
+                }
+
+            }
+        };
+        webServiceHandler.getUnreadNotification(userId);
+    }
+
     private void getCurrentLocationInfo(String lat, String lng) {
         WebServiceHandler webServiceHandler = new WebServiceHandler(IndexActivity.this);
         webServiceHandler.serviceListener = new WebServiceListener() {
             @Override
             public void onResponse(String response) {
-                JSONObject jsonObject = null;
+                JSONObject jsonObject;
                 final Session session = new Session(IndexActivity.this);
                 int is_error;
                 try {
                     jsonObject = new JSONObject(response);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                try {
                     if (jsonObject != null) {
                         is_error = Integer.parseInt(jsonObject.getString("err"));
                         if (is_error != 0) {
                             Snackbar.make(drawer_layout, jsonObject.getString("msg") + "", Snackbar.LENGTH_LONG).show();
                         } else {
-                            try {
-                                final JSONObject location = jsonObject.getJSONObject("location");
-                                if (location != null) {
-                                    String lat;
-                                    String lng;
-                                    String area;
-                                    cityName = location.getString("city_name");
-                                    lat = location.getString("lat");
-                                    lng = location.getString("lng");
+                            JSONObject location = jsonObject.getJSONObject("location");
+                            if (location != null) {
+                                String lat;
+                                String lng;
+                                String area;
+                                cityName = location.getString("city_name");
+                                lat = location.getString("lat");
+                                lng = location.getString("lng");
+                                if (lat != null && !lat.equals("")) {
+                                    latitude = lat;
+                                }
+                                if (lng != null && !lng.equals("")) {
+                                    longitude = lng;
+                                }
+
+                                try {
+                                    area = location.getString("area_name");
+                                    lat = location.getString("area_lat");
+                                    lng = location.getString("area_lng");
                                     if (lat != null && !lat.equals("")) {
                                         latitude = lat;
                                     }
                                     if (lng != null && !lng.equals("")) {
                                         longitude = lng;
                                     }
-
-                                    try {
-                                        area = location.getString("area_name");
-                                        lat = location.getString("area_lat");
-                                        lng = location.getString("area_lng");
-                                        if (lat != null && !lat.equals("")) {
-                                            latitude = lat;
-                                        }
-                                        if (lng != null && !lng.equals("")) {
-                                            longitude = lng;
-                                        }
-                                        if (area != null && !area.equals(""))
-                                            areaName = area;
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
-                                    }
-
-                                    session.setLocationDetails(cityName, areaName, latitude, longitude);
-
-                                    runOnUiThread(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            HashMap<String, String> locationDetails = session.getLocationDetails();
-                                            cityName = locationDetails.get(Session.KEY_CITY);
-                                            areaName = locationDetails.get(Session.KEY_AREA);
-                                            latitude = locationDetails.get(Session.KEY_LATITUDE);
-                                            longitude = locationDetails.get(Session.KEY_LONGITUDE);
-
-                                            tv_location.setText(cityName);
-                                            if (areaName.equals(""))
-                                                tv_area.setText("Select Area  ");
-                                            else
-                                                tv_area.setText(areaName + " ");
-
-//                                            HashMap<String, String> lat = session.getKeyLatitude();
-//                                            String latitude = lat.get(Session.KEY_LATITUDE);
-//                                            HashMap<String, String> lng = session.getKeyLongitude();
-//                                            String longitude = lng.get(Session.KEY_LONGITUDE);
-                                            Fragment fragment = getSupportFragmentManager().findFragmentByTag(FragmentIndex.class.getSimpleName());
-                                            if (fragment != null && fragment instanceof FragmentIndex) {
-                                                FragmentIndex fragmentIndex = (FragmentIndex) fragment;
-                                                fragmentIndex.getData(latitude, longitude);
-                                            }
-                                        }
-                                    });
+                                    if (area != null && !area.equals(""))
+                                        areaName = area;
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
                                 }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
+
+                                session.setLocationDetails(cityName, areaName, latitude, longitude);
+
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        HashMap<String, String> locationDetails = session.getLocationDetails();
+                                        cityName = locationDetails.get(Session.KEY_CITY);
+                                        areaName = locationDetails.get(Session.KEY_AREA);
+                                        latitude = locationDetails.get(Session.KEY_LATITUDE);
+                                        longitude = locationDetails.get(Session.KEY_LONGITUDE);
+
+                                        tv_location.setText(cityName);
+                                        if (areaName.equals(""))
+                                            tv_area.setText("Select Area  ");
+                                        else
+                                            tv_area.setText(areaName + " ");
+
+                                        Fragment fragment = getSupportFragmentManager().findFragmentByTag(FragmentIndex.class.getSimpleName());
+                                        if (fragment != null && fragment instanceof FragmentIndex) {
+                                            FragmentIndex fragmentIndex = (FragmentIndex) fragment;
+                                            fragmentIndex.getData(latitude, longitude);
+                                        }
+                                    }
+                                });
                             }
                         }
                     }
@@ -581,14 +534,6 @@ public class IndexActivity extends AppCompatActivity implements View.OnClickList
             }
         };
         webServiceHandler.getCurrentLocationInfo(lat, lng);
-    }
-
-    public void share_via_app(String referMessage) {
-        Intent sendIntent = new Intent();
-        sendIntent.setAction(Intent.ACTION_SEND_MULTIPLE);
-        sendIntent.putExtra(Intent.EXTRA_TEXT, referMessage);
-        sendIntent.setType("text/plain");
-        startActivity(sendIntent);
     }
 
     private void shareReferCode(String userId) {
@@ -616,47 +561,5 @@ public class IndexActivity extends AppCompatActivity implements View.OnClickList
             }
         };
         webServiceHandler.getReferralMessage(userId);
-    }
-
-    private void checkLocationEnabled() {
-        LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        boolean gps_enabled = false;
-        boolean network_enabled = false;
-
-        try {
-            gps_enabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
-        } catch (Exception ex) {
-        }
-
-        try {
-            network_enabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-        } catch (Exception ex) {
-        }
-
-        if (!gps_enabled && !network_enabled) {
-            // notify user
-            AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-            dialog.setMessage(this.getResources().getString(R.string.gps_network_not_enabled));
-            dialog.setPositiveButton(this.getResources().getString(R.string.open_location_settings), new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface paramDialogInterface, int paramInt) {
-                    // TODO Auto-generated method stub
-                    Intent myIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                    startActivity(myIntent);
-                    //get gps
-                }
-            });
-            dialog.setNegativeButton(this.getString(R.string.Cancel), new DialogInterface.OnClickListener() {
-
-                @Override
-                public void onClick(DialogInterface paramDialogInterface, int paramInt) {
-                    // TODO Auto-generated method stub
-
-                }
-            });
-            dialog.show();
-        } else {
-
-        }
     }
 }

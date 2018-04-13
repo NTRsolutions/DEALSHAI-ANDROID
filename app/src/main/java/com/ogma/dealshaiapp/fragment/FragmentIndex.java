@@ -8,8 +8,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -51,22 +49,14 @@ import me.relex.circleindicator.CircleIndicator;
 public class FragmentIndex extends Fragment implements View.OnClickListener, IndexActivity.OnBackPressedListener {
 
     private AutoScrollViewPager banner_view_pager;
-    private ViewPager funtime_view_pager;
-    private ViewPager shopping_view_pager;
     private JSONArray banner;
     private JSONArray foodie;
     private ArrayList<MerchantDetails> arrayList;
-    private JSONArray shopping;
     private FragmentManager fragmentManager;
-
-    private CircleIndicator fun_time_indicator;
-    private CircleIndicator shopping_indicator;
     private CircleIndicator banner_indicator;
     private FoodieAdapter recyclerViewAdapter;
     private MerchantViewAdapter marchentViewAdapter;
     private BannerAdapter bannerSlidingAdapter;
-    private int currentPage;
-    private SwipeRefreshLayout swipe_refresh_layout;
     private ImageView iv_cat1;
     private ImageView iv_cat2;
     private ImageView iv_cat3;
@@ -79,7 +69,6 @@ public class FragmentIndex extends Fragment implements View.OnClickListener, Ind
     private RelativeLayout ll_cat2;
     private RelativeLayout ll_cat3;
     private RelativeLayout ll_cat4;
-    private String categoryId = "3";
     private JSONArray categories;
     private ArrayList<CategoryDetails> categoryDetails;
     private Session session;
@@ -89,6 +78,7 @@ public class FragmentIndex extends Fragment implements View.OnClickListener, Ind
     private CoordinatorLayout parentPanel;
     private ImageLoader imageLoader;
     private DisplayImageOptions options;
+    private AppCompatActivity activity;
 
     @Nullable
     @Override
@@ -181,13 +171,19 @@ public class FragmentIndex extends Fragment implements View.OnClickListener, Ind
             Toast.makeText(getContext(), "No internet connection", Toast.LENGTH_SHORT).show();
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        this.activity = (AppCompatActivity) context;
+    }
+
     public void getData(String latitude, String longitude) {
         WebServiceHandler webServiceHandler = new WebServiceHandler(getContext());
         webServiceHandler.serviceListener = new WebServiceListener() {
             @Override
             public void onResponse(String response) {
-                JSONObject main = null;
-                String is_error = null;
+                JSONObject main;
+                String is_error;
                 try {
                     main = new JSONObject(response);
                     is_error = main.getString("is_error");
@@ -206,29 +202,29 @@ public class FragmentIndex extends Fragment implements View.OnClickListener, Ind
                                     details.setImgUrl(jsonObject.getString("img"));
                                     categoryDetails.add(details);
                                 }
-                                getActivity().runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        if (categoryDetails.size() > 0) {
-                                            CategoryDetails cat1 = categoryDetails.get(0);
-                                            CategoryDetails cat2 = categoryDetails.get(1);
-                                            CategoryDetails cat3 = categoryDetails.get(2);
-                                            CategoryDetails cat4 = categoryDetails.get(3);
+                                if (activity instanceof IndexActivity) {
+                                    activity.runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            if (categoryDetails.size() > 0) {
+                                                CategoryDetails cat1 = categoryDetails.get(0);
+                                                CategoryDetails cat2 = categoryDetails.get(1);
+                                                CategoryDetails cat3 = categoryDetails.get(2);
+                                                CategoryDetails cat4 = categoryDetails.get(3);
 
-                                            tv_cat1.setText(cat1.getCatName());
-                                            tv_cat2.setText(cat2.getCatName());
-                                            tv_cat3.setText(cat3.getCatName());
-                                            tv_cat4.setText(cat4.getCatName());
+                                                tv_cat1.setText(cat1.getCatName());
+                                                tv_cat2.setText(cat2.getCatName());
+                                                tv_cat3.setText(cat3.getCatName());
+                                                tv_cat4.setText(cat4.getCatName());
 
-                                            imageLoader.displayImage(cat1.getImgUrl(), iv_cat1, options);
-                                            imageLoader.displayImage(cat2.getImgUrl(), iv_cat2, options);
-                                            imageLoader.displayImage(cat3.getImgUrl(), iv_cat3, options);
-                                            imageLoader.displayImage(cat4.getImgUrl(), iv_cat4, options);
-
-
+                                                imageLoader.displayImage(cat1.getImgUrl(), iv_cat1, options);
+                                                imageLoader.displayImage(cat2.getImgUrl(), iv_cat2, options);
+                                                imageLoader.displayImage(cat3.getImgUrl(), iv_cat3, options);
+                                                imageLoader.displayImage(cat4.getImgUrl(), iv_cat4, options);
+                                            }
                                         }
-                                    }
-                                });
+                                    });
+                                }
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -237,13 +233,15 @@ public class FragmentIndex extends Fragment implements View.OnClickListener, Ind
                         try {
                             foodie = main.getJSONArray("Foodie");
                             if (foodie.length() > 0) {
-                                getActivity().runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        recyclerViewAdapter.setArray(foodie);
-                                        recyclerViewAdapter.notifyDataSetChanged();
-                                    }
-                                });
+                                if (activity instanceof IndexActivity) {
+                                    activity.runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            recyclerViewAdapter.setArray(foodie);
+                                            recyclerViewAdapter.notifyDataSetChanged();
+                                        }
+                                    });
+                                }
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -252,16 +250,18 @@ public class FragmentIndex extends Fragment implements View.OnClickListener, Ind
                         try {
                             banner = main.getJSONArray("Slider");
                             if (banner.length() > 0) {
-                                getActivity().runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        bannerSlidingAdapter = new BannerAdapter(fragmentManager, banner);
-                                        banner_view_pager.setAdapter(bannerSlidingAdapter);
-                                        banner_indicator.setViewPager(banner_view_pager);
-                                        banner_view_pager.setCurrentItem(Integer.MAX_VALUE / 2 - Integer.MAX_VALUE / 2 % banner.length());
-                                        banner_view_pager.setStopScrollWhenTouch(true);
-                                    }
-                                });
+                                if (activity instanceof IndexActivity) {
+                                    activity.runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            bannerSlidingAdapter = new BannerAdapter(fragmentManager, banner);
+                                            banner_view_pager.setAdapter(bannerSlidingAdapter);
+                                            banner_indicator.setViewPager(banner_view_pager);
+                                            banner_view_pager.setCurrentItem(Integer.MAX_VALUE / 2 - Integer.MAX_VALUE / 2 % banner.length());
+                                            banner_view_pager.setStopScrollWhenTouch(true);
+                                        }
+                                    });
+                                }
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -286,12 +286,14 @@ public class FragmentIndex extends Fragment implements View.OnClickListener, Ind
                                     merchantDetails.setLikes(object.getString("like"));
                                     arrayList.add(merchantDetails);
                                 }
-                                getActivity().runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        marchentViewAdapter.notifyDataSetChanged();
-                                    }
-                                });
+                                if (activity instanceof IndexActivity) {
+                                    activity.runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            marchentViewAdapter.notifyDataSetChanged();
+                                        }
+                                    });
+                                }
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -396,7 +398,8 @@ public class FragmentIndex extends Fragment implements View.OnClickListener, Ind
 
     @Override
     public void doBack() {
-        getActivity().finish();
+        if (activity instanceof IndexActivity)
+            activity.finish();
     }
 
     private class BannerAdapter extends FragmentPagerAdapter {
