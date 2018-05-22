@@ -18,6 +18,7 @@
         android:visibility="gone" />
 
     <RelativeLayout
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.5"
@@ -59,9 +60,9 @@
             android:background="#f4f4f4"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:padding="@dimen/margin_5">
+            android:padding="@dimen/margin_16">
 
-            <com.ogma.dealshaiapp.utility.OpenSansFontBold
+            <com.ogma.dealshaiapp.utility.OpenSansFontSemibold
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Basic Info"
@@ -97,7 +98,7 @@
                 android:src="@drawable/user_icon"
                 android:tint="@android:color/black" />
 
-            <com.ogma.dealshaiapp.utility.OpenSansFontSemibold
+            <com.ogma.dealshaiapp.utility.OpenSansFontRegular
                 android:id="@+id/et_profile_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -134,7 +135,7 @@
                 android:src="@drawable/ic_mobie"
                 android:tint="@android:color/black" />
 
-            <com.ogma.dealshaiapp.utility.OpenSansFontSemibold
+            <com.ogma.dealshaiapp.utility.OpenSansFontRegular
                 android:id="@+id/contact_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -171,7 +172,7 @@
                 android:src="@drawable/ic_email"
                 android:tint="@android:color/black" />
 
-            <com.ogma.dealshaiapp.utility.OpenSansFontSemibold
+            <com.ogma.dealshaiapp.utility.OpenSansFontRegular
                 android:id="@+id/et_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -208,7 +209,7 @@
                 android:src="@drawable/ic_gender"
                 android:tint="@android:color/black" />
 
-            <com.ogma.dealshaiapp.utility.OpenSansFontSemibold
+            <com.ogma.dealshaiapp.utility.OpenSansFontRegular
                 android:id="@+id/et_gender"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -245,7 +246,7 @@
                 android:src="@drawable/ic_birthday"
                 android:tint="@android:color/black" />
 
-            <com.ogma.dealshaiapp.utility.OpenSansFontSemibold
+            <com.ogma.dealshaiapp.utility.OpenSansFontRegular
                 android:id="@+id/et_dob"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

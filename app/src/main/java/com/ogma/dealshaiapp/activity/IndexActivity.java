@@ -34,7 +34,9 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.ogma.dealshaiapp.R;
 import com.ogma.dealshaiapp.dialog.NotificationView;
+import com.ogma.dealshaiapp.dialog.ReferFriendDialog;
 import com.ogma.dealshaiapp.fragment.FragmentIndex;
+import com.ogma.dealshaiapp.model.CategoryDetails;
 import com.ogma.dealshaiapp.network.NetworkConnection;
 import com.ogma.dealshaiapp.network.WebServiceHandler;
 import com.ogma.dealshaiapp.network.WebServiceListener;
@@ -42,9 +44,11 @@ import com.ogma.dealshaiapp.utility.LocationManagerHelper;
 import com.ogma.dealshaiapp.utility.PermissionUtil;
 import com.ogma.dealshaiapp.utility.Session;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class IndexActivity extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
@@ -53,8 +57,8 @@ public class IndexActivity extends AppCompatActivity implements View.OnClickList
     private LocationManagerHelper locationManagerHelper;
     private Location location;
 
-    private String cityName;
-    private String areaName;
+    private String cityName = "";
+    private String areaName = "";
     private String latitude;
     private String longitude;
 
@@ -84,7 +88,12 @@ public class IndexActivity extends AppCompatActivity implements View.OnClickList
     private String shareUrl = "";
     private AlertDialog alertDialog;
     private boolean flag = false;
+    private String referAmountGet;
+    private String referAmountSend;
 
+    public static JSONArray banner;
+    public static JSONArray foodie;
+    public static ArrayList<CategoryDetails> categoryDetails;
     public interface OnBackPressedListener {
         void doBack();
     }
@@ -270,7 +279,8 @@ public class IndexActivity extends AppCompatActivity implements View.OnClickList
                 startActivity(new Intent(IndexActivity.this, LikedProductActivity.class));
                 break;
             case R.id.tv_refer:
-                shareReferCode(userId);
+//                shareReferCode(userId);
+                new ReferFriendDialog(IndexActivity.this, userId).show();
                 break;
             case R.id.tv_help:
                 addNewContact();
@@ -328,7 +338,8 @@ public class IndexActivity extends AppCompatActivity implements View.OnClickList
                 addNewContact();
                 break;
             case R.id.refer_a_friend:
-                shareReferCode(userId);
+//                shareReferCode(userId);
+                new ReferFriendDialog(IndexActivity.this, userId).show();
                 break;
             case R.id.rate_the_app:
                 final String appPackageName = getPackageName(); // getPackageName() from Context or Activity object
@@ -373,13 +384,13 @@ public class IndexActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    public void share_via_app(String referMessage) {
-        Intent sendIntent = new Intent();
-        sendIntent.setAction(Intent.ACTION_SEND_MULTIPLE);
-        sendIntent.putExtra(Intent.EXTRA_TEXT, referMessage);
-        sendIntent.setType("text/plain");
-        startActivity(sendIntent);
-    }
+//    public void share_via_app(String referMessage) {
+//        Intent sendIntent = new Intent();
+//        sendIntent.setAction(Intent.ACTION_SEND_MULTIPLE);
+//        sendIntent.putExtra(Intent.EXTRA_TEXT, referMessage);
+//        sendIntent.setType("text/plain");
+//        startActivity(sendIntent);
+//    }
 
     private void addNewContact() {
 
@@ -413,24 +424,23 @@ public class IndexActivity extends AppCompatActivity implements View.OnClickList
         webServiceHandler.serviceListener = new WebServiceListener() {
             @Override
             public void onResponse(String response) {
-                String lat;
-                String lng;
-                String city;
-                String cityId;
+                final Session session = new Session(IndexActivity.this);
                 try {
                     JSONObject main = new JSONObject(response);
                     String err = main.getString("err");
+                    referAmountGet = main.getString("referrer_amount");
+                    referAmountSend = main.getString("ref_amount");
                     if (err != null && err.equals("0")) {
                         total_unread = main.getString("total_unread");
                         JSONObject location = main.getJSONObject("location");
                         cityName = location.getString("city_name");
-//                        cityId = location.getString("city_id");
-//                        latitude = location.getString("lat");
-//                        longitude = location.getString("lng");
-//                        session = new Session(IndexActivity.this);
-//                        if (cityName.equals("")) tv_location.setText("Select City");
-//                            session.setLocationDetails(cityName, "", latitude, longitude);
                     }
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            session.setKeyReferAmount(referAmountGet, referAmountSend);
+                        }
+                    });
                 } catch (JSONException e) {
                     e.printStackTrace();
                     Snackbar.make(drawer_layout, "No new notifications.", Snackbar.LENGTH_SHORT).show();
@@ -449,7 +459,6 @@ public class IndexActivity extends AppCompatActivity implements View.OnClickList
                         }
                     });
                 }
-
             }
         };
         webServiceHandler.getUnreadNotification(userId);
@@ -536,30 +545,30 @@ public class IndexActivity extends AppCompatActivity implements View.OnClickList
         webServiceHandler.getCurrentLocationInfo(lat, lng);
     }
 
-    private void shareReferCode(String userId) {
-        WebServiceHandler webServiceHandler = new WebServiceHandler(IndexActivity.this);
-        webServiceHandler.serviceListener = new WebServiceListener() {
-            @Override
-            public void onResponse(String response) {
-                JSONObject jsonObject = null;
-                int is_error;
-                try {
-                    jsonObject = new JSONObject(response);
-                    is_error = jsonObject.getInt("err");
-                    if (is_error == 0) {
-                        referMessage = jsonObject.getString("text");
-                        shareUrl = jsonObject.getString("link");
-                        if (shareUrl != null) {
-                            referMessage = referMessage + "\n" + shareUrl;
-                        }
-                        share_via_app(referMessage);
-                    } else
-                        Snackbar.make(drawer_layout, jsonObject.getString("msg") + "", Snackbar.LENGTH_LONG).show();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        };
-        webServiceHandler.getReferralMessage(userId);
-    }
+//    private void shareReferCode(String userId) {
+//        WebServiceHandler webServiceHandler = new WebServiceHandler(IndexActivity.this);
+//        webServiceHandler.serviceListener = new WebServiceListener() {
+//            @Override
+//            public void onResponse(String response) {
+//                JSONObject jsonObject = null;
+//                int is_error;
+//                try {
+//                    jsonObject = new JSONObject(response);
+//                    is_error = jsonObject.getInt("err");
+//                    if (is_error == 0) {
+//                        referMessage = jsonObject.getString("text");
+//                        shareUrl = jsonObject.getString("link");
+//                        if (shareUrl != null) {
+//                            referMessage = referMessage + "\n" + shareUrl;
+//                        }
+//                        share_via_app(referMessage);
+//                    } else
+//                        Snackbar.make(drawer_layout, jsonObject.getString("msg") + "", Snackbar.LENGTH_LONG).show();
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        };
+//        webServiceHandler.getReferralMessage(userId);
+//    }
 }

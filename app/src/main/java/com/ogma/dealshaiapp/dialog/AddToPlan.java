@@ -7,7 +7,6 @@ import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -19,6 +18,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,6 +50,8 @@ public class AddToPlan extends Dialog implements View.OnClickListener {
     private RecyclerView recycler_view;
     private FrameLayout error_screen;
     private String userId;
+    private boolean flagCanBuy;
+    private RelativeLayout parentPanel;
 
 
     public AddToPlan(@NonNull Activity activity, int merchantId) {
@@ -85,6 +87,7 @@ public class AddToPlan extends Dialog implements View.OnClickListener {
             });
         }
 
+        parentPanel = findViewById(R.id.parentPanel);
         recycler_view = findViewById(R.id.recycler_view);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
@@ -174,17 +177,7 @@ public class AddToPlan extends Dialog implements View.OnClickListener {
         int id = v.getId();
         switch (id) {
             case R.id.tv_add_to_plan:
-                if (FragmentCategoryList.totalAmount > 0) {
-                    quickViewItemsAdapter.getCouponsDetails();
-                    dismiss();
-                } else
-                    activity.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Snackbar.make(v, "Your cart is empty. Please add items to buy.", Snackbar.LENGTH_LONG).show();
-                        }
-                    });
-
+                quickViewItemsAdapter.getCouponsDetails();
                 break;
             case R.id.iv_esc:
                 dismiss();
@@ -244,6 +237,7 @@ public class AddToPlan extends Dialog implements View.OnClickListener {
                                 if (couponDetails.getQuantity() > 0) {
                                     couponDetails.setIsSelected(1);
                                 }
+                                FragmentCategoryList.mainArrayList = arrayList;
                                 notifyDataSetChanged();
                             } else
                                 Toast.makeText(context, R.string.not_more_than_one, Toast.LENGTH_SHORT).show();
@@ -329,7 +323,13 @@ public class AddToPlan extends Dialog implements View.OnClickListener {
                 CouponsDetails couponsDetails = arrayList.get(i);
                 if (couponsDetails.getIsSelected() == 1) {
                     FragmentCategoryList.mainArrayList.add(couponsDetails);
+                    flagCanBuy = true;
                 }
+            }
+            if (!flagCanBuy) {
+                Toast.makeText(activity, "Your cart is empty. Please add items to buy.", Toast.LENGTH_LONG).show();
+            } else {
+                dismiss();
             }
         }
     }

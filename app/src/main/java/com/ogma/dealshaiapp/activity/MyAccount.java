@@ -79,13 +79,9 @@ public class MyAccount extends AppCompatActivity implements View.OnClickListener
         ImageView iv_info_edit = findViewById(R.id.iv_info_edit);
 
         et_profile_name = findViewById(R.id.et_profile_name);
-
         contact_number = findViewById(R.id.contact_number);
-
         et_email = findViewById(R.id.et_email);
-
         et_dob = findViewById(R.id.et_dob);
-
         et_gender = findViewById(R.id.et_gender);
 
 

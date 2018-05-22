@@ -55,6 +55,7 @@ public class QuickView extends Dialog implements View.OnClickListener {
     private FrameLayout error_screen;
     private ProgressDialog progressDialog;
     private String userId;
+    private boolean flagCanBuy;
 
     public QuickView(@NonNull Activity activity, int merchantId) {
         super(activity);
@@ -186,7 +187,14 @@ public class QuickView extends Dialog implements View.OnClickListener {
         int id = v.getId();
         switch (id) {
             case R.id.tv_buy_now:
-                if (totalAmount > 0) {
+                for (int i = 0; i < arrayList.size(); i++) {
+                    CouponsDetails couponsDetail = arrayList.get(i);
+                    if (couponsDetail.getIsSelected() == 1) {
+                        flagCanBuy = true;
+                        break;
+                    }
+                }
+                if (flagCanBuy) {
                     arrayList = quickViewItemsAdapter.getCouponsDetails();
                     activity.startActivity(new Intent(activity, CheckOutActivity.class)
                             .putExtra("flag", "QuickView")

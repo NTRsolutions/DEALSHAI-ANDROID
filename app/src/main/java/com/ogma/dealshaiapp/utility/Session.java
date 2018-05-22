@@ -21,6 +21,8 @@ public class Session {
     public static String KEY_AREA = "Select Area ";
     public static String KEY_LATITUDE = "KEY_LATITUDE";
     public static String KEY_LONGITUDE = "KEY_LONGITUDE";
+    public static String KEY_REFER_AMOUNT_GET = "KEY_REFER_AMOUNT";
+    public static String KEY_REFER_AMOUNT_SEND = "KEY_REFER_AMOUNT";
     private static String PREF_NAME = "SessionVariable";
 
     SharedPreferences pref;
@@ -74,6 +76,19 @@ public class Session {
         HashMap<String, String> path = new HashMap<String, String>();
         path.put(KEY_IMAGE_PATH, pref.getString(KEY_IMAGE_PATH, null));
         return path;
+    }
+
+    public HashMap<String, String> getKeyReferAmounts() {
+        HashMap<String, String> user = new HashMap<String, String>();
+        user.put(KEY_REFER_AMOUNT_GET, pref.getString(KEY_REFER_AMOUNT_GET, null));
+        user.put(KEY_REFER_AMOUNT_SEND, pref.getString(KEY_REFER_AMOUNT_SEND, null));
+        return user;
+    }
+
+    public void setKeyReferAmount(String keyReferAmountGet, String referAmountSend) {
+        editor.putString(KEY_REFER_AMOUNT_GET, keyReferAmountGet);
+        editor.putString(KEY_REFER_AMOUNT_SEND, referAmountSend);
+        editor.commit();
     }
 
     public void setLocationDetails(String cityName, String areaName, String lat, String lng) {

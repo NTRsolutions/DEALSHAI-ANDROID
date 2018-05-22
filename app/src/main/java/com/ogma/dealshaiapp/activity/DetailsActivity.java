@@ -89,6 +89,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
     private static String[] PERMISSIONS_CALL = {Manifest.permission.CALL_PHONE};
     private static final int REQUEST_CALL = 1;
     private String menuStr;
+    private boolean flagCanBuy;
 
 
     @Override
@@ -216,14 +217,21 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
                 onBackPressed();
                 break;
             case R.id.tv_btn_buy_now:
-                if (totalAmount == 0) {
-                    Snackbar.make(parentPanel, "Please add a deals into cart please!", Snackbar.LENGTH_SHORT).show();
-                } else {
+                for (int i = 0; i < couponsDetails.size(); i++) {
+                    CouponsDetails couponsDetail = couponsDetails.get(i);
+                    if (couponsDetail.getIsSelected() == 1) {
+                        flagCanBuy = true;
+                        break;
+                    }
+                }
+                if (flagCanBuy) {
                     couponsDetails = recyclerViewAdapter.getCouponsDetails();
                     startActivity(new Intent(DetailsActivity.this, CheckOutActivity.class)
                             .putExtra("flag", "DetailsActivity")
                             .putExtra("couponList", couponsDetails)
                             .putExtra("totalAmount", String.valueOf(totalAmount)));
+                } else {
+                    Snackbar.make(parentPanel, "Please add a deals into cart please!", Snackbar.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.iv_like:

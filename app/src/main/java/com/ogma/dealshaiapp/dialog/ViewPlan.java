@@ -49,6 +49,7 @@ public class ViewPlan extends Dialog implements View.OnClickListener {
     private RelativeLayout parentPanel;
     private String userId;
     private boolean flag;
+    private boolean flagCanBuy;
 
     public ViewPlan(@NonNull AppCompatActivity activity, ArrayList<CouponsDetails> mainArrayList, int totalAmount, String userId) {
         super(activity);
@@ -178,7 +179,14 @@ public class ViewPlan extends Dialog implements View.OnClickListener {
                 dismiss();
                 break;
             case R.id.tv_buy_now:
-                if (totalAmount > 0) {
+                for (int i = 0; i < mainArrayList.size(); i++) {
+                    CouponsDetails couponsDetail = mainArrayList.get(i);
+                    if (couponsDetail.getIsSelected() == 1) {
+                        flagCanBuy = true;
+                        break;
+                    }
+                }
+                if (flagCanBuy) {
                     Intent intent = new Intent(activity, CheckOutActivity.class)
                             .putExtra("flag", "PlanKarle")
                             .putExtra("couponList", mainArrayList)

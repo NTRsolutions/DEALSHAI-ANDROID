@@ -169,11 +169,9 @@
                     android:id="@+id/tab_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#1B2174"
-                    android:orientation="horizontal"
-                    android:padding="@dimen/margin_5">
+                    android:orientation="horizontal">
 
-                    <LinearLayout
+                    <!--<LinearLayout
                         android:id="@+id/ll_dealshai"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -229,7 +227,23 @@
                             android:textSize="@dimen/text_medium"
                             android:textStyle="bold" />
 
-                    </LinearLayout>
+                    </LinearLayout>-->
+
+                    <LinearLayout
+                        android:id="@+id/ll_dealshai"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:background="@drawable/dealshai_button" />
+
+                    <LinearLayout
+                        android:id="@+id/ll_plankarle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/palnkarle_button"
+                        android:orientation="horizontal" />
 
                 </LinearLayout>
 

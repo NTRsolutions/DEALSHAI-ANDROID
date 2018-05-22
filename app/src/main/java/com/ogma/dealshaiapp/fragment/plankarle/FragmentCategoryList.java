@@ -44,7 +44,7 @@ public class FragmentCategoryList extends Fragment implements IndexActivity.OnBa
     private ViewPager viewPager;
     private RoundTabLayout tabLayout;
     public static ArrayList<CouponsDetails> mainArrayList = new ArrayList<>();
-    public static int totalAmount;
+    public static int totalAmount = 0;
     private RelativeLayout parentPanel;
     private String userId;
 

@@ -126,22 +126,22 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:contentDescription="@string/username"
-                android:src="@drawable/ic_mobie"
+                android:contentDescription="@string/email"
+                android:src="@drawable/ic_email"
                 android:tint="#8f8f8f" />
 
             <EditText
-                android:id="@+id/et_mobile_number"
-                android:layout_width="match_parent"
+                android:id="@+id/et_email"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
                 android:layout_marginStart="10dp"
+                android:layout_weight="1"
                 android:background="@android:color/transparent"
-                android:digits="0123456789"
                 android:gravity="start|center"
-                android:hint="Mobile Number"
-                android:imeOptions="actionNext"
-                android:inputType="phone"
-                android:maxLength="10"
+                android:hint="Email Id"
+                android:imeOptions="actionDone"
+                android:inputType="textEmailAddress"
                 android:padding="5dp"
                 android:textColorHint="@color/hint_text_color"
                 android:textSize="16sp" />
@@ -212,25 +212,26 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:contentDescription="@string/email"
-                android:src="@drawable/ic_email"
+                android:contentDescription="@string/username"
+                android:src="@drawable/ic_mobie"
                 android:tint="#8f8f8f" />
 
             <EditText
-                android:id="@+id/et_email"
-                android:layout_width="0dp"
+                android:id="@+id/et_mobile_number"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
                 android:layout_marginStart="10dp"
-                android:layout_weight="1"
                 android:background="@android:color/transparent"
+                android:digits="0123456789"
                 android:gravity="start|center"
-                android:hint="Email Id"
-                android:imeOptions="actionDone"
-                android:inputType="textEmailAddress"
+                android:hint="Mobile Number"
+                android:imeOptions="actionNext"
+                android:inputType="phone"
+                android:maxLength="10"
                 android:padding="5dp"
                 android:textColorHint="@color/hint_text_color"
                 android:textSize="16sp" />
+
 
             <!--<ImageView
                 android:id="@+id/show_password"
@@ -266,7 +267,7 @@
         android:gravity="center"
         android:orientation="vertical"
         android:paddingTop="5dp"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <com.ogma.dealshaiapp.utility.OpenSansFontRegular
             android:layout_width="wrap_content"
@@ -335,9 +336,9 @@
 
     <LinearLayout
         android:id="@+id/rl_TnC"
-        android:layout_marginTop="@dimen/margin_5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_5"
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
@@ -356,29 +357,29 @@
             android:layout_below="@+id/textView"
             android:layout_centerHorizontal="true">-->
 
-            <com.ogma.dealshaiapp.utility.OpenSansFontLight
+        <com.ogma.dealshaiapp.utility.OpenSansFontLight
 
-                android:id="@+id/tv_TnC"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Terms and Condition"
-                android:textColor="@color/colorAccent"
-                android:textSize="@dimen/text_medium" />
+            android:id="@+id/tv_TnC"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Terms and Condition"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/text_medium" />
 
-            <com.ogma.dealshaiapp.utility.OpenSansFontLight
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="  and  "
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/text_medium" />
+        <com.ogma.dealshaiapp.utility.OpenSansFontLight
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="  and  "
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_medium" />
 
-            <com.ogma.dealshaiapp.utility.OpenSansFontLight
-                android:id="@+id/tv_prv_plc"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Privacy Policy"
-                android:textColor="@color/colorAccent"
-                android:textSize="@dimen/text_medium" />
+        <com.ogma.dealshaiapp.utility.OpenSansFontLight
+            android:id="@+id/tv_prv_plc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Privacy Policy"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/text_medium" />
         <!--</LinearLayout>-->
 
     </LinearLayout>

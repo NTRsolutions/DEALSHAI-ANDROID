@@ -2,6 +2,8 @@ package com.ogma.dealshaiapp.activity;
 
 import android.content.Intent;
 import android.graphics.Paint;
+import android.location.Location;
+import android.location.LocationListener;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +18,7 @@ import com.ogma.dealshaiapp.R;
 import com.ogma.dealshaiapp.network.NetworkConnection;
 import com.ogma.dealshaiapp.network.WebServiceHandler;
 import com.ogma.dealshaiapp.network.WebServiceListener;
+import com.ogma.dealshaiapp.utility.LocationManagerHelper;
 import com.ogma.dealshaiapp.utility.Session;
 
 import org.json.JSONException;
@@ -47,12 +50,17 @@ LoginActivity extends AppCompatActivity implements View.OnClickListener {
     private LinearLayout rl_TnC;
     private TextView tv_TnC;
     private TextView tv_prv_plc;
+    private LocationManagerHelper locationManagerHelper;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        locationManagerHelper = new LocationManagerHelper(LoginActivity.this);
+        locationManagerHelper.requestLocationPermission();
+        getCurrentLocation();
         session = new Session(LoginActivity.this);
 
         et_mobile_number = findViewById(R.id.et_mobile_number);
@@ -84,6 +92,45 @@ LoginActivity extends AppCompatActivity implements View.OnClickListener {
         findViewById(R.id.tv_prv_plc).setOnClickListener(this);
     }
 
+    private void getCurrentLocation() {
+        double longitude;
+        double latitude;
+        session = new Session(LoginActivity.this);
+        Location location = locationManagerHelper.getLastKnownLocation();
+        if (location == null)
+            locationManagerHelper.getLocation(locationListener);
+        else {
+            longitude = location.getLongitude();
+            latitude = location.getLatitude();
+            session.setLocationDetails("", "", String.valueOf(latitude), String.valueOf(longitude));
+        }
+    }
+
+    private final LocationListener locationListener = new LocationListener() {
+        public void onLocationChanged(Location location) {
+            session = new Session(LoginActivity.this);
+//            locationManagerHelper.getLocationManager().removeUpdates(this);
+            double longitude = location.getLongitude();
+            double latitude = location.getLatitude();
+            session.setLocationDetails("", "", String.valueOf(latitude), String.valueOf(longitude));
+        }
+
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+
+        }
+
+        @Override
+        public void onProviderEnabled(String provider) {
+
+        }
+
+        @Override
+        public void onProviderDisabled(String provider) {
+
+        }
+    };
+
     @Override
     public void onClick(View v) {
         Intent browserIntent;
@@ -93,17 +140,14 @@ LoginActivity extends AppCompatActivity implements View.OnClickListener {
                 NetworkConnection connection = new NetworkConnection(LoginActivity.this);
                 if (connection.isNetworkConnected()) {
                     if (btn_signIn.getText().toString().equalsIgnoreCase("Get OTP")) {
-                        if (isValidEmail()) {
+                        if (isValidMobile()) {
                             userLogin();
                         }
                     } else if (btn_signIn.getText().toString().equalsIgnoreCase("Sign In")) {
                         checkOTP();
                     } else {
                         if (isValid()) {
-                            name = et_name.getText().toString().trim();
-                            referral_code = et_rereferral_code.getText().toString().trim();
-                            mobile = et_mobile_number.getText().toString().trim();
-                            addName(name, mobile, referral_code);
+                            addName();
                         }
                     }
                 } else {
@@ -116,13 +160,13 @@ LoginActivity extends AppCompatActivity implements View.OnClickListener {
             case R.id.tv_TnC:
                 browserIntent = new Intent(
                         Intent.ACTION_VIEW,
-                        Uri.parse("https://www.dealshai.in/Home/terms_and_conditions?data=1522232397"));
+                        Uri.parse("https://www.dealshai.in/Home/terms_and_conditions?data=1526987232"));
                 startActivity(browserIntent);
                 break;
             case R.id.tv_prv_plc:
                 browserIntent = new Intent(
                         Intent.ACTION_VIEW,
-                        Uri.parse("https://www.dealshai.in/Home/privacy_policy?data=1522232397"));
+                        Uri.parse("https://www.dealshai.in/Home/privacy_policy?data=1526987232"));
                 startActivity(browserIntent);
                 break;
             case R.id.tv_btn_reset:
@@ -138,11 +182,8 @@ LoginActivity extends AppCompatActivity implements View.OnClickListener {
         }
     }
 
-    private boolean isValid() {
-        if (et_name.getText().toString().trim().equals("")) {
-            et_name.setError("Please enter your full name");
-            return false;
-        } else if (et_mobile_number.getText().toString().equals("")) {
+    private boolean isValidMobile() {
+        if (et_mobile_number.getText().toString().equals("")) {
             et_mobile_number.setError("Please enter a your mobile number.");
             return false;
         } else if (et_mobile_number.getText().toString().trim().length() < 10) {
@@ -150,6 +191,13 @@ LoginActivity extends AppCompatActivity implements View.OnClickListener {
             return false;
         } else
             return true;
+    }
+
+    private boolean isValid() {
+        if (et_name.getText().toString().trim().equals("")) {
+            et_name.setError("Please enter your full name");
+            return false;
+        } else return isValidEmail();
     }
 
     public boolean isValidEmail() {
@@ -163,7 +211,7 @@ LoginActivity extends AppCompatActivity implements View.OnClickListener {
     }
 
     private void userLogin() {
-        emailId = et_email.getText().toString().trim();
+        mobile = et_mobile_number.getText().toString().trim();
         WebServiceHandler webServiceHandler = new WebServiceHandler(LoginActivity.this);
         webServiceHandler.serviceListener = new WebServiceListener() {
             @Override
@@ -172,7 +220,7 @@ LoginActivity extends AppCompatActivity implements View.OnClickListener {
                     if (response != null) {
                         JSONObject jsonObject = new JSONObject(response);
                         if (jsonObject.getString("err").equals("0")) {
-                            session.saveUserLoginSession(null, null, mobile, emailId, null, null, null);
+                            session.saveUserLoginSession(null, null, mobile, null, null, null, null);
                             LoginActivity.this.runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
@@ -190,23 +238,22 @@ LoginActivity extends AppCompatActivity implements View.OnClickListener {
                 }
             }
         };
-        webServiceHandler.loginUser(emailId);
+        webServiceHandler.loginUser(mobile);
     }
 
     private void checkOTP() {
         otp = et_otp.getText().toString().trim();
         user = session.getUserDetails();
-        emailId = user.get(Session.KEY_EMAIL);
+        mobile = user.get(Session.KEY_CONTACT_NUMBER);
         WebServiceHandler webServiceHandler = new WebServiceHandler(LoginActivity.this);
         webServiceHandler.serviceListener = new WebServiceListener() {
             @Override
             public void onResponse(String response) {
                 try {
                     if (response != null) {
-                        String userType = "";
                         JSONObject jsonObject = new JSONObject(response);
                         if (jsonObject.getString("err").equals("0")) {
-                            userType = String.valueOf(jsonObject.getInt("is_new_user"));
+                            String userType = String.valueOf(jsonObject.getInt("is_new_user"));
                             name = jsonObject.getString("name");
                             JSONObject userDetails = jsonObject.getJSONObject("user_details");
                             nextStep(userType, userDetails, name);
@@ -220,16 +267,19 @@ LoginActivity extends AppCompatActivity implements View.OnClickListener {
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-
                 }
             }
         };
-        webServiceHandler.checkOTP(otp, emailId);
+        webServiceHandler.checkOTP(otp, mobile);
     }
 
-    private void addName(final String name, final String mobile, String referral_code) {
+    private void addName() {
         user = session.getUserDetails();
         userId = user.get(Session.KEY_ID);
+        name = et_name.getText().toString().trim();
+        referral_code = et_rereferral_code.getText().toString().trim();
+        emailId = et_email.getText().toString().trim();
+
         WebServiceHandler webServiceHandler = new WebServiceHandler(LoginActivity.this);
         webServiceHandler.serviceListener = new WebServiceListener() {
             @Override
@@ -243,7 +293,8 @@ LoginActivity extends AppCompatActivity implements View.OnClickListener {
                                 @Override
                                 public void run() {
                                     session.saveUserLoginSession(userId, name, mobile, emailId, "", "", "");
-                                    startActivity(new Intent(LoginActivity.this, IndexActivity.class));
+                                    startActivity(new Intent(LoginActivity.this, IndexActivity.class)
+                                            .putExtra("Flag", true));
                                     LoginActivity.this.finish();
                                 }
                             });
@@ -254,7 +305,7 @@ LoginActivity extends AppCompatActivity implements View.OnClickListener {
                 }
             }
         };
-        webServiceHandler.add_name_and_referral_code(userId, name, referral_code, mobile);
+        webServiceHandler.add_name_and_referral_code(userId, name, referral_code, emailId);
     }
 
     private void nextStep(String userType, JSONObject userDetails, String name) {
@@ -268,7 +319,8 @@ LoginActivity extends AppCompatActivity implements View.OnClickListener {
         }
         switch (userType) {
             case "0":
-                startActivity(new Intent(LoginActivity.this, IndexActivity.class));
+                startActivity(new Intent(LoginActivity.this, IndexActivity.class)
+                        .putExtra("Flag", true));
                 LoginActivity.this.finish();
                 break;
             case "1":

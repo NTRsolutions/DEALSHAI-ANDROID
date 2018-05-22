@@ -48,10 +48,10 @@ public class WebServiceHandler {
     }
 
     //User Login Request
-    public void loginUser(String emailId) {
+    public void loginUser(String mobile) {
         progressDialog.show();
         Map<String, String> params = new HashMap<>();
-        params.put("email", emailId);
+        params.put("phone", mobile);
         JSONObject parameter = new JSONObject(params);
 
         newCall(parameter, ServicesURls.LoginApi);
@@ -61,19 +61,19 @@ public class WebServiceHandler {
     public void checkOTP(String otp, String emailId) {
         progressDialog.show();
         Map<String, String> params = new HashMap<>();
-        params.put("email", emailId);
+        params.put("phone", emailId);
         params.put("otp", otp);
         JSONObject parameter = new JSONObject(params);
 
         newCall(parameter, ServicesURls.CheckOtp);
     }
 
-    public void add_name_and_referral_code(String userId, String name, String referral_code, String mobile) {
+    public void add_name_and_referral_code(String userId, String name, String referral_code, String emailId) {
         progressDialog.show();
         Map<String, String> params = new HashMap<>();
         params.put("user_id", userId);
         params.put("name", name);
-        params.put("phone", mobile);
+        params.put("email", emailId);
         params.put("referral_code", referral_code);
         JSONObject parameter = new JSONObject(params);
 
