@@ -36,7 +36,6 @@ import com.ogma.dealshaiapp.R;
 import com.ogma.dealshaiapp.dialog.NotificationView;
 import com.ogma.dealshaiapp.dialog.ReferFriendDialog;
 import com.ogma.dealshaiapp.fragment.FragmentIndex;
-import com.ogma.dealshaiapp.model.CategoryDetails;
 import com.ogma.dealshaiapp.network.NetworkConnection;
 import com.ogma.dealshaiapp.network.WebServiceHandler;
 import com.ogma.dealshaiapp.network.WebServiceListener;
@@ -44,18 +43,14 @@ import com.ogma.dealshaiapp.utility.LocationManagerHelper;
 import com.ogma.dealshaiapp.utility.PermissionUtil;
 import com.ogma.dealshaiapp.utility.Session;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class IndexActivity extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
     private static final int REQUEST_LOCATION = 1;
-    private static String[] PERMISSIONS_LOCATION = {android.Manifest.permission.ACCESS_COARSE_LOCATION, android.Manifest.permission.ACCESS_FINE_LOCATION};
     private LocationManagerHelper locationManagerHelper;
-    private Location location;
 
     private String cityName = "";
     private String areaName = "";
@@ -66,7 +61,6 @@ public class IndexActivity extends AppCompatActivity implements View.OnClickList
     private TextView tv_area;
     private TextView tv_notification;
     private DrawerLayout drawer_layout;
-    private ImageLoader imageLoader;
     private AppCompatEditText et_search;
     private DisplayImageOptions options = new DisplayImageOptions.Builder()
             .showStubImage(R.drawable.pf_male)
@@ -79,21 +73,15 @@ public class IndexActivity extends AppCompatActivity implements View.OnClickList
     private Session session;
 
     protected OnBackPressedListener onBackPressedListener;
-    private String TAG = IndexActivity.class.getName();
     private String userId;
     private String total_unread;
     private FrameLayout frameLayout;
-    private ImageView pf_imge;
-    private String referMessage = "";
-    private String shareUrl = "";
+    private ImageView pf_image;
     private AlertDialog alertDialog;
     private boolean flag = false;
     private String referAmountGet;
     private String referAmountSend;
 
-    public static JSONArray banner;
-    public static JSONArray foodie;
-    public static ArrayList<CategoryDetails> categoryDetails;
     public interface OnBackPressedListener {
         void doBack();
     }
@@ -116,7 +104,6 @@ public class IndexActivity extends AppCompatActivity implements View.OnClickList
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-//            requestLocationPermissions();
             locationManagerHelper.requestLocationPermission();
         } else {
             if (flag)
@@ -133,7 +120,7 @@ public class IndexActivity extends AppCompatActivity implements View.OnClickList
         et_search = findViewById(R.id.et_search);
         tv_location = findViewById(R.id.tv_location);
         tv_area = findViewById(R.id.tv_area);
-        pf_imge = header.findViewById(R.id.pf_imge);
+        pf_image = header.findViewById(R.id.pf_imge);
 
         TextView tv_liked = findViewById(R.id.tv_liked);
         TextView tv_search = findViewById(R.id.tv_search);
@@ -182,17 +169,14 @@ public class IndexActivity extends AppCompatActivity implements View.OnClickList
 
         @Override
         public void onStatusChanged(String provider, int status, Bundle extras) {
-
         }
 
         @Override
         public void onProviderEnabled(String provider) {
-
         }
 
         @Override
         public void onProviderDisabled(String provider) {
-
         }
     };
 
@@ -216,21 +200,27 @@ public class IndexActivity extends AppCompatActivity implements View.OnClickList
         HashMap<String, String> user = session.getUserDetails();
         String imgUri = user.get(Session.KEY_IMAGE);
 
-        imageLoader = ImageLoader.getInstance();
+        ImageLoader imageLoader = ImageLoader.getInstance();
         if (!imageLoader.isInited())
             imageLoader.init(ImageLoaderConfiguration.createDefault(IndexActivity.this));
         if (imgUri != null)
-            imageLoader.displayImage(imgUri, pf_imge, options);
+            imageLoader.displayImage(imgUri, pf_image, options);
     }
 
     @Override
     public void onBackPressed() {
+//        Fragment fragmentIndex = getSupportFragmentManager().findFragmentByTag(FragmentIndex.class.getSimpleName());
+//        Fragment fragmentPlankarleSelectCategories = getSupportFragmentManager().findFragmentByTag(FragmentPlankarleSelectCategories.class.getSimpleName());
+//
+//        if (fragmentIndex != null && fragmentIndex instanceof FragmentIndex) {
+//            super.onBackPressed();
+//        } else if (fragmentPlankarleSelectCategories != null && fragmentPlankarleSelectCategories instanceof FragmentPlankarleSelectCategories) {
+//
+//        }
         if (onBackPressedListener != null) {
-            if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
+            if (drawer_layout.isDrawerOpen(GravityCompat.START))
                 drawer_layout.closeDrawer(GravityCompat.START);
-            } else {
-                onBackPressedListener.doBack();
-            }
+            else onBackPressedListener.doBack();
         } else
             super.onBackPressed();
     }
@@ -279,7 +269,6 @@ public class IndexActivity extends AppCompatActivity implements View.OnClickList
                 startActivity(new Intent(IndexActivity.this, LikedProductActivity.class));
                 break;
             case R.id.tv_refer:
-//                shareReferCode(userId);
                 new ReferFriendDialog(IndexActivity.this, userId).show();
                 break;
             case R.id.tv_help:
@@ -338,7 +327,6 @@ public class IndexActivity extends AppCompatActivity implements View.OnClickList
                 addNewContact();
                 break;
             case R.id.refer_a_friend:
-//                shareReferCode(userId);
                 new ReferFriendDialog(IndexActivity.this, userId).show();
                 break;
             case R.id.rate_the_app:
@@ -384,18 +372,10 @@ public class IndexActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-//    public void share_via_app(String referMessage) {
-//        Intent sendIntent = new Intent();
-//        sendIntent.setAction(Intent.ACTION_SEND_MULTIPLE);
-//        sendIntent.putExtra(Intent.EXTRA_TEXT, referMessage);
-//        sendIntent.setType("text/plain");
-//        startActivity(sendIntent);
-//    }
-
     private void addNewContact() {
 
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-        View view = getLayoutInflater().inflate(R.layout.help_popup, null, false);
+        @SuppressLint("InflateParams") View view = getLayoutInflater().inflate(R.layout.help_popup, null, false);
         dialog.setView(view);
 
         ImageView btn_wtsp_us = view.findViewById(R.id.btn_wtsp_us);
@@ -544,31 +524,4 @@ public class IndexActivity extends AppCompatActivity implements View.OnClickList
         };
         webServiceHandler.getCurrentLocationInfo(lat, lng);
     }
-
-//    private void shareReferCode(String userId) {
-//        WebServiceHandler webServiceHandler = new WebServiceHandler(IndexActivity.this);
-//        webServiceHandler.serviceListener = new WebServiceListener() {
-//            @Override
-//            public void onResponse(String response) {
-//                JSONObject jsonObject = null;
-//                int is_error;
-//                try {
-//                    jsonObject = new JSONObject(response);
-//                    is_error = jsonObject.getInt("err");
-//                    if (is_error == 0) {
-//                        referMessage = jsonObject.getString("text");
-//                        shareUrl = jsonObject.getString("link");
-//                        if (shareUrl != null) {
-//                            referMessage = referMessage + "\n" + shareUrl;
-//                        }
-//                        share_via_app(referMessage);
-//                    } else
-//                        Snackbar.make(drawer_layout, jsonObject.getString("msg") + "", Snackbar.LENGTH_LONG).show();
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        };
-//        webServiceHandler.getReferralMessage(userId);
-//    }
 }

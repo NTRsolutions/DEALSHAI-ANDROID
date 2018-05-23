@@ -13,6 +13,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -44,7 +45,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import cn.trinea.android.view.autoscrollviewpager.AutoScrollViewPager;
-import me.relex.circleindicator.CircleIndicator;
 
 public class FragmentIndex extends Fragment implements View.OnClickListener, IndexActivity.OnBackPressedListener {
 
@@ -53,7 +53,7 @@ public class FragmentIndex extends Fragment implements View.OnClickListener, Ind
     private JSONArray foodie;
     private ArrayList<MerchantDetails> arrayList;
     private FragmentManager fragmentManager;
-    private CircleIndicator banner_indicator;
+    //    private CircleIndicator banner_indicator;
     private FoodieAdapter recyclerViewAdapter;
     private MerchantViewAdapter marchentViewAdapter;
     private BannerAdapter bannerSlidingAdapter;
@@ -112,7 +112,7 @@ public class FragmentIndex extends Fragment implements View.OnClickListener, Ind
         banner_view_pager = view.findViewById(R.id.banner_view_pager);
         RecyclerView foodieSubView = view.findViewById(R.id.cat_foodie);
         RecyclerView merchantsView = view.findViewById(R.id.recycler_view);
-        banner_indicator = view.findViewById(R.id.banner_indicator);
+//        banner_indicator = view.findViewById(R.id.banner_indicator);
         iv_cat1 = view.findViewById(R.id.iv_cat1);
         iv_cat2 = view.findViewById(R.id.iv_cat2);
         iv_cat3 = view.findViewById(R.id.iv_cat3);
@@ -140,8 +140,9 @@ public class FragmentIndex extends Fragment implements View.OnClickListener, Ind
         marchentViewAdapter = new MerchantViewAdapter(getContext(), (AppCompatActivity) getActivity(), arrayList);
         merchantsView.setAdapter(marchentViewAdapter);
 
-        banner_view_pager.setInterval(3000);
+        banner_view_pager.setInterval(5000);
         banner_view_pager.startAutoScroll();
+        banner_view_pager.setStopScrollWhenTouch(true);
 
         ll_plankarle.setOnClickListener(this);
         ll_dealshai.setOnClickListener(this);
@@ -152,6 +153,17 @@ public class FragmentIndex extends Fragment implements View.OnClickListener, Ind
         ll_more.setOnClickListener(this);
 
         ((IndexActivity) getActivity()).setOnBackPressedListener(this);
+
+        banner_view_pager.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.equals(MotionEvent.ACTION_DOWN) || event.equals(MotionEvent.ACTION_MOVE)) {
+                    banner_view_pager.stopAutoScroll();
+                } else
+                    banner_view_pager.startAutoScroll();
+                return false;
+            }
+        });
 
         return view;
     }
@@ -256,9 +268,9 @@ public class FragmentIndex extends Fragment implements View.OnClickListener, Ind
                                         public void run() {
                                             bannerSlidingAdapter = new BannerAdapter(fragmentManager, banner);
                                             banner_view_pager.setAdapter(bannerSlidingAdapter);
-                                            banner_indicator.setViewPager(banner_view_pager);
-                                            banner_view_pager.setCurrentItem(Integer.MAX_VALUE / 2 - Integer.MAX_VALUE / 2 % banner.length());
                                             banner_view_pager.setStopScrollWhenTouch(true);
+//                                            banner_indicator.setViewPager(banner_view_pager);
+                                            banner_view_pager.setCurrentItem(Integer.MAX_VALUE / 2 - Integer.MAX_VALUE / 2 % banner.length());
                                         }
                                     });
                                 }
