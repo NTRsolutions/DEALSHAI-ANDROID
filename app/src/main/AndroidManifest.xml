@@ -72,6 +72,18 @@
             android:name=".activity.DetailsActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".activity.Main2Activity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.CustomActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.CustomActivity2"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.RequestActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".activity.MyPurchases"
             android:screenOrientation="portrait" />
         <activity

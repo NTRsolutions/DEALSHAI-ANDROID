@@ -47,9 +47,9 @@ import retrofit2.Response;
 
 public class Main2Activity extends AppCompatActivity {
 
-    public static final String CLIENT_ID = "2iw-HpEAOYCEvKsv-eQxOQqifb7iatx4";
-    public static final String REDIRECT_URI = "https://play.google.com/store/apps/details?id=com.ogma.dealshaiapp";
-    private static final String SERVER_TOKEN = "IPMniRibi0hexyNdheajfbuGEMoFX3_G9seS5ln1";
+    public static final String CLIENT_ID = "TOOZoBaYx35sskiTlpcs_pOrWcYZtUi";
+    public static final String REDIRECT_URI = "https://www.uber.com/en-IN";
+    private static final String SERVER_TOKEN = "DrywEooMHBzlk3LgoEr1ntR8MDqUJRBa8aneZ6o0";
 
     private static final String LOG_TAG = "LoginSampleActivity";
 

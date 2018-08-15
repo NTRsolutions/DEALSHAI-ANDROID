@@ -30,6 +30,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.ogma.dealshaiapp.R;
 import com.ogma.dealshaiapp.activity.IndexActivity;
+import com.ogma.dealshaiapp.activity.Main2Activity;
 import com.ogma.dealshaiapp.activity.MyPurchases;
 import com.ogma.dealshaiapp.adapter.MerchantViewAdapter;
 import com.ogma.dealshaiapp.fragment.dealshai.FragmentDealshaiPlusPackages;
@@ -150,6 +151,7 @@ public class FragmentIndex extends Fragment implements View.OnClickListener, Ind
         planKarle.setOnClickListener(this);
         FloatingActionButton go_taxi = view.findViewById(R.id.go_taxi);
         go_taxi.bringToFront();
+        go_taxi.setOnClickListener(this);
 
 
         ((IndexActivity) getActivity()).setOnBackPressedListener(this);
@@ -333,6 +335,9 @@ public class FragmentIndex extends Fragment implements View.OnClickListener, Ind
                     manager = getFragmentManager();
                     fct1.setArguments(bundle);
                     manager.beginTransaction().replace(R.id.index_frame, fct1).commitAllowingStateLoss();
+                break;
+            case R.id.go_taxi:
+                startActivity(new Intent(getActivity(), Main2Activity.class));
                 break;
             case R.id.spa_and_salon:
                     bundle = new Bundle();

@@ -40,9 +40,9 @@ public class RequestActivity extends AppCompatActivity implements RideRequestBut
     private static final String UBERX_PRODUCT_ID = "a1111c8c-c720-46c3-8534-2fcdd730040d";
     private static final int WIDGET_REQUEST_CODE = 1234;
 
-    public static final String CLIENT_ID = "2iw-HpEAOYCEvKsv-eQxOQqifb7iatx4";
+    public static final String CLIENT_ID = "TOOZoBaYx35sskiTlpcs_pOrWcYZtUi";
     public static final String REDIRECT_URI = "https://www.uber.com/en-IN";
-    private static final String SERVER_TOKEN = "IPMniRibi0hexyNdheajfbuGEMoFX3_G9seS5ln1";
+    private static final String SERVER_TOKEN = "DrywEooMHBzlk3LgoEr1ntR8MDqUJRBa8aneZ6o0";
 
     private SessionConfiguration configuration;
 
