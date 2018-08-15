@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -147,6 +148,9 @@ public class FragmentIndex extends Fragment implements View.OnClickListener, Ind
         alacarte.setOnClickListener(this);
         spa_and_salon.setOnClickListener(this);
         planKarle.setOnClickListener(this);
+        FloatingActionButton go_taxi = view.findViewById(R.id.go_taxi);
+        go_taxi.bringToFront();
+
 
         ((IndexActivity) getActivity()).setOnBackPressedListener(this);
         banner_view_pager.setOnTouchListener(new View.OnTouchListener() {

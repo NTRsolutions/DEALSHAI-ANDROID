@@ -457,13 +457,14 @@
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/go_taxi"
-        android:layout_gravity="bottom"
-        android:layout_width="366dp"
+        android:layout_gravity="bottom|end"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_marginBottom="50dp"
-        android:layout_marginLeft="290dp"
+        android:clickable="true"
+        android:layout_marginLeft="10dp"
         android:background="@drawable/shape_button_background2"
         app:fabSize="normal"
         app:srcCompat="@drawable/taxi_app"
