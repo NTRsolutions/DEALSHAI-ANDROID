@@ -19,6 +19,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -381,16 +382,18 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
             private TextView tv_referral_code;
             private TextView tv_voucher_amount;
             private TextView tv_voucher_date;
-            private ImageView iv_voucher_type;
-            private TextView tv_voucher_status;
+            private LinearLayout linearLayout;
+            //private ImageView iv_voucher_type;
+            //private TextView tv_voucher_status;
 
             ViewHolder(View itemView) {
                 super(itemView);
                 tv_referral_code = itemView.findViewById(R.id.tv_referral_code);
                 tv_voucher_amount = itemView.findViewById(R.id.tv_voucher_amount);
                 tv_voucher_date = itemView.findViewById(R.id.tv_voucher_date);
-                iv_voucher_type = itemView.findViewById(R.id.iv_voucher_type);
-                tv_voucher_status = itemView.findViewById(R.id.tv_voucher_status);
+                linearLayout=itemView.findViewById(R.id.my_vouchers);
+                //iv_voucher_type = itemView.findViewById(R.id.iv_voucher_type);
+              //  tv_voucher_status = itemView.findViewById(R.id.tv_voucher_status);
 
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -414,10 +417,10 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
         public void onBindViewHolder(VouchersListAdapter.ViewHolder holder, int position) {
 
             Vouchers vouchers = vouchersArrayList.get(position);
-            holder.tv_referral_code.setText("Min Purchase \n₹ " + vouchers.getMinPurchase());
-            holder.tv_voucher_amount.setText("₹ " + vouchers.getVoucherAmount());
-            holder.tv_voucher_date.setText("Expire on: " + vouchers.getVoucherDate());
-            switch (vouchers.getVoucherType()) {
+            holder.tv_referral_code.setText("Minimum Order: ₹" + vouchers.getMinPurchase());
+            holder.tv_voucher_amount.setText("₹" + vouchers.getVoucherAmount());
+            holder.tv_voucher_date.setText("Valid Till: "+vouchers.getVoucherDate());
+            /**switch (vouchers.getVoucherType()) {
                 case "U":
                     holder.iv_voucher_type.setImageResource(R.drawable.coupon_blue);
                     break;
@@ -432,9 +435,17 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
                     break;
                 default:
                     break;
-            }
-            holder.tv_voucher_status.setText(" " + vouchers.getVoucherStaus());
-            switch (vouchers.getVoucherStaus()) {
+            }*/
+            //holder.tv_voucher_status.setText(" " + vouchers.getVoucherStaus());
+             String v=vouchers.getVoucherStaus();
+             if(v.equals("inactive"))
+             {
+                 holder.tv_voucher_date.setText(" expired");
+                 holder.tv_voucher_date.setTextColor(getResources().getColor(R.color.red_dot_color));
+                 holder.linearLayout.setBackgroundResource(R.drawable.shape_voucher_background_expired);
+             //myVoucher.setBackground(getResources().getDrawable(R.drawable.shape_voucher_background_expired));
+             }
+           /** switch (vouchers.getVoucherStaus()) {
                 case "active":
                     holder.tv_voucher_status.setTextColor(getResources().getColor(R.color.green_dot_color));
                     holder.tv_voucher_status.setCompoundDrawablesWithIntrinsicBounds(R.drawable.green_dot, 0, 0, 0);
@@ -443,7 +454,7 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
                     holder.tv_voucher_status.setTextColor(getResources().getColor(R.color.red_dot_color));
                     holder.tv_voucher_status.setCompoundDrawablesWithIntrinsicBounds(R.drawable.red_dot, 0, 0, 0);
                     break;
-            }
+            }*/
         }
 
         @Override

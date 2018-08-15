@@ -60,7 +60,7 @@ public class WelcomeActivity extends AppCompatActivity {
                             WelcomeActivity.this.finish();
                         }
                     }
-                }, 1000);
+                }, 3000);
             } else {
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
                 alertDialogBuilder.setTitle(R.string.no_internet_connection);

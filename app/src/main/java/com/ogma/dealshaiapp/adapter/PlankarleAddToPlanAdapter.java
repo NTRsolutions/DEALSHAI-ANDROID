@@ -94,7 +94,7 @@ public class PlankarleAddToPlanAdapter extends RecyclerView.Adapter<PlankarleAdd
     }
 
     public PlankarleAddToPlanAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.plankarle_second_step_view, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.plankarle_second_step_view2, parent, false);
         return new PlankarleAddToPlanAdapter.ViewHolder(view);
     }
 
@@ -119,7 +119,7 @@ public class PlankarleAddToPlanAdapter extends RecyclerView.Adapter<PlankarleAdd
         holder.tv_lowest_deal_tittle.setText(dealTitle);
         holder.tv_old_price.setText("₹ " + price);
         holder.tv_new_price.setText("₹ " + offerPrice);
-        holder.tv_likes.setText(" " + likes);
+        //holder.tv_likes.setText(" " + likes);
         holder.tv_old_price.setPaintFlags(holder.tv_old_price.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
     }

@@ -12,7 +12,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorHeaderBar"
+        android:background="@drawable/background_color"
         app:layout_scrollFlags="scroll|enterAlways"
         app:popupTheme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:titleTextColor="@android:color/black" />
@@ -54,7 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/margin_30"
-            android:background="#e5e6e6"
+            android:background="@drawable/shape_button_background2"
             android:paddingEnd="5dp"
             android:paddingStart="5dp"
             android:text="View Orders"

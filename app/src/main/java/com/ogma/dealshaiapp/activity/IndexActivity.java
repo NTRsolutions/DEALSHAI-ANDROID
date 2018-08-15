@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Typeface;
 import android.location.Location;
 import android.location.LocationListener;
 import android.net.Uri;
@@ -48,6 +49,8 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 
+import me.anwarshahriar.calligrapher.Calligrapher;
+
 public class IndexActivity extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
     private static final int REQUEST_LOCATION = 1;
     private LocationManagerHelper locationManagerHelper;
@@ -56,9 +59,9 @@ public class IndexActivity extends AppCompatActivity implements View.OnClickList
     private String areaName = "";
     private String latitude;
     private String longitude;
-
+    Typeface myfont;
     private TextView tv_location;
-    private TextView tv_area;
+    //private TextView tv_area;
     private TextView tv_notification;
     private DrawerLayout drawer_layout;
     private AppCompatEditText et_search;
@@ -96,6 +99,9 @@ public class IndexActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_index);
         session = new Session(IndexActivity.this);
 
+        Calligrapher calligrapher=new Calligrapher(this);
+        calligrapher.setFont(this, "gothic.ttf",true);
+
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             flag = bundle.getBoolean("Flag");
@@ -117,18 +123,20 @@ public class IndexActivity extends AppCompatActivity implements View.OnClickList
 
         frameLayout = findViewById(R.id.frameLayout);
         tv_notification = findViewById(R.id.tv_notification);
+        Typeface tx=Typeface.createFromAsset(getAssets(),"gothic.ttf");
+        //et_search.setTypeface(tx);
         et_search = findViewById(R.id.et_search);
         tv_location = findViewById(R.id.tv_location);
-        tv_area = findViewById(R.id.tv_area);
+        //tv_area = findViewById(R.id.tv_area);
         pf_image = header.findViewById(R.id.pf_imge);
 
-        TextView tv_liked = findViewById(R.id.tv_liked);
-        TextView tv_search = findViewById(R.id.tv_search);
+       // TextView tv_liked = findViewById(R.id.tv_liked);
+        ImageView tv_search = findViewById(R.id.tv_search);
         ImageView iv_notification = findViewById(R.id.iv_notification);
         LinearLayout ll_area = findViewById(R.id.ll_area);
 
-        TextView tv_home = findViewById(R.id.tv_home);
-        TextView tv_my_purchase = findViewById(R.id.tv_my_purchase);
+        ImageView tv_home = findViewById(R.id.tv_home);
+        //TextView tv_my_purchase = findViewById(R.id.tv_my_purchase);
 
         HashMap<String, String> user = session.getUserDetails();
         userId = user.get(Session.KEY_ID);
@@ -140,15 +148,16 @@ public class IndexActivity extends AppCompatActivity implements View.OnClickList
         iv_notification.setOnClickListener(this);
         tv_notification.setOnClickListener(this);
         tv_search.setOnClickListener(this);
-        tv_liked.setOnClickListener(this);
+       // tv_liked.setOnClickListener(this);
+       // Typeface tx=Typeface.createFromAsset(getAssets(),"gothic.ttf");
 
         onNavigationItemSelected(navigationView.getMenu().getItem(0));
         navigationView.setCheckedItem(R.id.nav_home);
 
         tv_home.setOnClickListener(this);
-        tv_my_purchase.setOnClickListener(this);
-        findViewById(R.id.tv_help).setOnClickListener(this);
-        findViewById(R.id.tv_refer).setOnClickListener(this);
+        //tv_my_purchase.setOnClickListener(this);
+        //findViewById(R.id.tv_help).setOnClickListener(this);
+        //findViewById(R.id.tv_refer).setOnClickListener(this);
         findViewById(R.id.frameLayout).setOnClickListener(this);
 
         NetworkConnection connection = new NetworkConnection(IndexActivity.this);
@@ -187,11 +196,11 @@ public class IndexActivity extends AppCompatActivity implements View.OnClickList
         HashMap<String, String> locationDetails = session.getLocationDetails();
         cityName = locationDetails.get(Session.KEY_CITY);
         areaName = locationDetails.get(Session.KEY_AREA);
-        if (cityName.equals("")) tv_location.setText("Select City");
+        if (cityName.equals("")) tv_location.setText("Kolkata");
         else tv_location.setText(cityName);
 
-        if (areaName.equals("")) tv_area.setText("Select Area  ");
-        else tv_area.setText(areaName + " ");
+        //if (areaName.equals("")) tv_area.setText("Select Area  ");
+       // else tv_area.setText(areaName + " ");
 
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
             drawer_layout.closeDrawer(GravityCompat.START);
@@ -261,18 +270,6 @@ public class IndexActivity extends AppCompatActivity implements View.OnClickList
                 FragmentIndex fragmentIndex = new FragmentIndex();
                 manager = getSupportFragmentManager();
                 manager.beginTransaction().replace(R.id.index_frame, fragmentIndex).addToBackStack(null).commit();
-                break;
-            case R.id.tv_my_purchase:
-                startActivity(new Intent(IndexActivity.this, MyPurchases.class));
-                break;
-            case R.id.tv_liked:
-                startActivity(new Intent(IndexActivity.this, LikedProductActivity.class));
-                break;
-            case R.id.tv_refer:
-                new ReferFriendDialog(IndexActivity.this, userId).show();
-                break;
-            case R.id.tv_help:
-                addNewContact();
                 break;
         }
     }
@@ -434,7 +431,7 @@ public class IndexActivity extends AppCompatActivity implements View.OnClickList
                                 frameLayout.setVisibility(View.VISIBLE);
                                 tv_notification.setText(total_unread);
                             }
-                            if (cityName.equals("")) tv_location.setText("Select City");
+                            if (cityName.equals("")) tv_location.setText("Kolkata");
                             else tv_location.setText(cityName);
                         }
                     });
@@ -502,10 +499,10 @@ public class IndexActivity extends AppCompatActivity implements View.OnClickList
                                         longitude = locationDetails.get(Session.KEY_LONGITUDE);
 
                                         tv_location.setText(cityName);
-                                        if (areaName.equals(""))
+                                        /**if (areaName.equals(""))
                                             tv_area.setText("Select Area  ");
                                         else
-                                            tv_area.setText(areaName + " ");
+                                            tv_area.setText(areaName + " ");*/
 
                                         Fragment fragment = getSupportFragmentManager().findFragmentByTag(FragmentIndex.class.getSimpleName());
                                         if (fragment != null && fragment instanceof FragmentIndex) {

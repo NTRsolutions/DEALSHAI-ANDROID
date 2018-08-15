@@ -28,7 +28,7 @@ public class OpenSansFontSemibold extends AppCompatTextView {
     }
 
     private void init() {
-        Typeface tf = Typeface.createFromAsset(getContext().getAssets(), "OpenSans_Semibold.ttf");
+        Typeface tf = Typeface.createFromAsset(getContext().getAssets(), "GOTHICB.ttf");
         setTypeface(tf);
     }
 }

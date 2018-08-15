@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -37,7 +38,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class MyPurchases extends AppCompatActivity {
+public class MyPurchases extends AppCompatActivity implements View.OnClickListener{
 
     private RecyclerView recycler_view;
     private Session session;
@@ -45,6 +46,7 @@ public class MyPurchases extends AppCompatActivity {
     private PurchaseListAdapter adapter;
     private ArrayList<OrderedItems> arrayList;
     private CoordinatorLayout parentPanel;
+    private Button click;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +73,9 @@ public class MyPurchases extends AppCompatActivity {
         recycler_view.setItemAnimator(new DefaultItemAnimator());
         adapter = new PurchaseListAdapter(MyPurchases.this, MyPurchases.this, arrayList);
         recycler_view.setAdapter(adapter);
+        click=findViewById(R.id.more_purchase);
+        
+        click.setOnClickListener(this);
     }
 
     @Override
@@ -144,6 +149,12 @@ public class MyPurchases extends AppCompatActivity {
             }
         };
         webServiceHandler.getPurchaseList(userId);
+    }
+
+    @Override
+    public void onClick(View view) {
+        startActivity(new Intent(MyPurchases.this, IndexActivity.class));
+
     }
 
     private class PurchaseListAdapter extends RecyclerView.Adapter<PurchaseListAdapter.ViewHolder> {

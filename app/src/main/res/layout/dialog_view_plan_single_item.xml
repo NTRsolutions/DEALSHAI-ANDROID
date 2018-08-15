@@ -11,18 +11,18 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/white">
+        android:background="@drawable/shape_curved_rectangle_background3">
 
         <LinearLayout
             android:id="@+id/ll_details"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorButterWhite"
             android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/index_banner"
                 android:layout_width="0dp"
+                android:layout_margin="2dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.9"
                 android:scaleType="centerCrop"
@@ -39,9 +39,8 @@
                     android:id="@+id/tv_merchant_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Food"
-                    android:textAllCaps="true"
-                    android:textColor="@color/colorTheme"
+                    android:text="Merchant"
+                    android:textColor="@color/uber_black"
                     android:textSize="@dimen/text_medium"
                     android:textStyle="bold" />
 
@@ -50,7 +49,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tv_merchant_name"
-                    android:text="Food"
+                    android:text="Title"
                     android:textAllCaps="true"
                     android:textColor="@color/textBlack"
                     android:textSize="@dimen/text_medium"
@@ -63,7 +62,7 @@
                     android:layout_alignStart="@+id/tv_title"
                     android:layout_below="@+id/tv_title"
                     android:gravity="center"
-                    android:text="Qty:"
+                    android:text="Quantity:"
                     android:textColor="@color/textBlack"
                     android:textSize="@dimen/text_medium" />
 
@@ -121,7 +120,7 @@
                     android:layout_marginStart="10dp"
                     android:layout_toEndOf="@+id/openSansFontSemibold"
                     android:text="₹ 1500"
-                    android:textColor="@color/colorTheme"
+                    android:textColor="@color/uber_black"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 

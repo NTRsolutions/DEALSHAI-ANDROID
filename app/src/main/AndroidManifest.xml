@@ -74,7 +74,6 @@
         <activity
             android:name=".activity.MyPurchases"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".activity.CheckOutActivity"
             android:screenOrientation="portrait" />

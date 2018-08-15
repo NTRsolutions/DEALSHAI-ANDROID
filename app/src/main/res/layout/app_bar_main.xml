@@ -12,6 +12,7 @@
     <LinearLayout
         android:id="@+id/app_bar_with_search"
         android:layout_width="match_parent"
+        android:background="@drawable/background_color"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
@@ -19,22 +20,29 @@
             android:id="@+id/rl_header_bar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#ececec"
             android:gravity="center"
             android:paddingBottom="2.5dp"
             android:paddingEnd="0dp"
-            android:paddingStart="5dp">
+            android:paddingStart="2dp">
 
             <ImageView
                 android:id="@+id/iv_drawer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="25dp"
+                android:layout_height="48dp"
                 android:layout_centerVertical="true"
-                android:paddingBottom="5dp"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:src="@drawable/dots3" />
+            <ImageView
+                android:id="@+id/tv_home"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_toRightOf="@+id/iv_drawer"
+                android:layout_centerVertical="true"
+                android:paddingBottom="10dp"
                 android:paddingEnd="15dp"
-                android:paddingStart="5dp"
-                android:paddingTop="15dp"
-                android:src="@drawable/drawer_icon" />
+                android:paddingTop="10dp"
+                android:src="@drawable/home" />
 
             <LinearLayout
                 android:id="@+id/ll_area"
@@ -46,7 +54,7 @@
                 android:gravity="center"
                 android:orientation="vertical">
 
-                <com.ogma.dealshaiapp.utility.OpenSansFontRegular
+                <com.ogma.dealshaiapp.utility.OpenSansFontBold
                     android:id="@+id/tv_location"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -54,11 +62,11 @@
                     android:layout_marginStart="15dp"
                     android:gravity="center"
                     android:text="Select City"
-                    android:textColor="#080B30"
-                    android:textSize="@dimen/text_very_small"
+                    android:textColor="#ffffff"
+                    android:textSize="@dimen/text_small"
                     android:textStyle="bold" />
 
-                <com.ogma.dealshaiapp.utility.OpenSansFontSemibold
+                <com.ogma.dealshaiapp.utility.OpenSansFontRegular
                     android:id="@+id/tv_area"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -67,9 +75,8 @@
                     android:drawableEnd="@drawable/down_arrow"
                     android:gravity="center"
                     android:text="Select Area "
-                    android:textColor="#080B30"
-                    android:textSize="@dimen/text_small"
-                    android:textStyle="bold" />
+                    android:textColor="#ffffff"
+                    android:textSize="@dimen/text_very_small" />
 
             </LinearLayout>
 
@@ -106,133 +113,77 @@
 
             <ImageView
                 android:id="@+id/iv_notification"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="4dp"
                 android:layout_alignBottom="@+id/ll_area"
                 android:layout_alignStart="@+id/frameLayout"
-                android:src="@drawable/notification_icon" />
+                android:src="@drawable/bell" />
 
         </RelativeLayout>
 
-        <LinearLayout
-            android:id="@+id/search_bar"
+        <android.support.design.widget.CollapsingToolbarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/black"
-            android:paddingBottom="3dp"
-            android:paddingTop="3dp">
+            app:layout_scrollFlags="scroll|enterAlways">
 
-            <android.support.v7.widget.AppCompatEditText
-                android:id="@+id/et_search"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.75"
-                android:background="@android:color/white"
-                android:imeOptions="actionDone"
-                android:inputType="text"
-                android:maxLines="1"
-                android:padding="1dp"
-                android:paddingStart="4dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:id="@+id/search_bar"
+                android:weightSum="1"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-            <com.ogma.dealshaiapp.utility.OpenSansFontSemibold
-                android:id="@+id/tv_search"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.25"
-                android:background="@color/colorTheme"
-                android:gravity="center"
-                android:text="Search"
-                android:textAllCaps="true"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/text_small"
-                android:textStyle="bold" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_weight="0.1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_4sdp"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/shape_curved_rectangle_background2"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
-        </LinearLayout>
+                    <android.support.v7.widget.AppCompatEditText
+                        android:id="@+id/et_search"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/white"
+                        android:padding="1dp"
+                        android:fontFamily="sans-serif-smallcaps"
+                        android:layout_marginLeft="@dimen/margin_5"
+                        android:layout_marginRight="8dp" />
+
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/tv_search"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="7dp"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="11dp"
+                    android:gravity="left"
+                    android:layout_weight="0.9"
+                    android:src="@drawable/search" />
+
+            </LinearLayout>
+
+        </android.support.design.widget.CollapsingToolbarLayout>
 
     </LinearLayout>
+
 
     <FrameLayout
         android:id="@+id/index_frame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/ll_bottom_bar"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/app_bar_with_search"
-        android:layout_marginBottom="2dp"
-        android:layout_marginTop="2dp">
+        android:layout_marginTop="0dp"
+        android:layout_above="@+id/ll_bottom_bar">
 
     </FrameLayout>
 
-    <LinearLayout
-        android:id="@+id/ll_bottom_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="@color/colorTheme"
-        android:gravity="bottom|center_horizontal"
-        android:paddingTop="8dp"
-        android:paddingBottom="4dp">
-
-        <com.ogma.dealshaiapp.utility.OpenSansFontSemibold
-            android:id="@+id/tv_home"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_weight="1"
-            android:drawableTop="@drawable/ic_menu_home"
-            android:gravity="bottom|center"
-            android:text="Home"
-            android:textColor="#FFFFFF"
-            android:textSize="@dimen/text_very_small" />
-
-        <com.ogma.dealshaiapp.utility.OpenSansFontSemibold
-            android:id="@+id/tv_my_purchase"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:drawableTop="@drawable/ic_menu_shopping"
-            android:gravity="bottom|center"
-            android:text="Purchase"
-            android:textColor="#FFFFFF"
-            android:textSize="@dimen/text_very_small" />
-
-        <com.ogma.dealshaiapp.utility.OpenSansFontSemibold
-            android:id="@+id/tv_liked"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:drawableTop="@drawable/ic_menu_ok"
-            android:gravity="bottom|center"
-            android:text="Liked"
-            android:textColor="#FFFFFF"
-            android:textSize="@dimen/text_very_small" />
-
-        <com.ogma.dealshaiapp.utility.OpenSansFontSemibold
-            android:id="@+id/tv_help"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:drawableTop="@drawable/ic_menu_help"
-            android:gravity="bottom|center"
-            android:text="Help"
-            android:textColor="#FFFFFF"
-            android:textSize="@dimen/text_very_small" />
-
-        <com.ogma.dealshaiapp.utility.OpenSansFontSemibold
-            android:id="@+id/tv_refer"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:drawableTop="@drawable/ic_menu_share"
-            android:gravity="bottom|center"
-            android:text="Refer"
-            android:textColor="#FFFFFF"
-            android:textSize="@dimen/text_very_small" />
-
-
-    </LinearLayout>
 
 </RelativeLayout>

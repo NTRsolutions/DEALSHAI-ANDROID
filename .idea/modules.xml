@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://C:\Users\AndroidDev\AndroidStudioProjects\DealshaiApp\DEALSHAI-ANDROID.iml" filepath="C:\Users\AndroidDev\AndroidStudioProjects\DealshaiApp\DEALSHAI-ANDROID.iml" />
-      <module fileurl="file://$PROJECT_DIR$/DealshaiApp.iml" filepath="$PROJECT_DIR$/DealshaiApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DEALSHAI-ANDROID.iml" filepath="$PROJECT_DIR$/DEALSHAI-ANDROID.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

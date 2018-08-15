@@ -21,6 +21,7 @@
         app:itemIconTint="@android:color/white"
         app:itemTextAppearance="@style/BaseText"
         app:menu="@menu/navigation_menu" />-->
+
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -30,26 +31,45 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorHeaderBar"
+            android:background="@drawable/background_color"
             app:layout_scrollFlags="scroll|enterAlways"
             app:titleTextColor="@android:color/black"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Dark" />
     </android.support.design.widget.AppBarLayout>
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:visibility="gone"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:background="@color/colorAccent"
+        android:id="@+id/more_purchase"
+        android:layout_marginBottom="40dp"
+        android:text="click for more purchase" />
+
     <android.support.v7.widget.RecyclerView
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:padding="@dimen/margin_5"
         android:id="@+id/recycler_view"
+        android:layout_marginBottom="70dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
     </android.support.v7.widget.RecyclerView>
+
+
+
 
     <FrameLayout
         android:id="@+id/error_screen"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/bg"
-        android:visibility="gone" />
+        android:visibility="gone">
+
+    </FrameLayout>
+
 
 </android.support.design.widget.CoordinatorLayout>

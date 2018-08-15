@@ -26,7 +26,6 @@
         android:layout_above="@+id/ll_buy_now"
         android:layout_below="@+id/tv_title"
         android:layout_marginTop="@dimen/margin_5"
-        android:background="@color/colorButterWhite"
         android:paddingEnd="@dimen/margin_5"
         android:paddingStart="@dimen/margin_5" />
 
@@ -36,7 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
-        android:background="#1B2272"
+        android:background="@drawable/background_color"
         android:padding="@dimen/margin_5">
 
         <LinearLayout
@@ -55,7 +54,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TOTAL:"
-                android:textColor="@color/colorTheme"
+                android:textColor="#ffffff"
                 android:textSize="@dimen/text_large" />
 
             <com.ogma.dealshaiapp.utility.OpenSansFontBold
@@ -79,7 +78,7 @@
             android:layout_gravity="end"
             android:drawableEnd="@drawable/left_arrow"
             android:gravity="end|center"
-            android:text="Buy now   "
+            android:text="Buy Now   "
             android:textColor="@android:color/white"
             android:textSize="18sp"
             android:textStyle="bold" />

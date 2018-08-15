@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="20dp"
+    android:layout_marginTop="20dp"
+    android:layout_marginRight="20dp"
+    android:layout_marginBottom="20dp"
+    android:background="@drawable/shape_voucher_background"
+    android:weightSum="2">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_weight="1.2">
+
+        <ImageView
+            android:id="@+id/iv_voucher_type"
+            android:layout_width="35dp"
+            android:layout_gravity="center"
+            android:layout_height="match_parent"
+            android:src="@drawable/indian_rupee"/>
+
+        <com.ogma.dealshaiapp.utility.OpenSansFontBold
+            android:id="@+id/tv_voucher_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textSize="55dp"
+            android:textStyle="bold"
+            android:textColor="@color/colorButterWhite"
+            android:layout_gravity="center"
+            android:layout_marginBottom="5dp"
+            android:text="600"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_weight="0.8"
+        android:orientation="vertical">
+
+        <com.ogma.dealshaiapp.utility.OpenSansFontRegular
+            android:id="@+id/tv_voucher_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:drawableStart="@drawable/red_dot"
+            android:gravity="center_vertical"
+            android:textColor="@color/red_dot_color" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="minimum order: "
+                android:textColor="@color/colorButterWhite" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/indian_rupee"/>
+
+            <TextView
+                android:id="@+id/tv_referral_code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1999"
+                android:textColor="@color/colorButterWhite" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="valid till: "
+                android:textColor="@color/colorButterWhite" />
+
+
+            <TextView
+                android:id="@+id/tv_voucher_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="15th Aug 2018"
+                android:textColor="@color/colorButterWhite" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

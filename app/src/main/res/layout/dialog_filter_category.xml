@@ -4,7 +4,6 @@
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
     android:orientation="horizontal"
-    android:background="#eceaea"
     android:padding="@dimen/margin_5">
 
     <com.ogma.dealshaiapp.utility.OpenSansFontBold

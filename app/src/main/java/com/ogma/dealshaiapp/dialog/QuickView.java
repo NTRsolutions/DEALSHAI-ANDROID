@@ -27,6 +27,9 @@ import android.widget.Toast;
 
 import com.ogma.dealshaiapp.R;
 import com.ogma.dealshaiapp.activity.CheckOutActivity;
+import com.ogma.dealshaiapp.activity.DetailsActivity;
+import com.ogma.dealshaiapp.activity.LoginActivity;
+import com.ogma.dealshaiapp.activity.WelcomeActivity;
 import com.ogma.dealshaiapp.model.CouponsDetails;
 import com.ogma.dealshaiapp.network.NetworkConnection;
 import com.ogma.dealshaiapp.network.WebServiceHandler;
@@ -213,6 +216,10 @@ public class QuickView extends Dialog implements View.OnClickListener {
             case R.id.iv_esc:
                 dismiss();
                 break;
+            /**case R.id.quick_view1:
+                activity.startActivity(new Intent(activity, DetailsActivity.class));
+                dismiss();
+                break;*/
         }
     }
 

@@ -28,7 +28,7 @@ public class OpenSansFontBold extends AppCompatTextView {
     }
 
     private void init() {
-        Typeface tf = Typeface.createFromAsset(getContext().getAssets(), "OpenSans_Bold.ttf");
+        Typeface tf = Typeface.createFromAsset(getContext().getAssets(), "GOTHICB.ttf");
         setTypeface(tf);
     }
 }

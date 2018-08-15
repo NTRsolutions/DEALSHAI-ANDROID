@@ -21,8 +21,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/margin_5"
-            android:background="@color/colorTheme"
-            android:text="Coupons"
+            android:background="@drawable/background_color"
+            android:text="Your Plan"
             android:textColor="@android:color/white"
             android:textSize="@dimen/text_large" />
 
@@ -46,10 +46,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:background="@color/colorTheme"
+            android:background="@drawable/background_color"
             android:gravity="center"
             android:padding="10dp"
-            android:text="ADD TO PLAN"
+            android:text="Add To Plan"
             android:textColor="@android:color/white"
             android:textSize="18sp" />
 

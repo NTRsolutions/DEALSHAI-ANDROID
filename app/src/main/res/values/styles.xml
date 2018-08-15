@@ -8,6 +8,7 @@
         <item name="colorAccent">@color/colorTheme</item>
     </style>
 
+
     <style name="BaseText" parent="@android:style/TextAppearance.Small">
         <item name="android:textSize">18sp</item>
         <item name="android:textStyle">bold</item>

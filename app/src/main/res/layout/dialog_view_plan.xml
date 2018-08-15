@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/margin_5"
-            android:background="@color/colorTheme"
+            android:background="@drawable/background_color"
             android:text="Your Plan"
             android:textColor="@android:color/white"
             android:textSize="@dimen/text_large" />
@@ -43,7 +43,7 @@
             android:id="@+id/tv_buy_now"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorTheme"
+            android:background="@drawable/background_color"
             android:gravity="center"
             android:padding="10dp"
             android:text="Buy Now"

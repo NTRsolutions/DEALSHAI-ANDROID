@@ -5,7 +5,6 @@
     android:id="@+id/parentPanel"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/shape_cream_gradient_background"
     android:focusable="true"
     android:focusableInTouchMode="true"
     android:orientation="vertical"
@@ -23,10 +22,10 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:layout_marginBottom="@dimen/margin_10"
-        android:background="@color/colorHeaderBar"
+        android:background="@drawable/background_color"
         app:layout_scrollFlags="scroll|enterAlways"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Dark"
-        app:titleTextColor="@android:color/black" />
+        app:titleTextColor="@android:color/white" />
 
     <LinearLayout
         android:id="@+id/ll_city"
@@ -88,7 +87,7 @@
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
             android:layout_marginStart="15dp"
-            android:src="@drawable/location_icon" />
+            android:src="@drawable/location" />
 
         <android.support.v7.widget.AppCompatAutoCompleteTextView
             android:id="@+id/actv_city"
@@ -162,7 +161,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/margin_5"
-            android:background="@drawable/shape_curved_pink_rectangle_background"
+            android:background="@drawable/shape_button_background2"
             android:paddingBottom="@dimen/margin_5"
             android:paddingEnd="@dimen/margin_15"
             android:paddingStart="@dimen/margin_15"
@@ -177,13 +176,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_5"
-            android:background="@drawable/shape_curved_rectangle_background"
+            android:background="@drawable/shape_button_background2"
             android:paddingBottom="@dimen/margin_5"
             android:paddingEnd="@dimen/margin_15"
             android:paddingStart="@dimen/margin_15"
             android:paddingTop="@dimen/margin_5"
             android:text="Cancel"
-            android:textColor="@android:color/black"
+            android:textColor="@android:color/white"
             android:textSize="@dimen/text_large" />
 
     </LinearLayout>
@@ -202,7 +201,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:background="@android:color/white"
+        android:background="@drawable/shape_button_background2"
         android:drawableStart="@drawable/ic_my_location"
         android:drawableTint="@color/colorTheme"
         android:gravity="center"
@@ -210,7 +209,7 @@
         android:paddingStart="@dimen/margin_10"
         android:text=" Detect My Location"
         android:textAllCaps="false"
-        android:textColor="@color/textBlack"
+        android:textColor="@color/uber_white"
         android:textSize="@dimen/text_medium"
         tools:ignore="UnusedAttribute" />
 

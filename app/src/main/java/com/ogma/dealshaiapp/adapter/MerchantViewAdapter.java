@@ -157,7 +157,7 @@ public class MerchantViewAdapter extends RecyclerView.Adapter<MerchantViewAdapte
     }
 
     public MerchantViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.index_page_merchant_view, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.index_page_merchant_view3, parent, false);
         return new MerchantViewAdapter.ViewHolder(view);
     }
 
@@ -182,7 +182,7 @@ public class MerchantViewAdapter extends RecyclerView.Adapter<MerchantViewAdapte
         holder.tv_lowest_deal_tittle.setText(dealTitle);
         holder.tv_old_price.setText("₹" + price);
         holder.tv_new_price.setText("₹" + offerPrice);
-        holder.tv_likes.setText(" " + likes);
+       // holder.tv_likes.setText(" " + likes);
         holder.tv_old_price.setPaintFlags(holder.tv_old_price.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
     }

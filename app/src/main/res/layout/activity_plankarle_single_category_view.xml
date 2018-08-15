@@ -27,7 +27,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/margin_5"
-                    android:background="@drawable/shape_curved_rectangle_background"
+                    android:background="@drawable/shape_curved_rectangle_background3"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
@@ -114,7 +114,6 @@
         android:id="@+id/swipe_refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#F9F9EC"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <android.support.v7.widget.RecyclerView

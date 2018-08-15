@@ -6,7 +6,12 @@
     <!--<string name="google_api_key">AIzaSyBq85wZMoc2VhxJc0NAl7pg5EclcTgHN34</string>-->
     <string name="google_api_key">AIzaSyAxM66ZAq4slRWv04YKMOzOyFM-8c7siYI</string>
     <string name="sha">1D:63:05:29:AD:B6:54:D0:05:DF:EE:5B:59:18:3F:3B:37:AB:E2:0C</string>
-
+    <string name="client_id">2iw-HpEAOYCEvKsv-eQxOQqifb7iatx4</string>
+    <string name="code">crd.EA.CAESEBrBuQx4tke8nJ-zqwXZJRciATE.UBnKPWtHqcEjYXCxyjHr1pYGd2iEuGd99xTkaSLOLes&amp;id=com.ogma.dealshaiapp</string>
+    <string name="server_token">IPMniRibi0hexyNdheajfbuGEMoFX3_G9seS5ln1</string>
+    <string name="client_secret">QDZ1Lw19D5k2rFG2vXmgmC3_cJZSHb-WRx9ayGJC</string>
+    <string name="access_token">KA.eyJ2ZXJzaW9uIjoyLCJpZCI6InhJalM5RGxwUlNlMkxKclNMTTVPc0E9PSIsImV4cGlyZXNfYXQiOjE1MzU4MDA3NjksInBpcGVsaW5lX2tleV9pZCI6Ik1RPT0iLCJwaXBlbGluZV9pZCI6MX0.eTpxhRtdSW8Sz98oUurdpB4GSygQbOU9dX6j8zWb9i8</string>
+    <string name="redirect_url">https://www.uber.com/en-IN</string>
     <string name="title_activity_welcome_screen">WelcomeScreen</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>

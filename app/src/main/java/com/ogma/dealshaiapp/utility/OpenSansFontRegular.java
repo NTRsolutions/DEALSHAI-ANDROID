@@ -28,7 +28,7 @@ public class OpenSansFontRegular extends AppCompatTextView {
     }
 
     private void init() {
-        Typeface tf = Typeface.createFromAsset(getContext().getAssets(), "OpenSans_Regular.ttf");
+        Typeface tf = Typeface.createFromAsset(getContext().getAssets(), "gothic.ttf");
         setTypeface(tf);
     }
 }

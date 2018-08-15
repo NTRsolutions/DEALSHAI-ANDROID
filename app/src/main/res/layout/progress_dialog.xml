@@ -9,8 +9,8 @@
     <com.wang.avi.AVLoadingIndicatorView
         android:id="@+id/avi"
         style="@style/AVLoadingIndicatorView.Small"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:visibility="visible"
         android:background="@android:color/transparent"
         app:indicatorColor="@color/colorAccent"

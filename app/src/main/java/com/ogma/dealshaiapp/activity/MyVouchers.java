@@ -3,8 +3,7 @@ package com.ogma.dealshaiapp.activity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.os.Build;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
@@ -18,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ogma.dealshaiapp.R;
@@ -34,29 +34,37 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class MyVouchers extends AppCompatActivity {
+import me.anwarshahriar.calligrapher.Calligrapher;
+
+public class MyVouchers extends AppCompatActivity implements View.OnClickListener{
+    TextView mytv;
+    Typeface myfont;
 
     private Session session;
+    private ImageView back_button;
     private String userId;
     private ArrayList<Vouchers> vouchersArrayList = new ArrayList<>();
     private VouchersListAdapter adapter;
     private CoordinatorLayout parentPanel;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_vouchers);
         Toolbar toolbar = findViewById(R.id.toolbar);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        /**if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             toolbar.setTitle("My Vouchers");
             toolbar.setTitleTextColor(Color.BLACK);
-        }
-
+        }*/
+        Calligrapher calligrapher=new Calligrapher(this);
+        calligrapher.setFont(this, "GOTHICB.ttf",true);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
 
         parentPanel = findViewById(R.id.parentPanel);
+        back_button=findViewById(R.id.back_voucher);
         session = new Session(MyVouchers.this);
         HashMap<String, String> user = session.getUserDetails();
         userId = user.get(Session.KEY_ID);
@@ -67,6 +75,7 @@ public class MyVouchers extends AppCompatActivity {
         recycler_view.setItemAnimator(new DefaultItemAnimator());
         adapter = new VouchersListAdapter(MyVouchers.this, MyVouchers.this, vouchersArrayList);
         recycler_view.setAdapter(adapter);
+        back_button.setOnClickListener(this);
     }
 
     @Override
@@ -120,6 +129,17 @@ public class MyVouchers extends AppCompatActivity {
         webServiceHandler.getVoucherList(userId);
     }
 
+    @Override
+    public void onClick(View v) {
+        int id = v.getId();
+        switch (id)
+        {
+            case R.id.back_voucher:
+                startActivity(new Intent(MyVouchers.this, IndexActivity.class));
+                break;
+        }
+    }
+
     private class VouchersListAdapter extends RecyclerView.Adapter<VouchersListAdapter.ViewHolder> {
         private Activity activity;
         private Context context;
@@ -135,16 +155,19 @@ public class MyVouchers extends AppCompatActivity {
             private TextView tv_referral_code;
             private TextView tv_voucher_amount;
             private TextView tv_voucher_date;
-            private ImageView iv_voucher_type;
-            private TextView tv_voucher_status;
+            private LinearLayout linearLayout;
+            Typeface tx=Typeface.createFromAsset(getAssets(),"gothic.ttf");
+            //private ImageView iv_voucher_type;
+           // private TextView tv_voucher_status;
 
             ViewHolder(View itemView) {
                 super(itemView);
                 tv_referral_code = itemView.findViewById(R.id.tv_referral_code);
                 tv_voucher_amount = itemView.findViewById(R.id.tv_voucher_amount);
                 tv_voucher_date = itemView.findViewById(R.id.tv_voucher_date);
-                iv_voucher_type = itemView.findViewById(R.id.iv_voucher_type);
-                tv_voucher_status = itemView.findViewById(R.id.tv_voucher_status);
+                linearLayout=itemView.findViewById(R.id.my_vouchers);
+                //iv_voucher_type = itemView.findViewById(R.id.iv_voucher_type);
+                //tv_voucher_status = itemView.findViewById(R.id.tv_voucher_status);
             }
         }
 
@@ -157,10 +180,13 @@ public class MyVouchers extends AppCompatActivity {
         public void onBindViewHolder(VouchersListAdapter.ViewHolder holder, int position) {
 
             Vouchers vouchers = vouchersArrayList.get(position);
-            holder.tv_referral_code.setText("Min Purchase \n₹ " + vouchers.getMinPurchase());
-            holder.tv_voucher_amount.setText("₹ " + vouchers.getVoucherAmount());
-            holder.tv_voucher_date.setText("Expire on: " + vouchers.getVoucherDate());
-            switch (vouchers.getVoucherType()) {
+            holder.tv_referral_code.setText("Minimum Order: ₹" + vouchers.getMinPurchase());
+            holder.tv_voucher_amount.setText("₹" + vouchers.getVoucherAmount());
+            holder.tv_voucher_date.setText("Valid Till: "+vouchers.getVoucherDate());
+            //holder.tv_voucher_date.setText("Expire on: " + vouchers.getVoucherDate());
+            //holder.tv_referral_code.setText(vouchers.getMinPurchase());
+            //holder.tv_voucher_amount.setText(vouchers.getVoucherAmount());
+            /**switch (vouchers.getVoucherType()) {
                 case "U":
                     holder.iv_voucher_type.setImageResource(R.drawable.coupon_blue);
                     break;
@@ -175,9 +201,16 @@ public class MyVouchers extends AppCompatActivity {
                     break;
                 default:
                     break;
+            }*/
+            //holder.tv_voucher_status.setText(" " + vouchers.getVoucherStaus());
+            String v=vouchers.getVoucherStaus();
+            if(v.equals("inactive"))
+            {
+                holder.tv_voucher_date.setText(" expired");
+                holder.tv_voucher_date.setTextColor(getResources().getColor(R.color.red_dot_color));
+                holder.linearLayout.setBackgroundResource(R.drawable.shape_voucher_background_expired);
             }
-            holder.tv_voucher_status.setText(" " + vouchers.getVoucherStaus());
-            switch (vouchers.getVoucherStaus()) {
+            /**switch (vouchers.getVoucherStaus()) {
                 case "active":
                     holder.tv_voucher_status.setTextColor(getResources().getColor(R.color.green_dot_color));
                     holder.tv_voucher_status.setCompoundDrawablesWithIntrinsicBounds(R.drawable.green_dot, 0, 0, 0);
@@ -186,7 +219,7 @@ public class MyVouchers extends AppCompatActivity {
                     holder.tv_voucher_status.setTextColor(getResources().getColor(R.color.red_dot_color));
                     holder.tv_voucher_status.setCompoundDrawablesWithIntrinsicBounds(R.drawable.red_dot, 0, 0, 0);
                     break;
-            }
+            }*/
         }
 
         @Override

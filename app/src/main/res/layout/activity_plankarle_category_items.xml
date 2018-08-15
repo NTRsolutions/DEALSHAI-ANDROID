@@ -37,11 +37,14 @@
 
     <RelativeLayout
         android:id="@+id/rl_view_plan"
+        android:layout_marginRight="100dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginBottom="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
-        android:background="@color/colorPrimaryDark"
+        android:background="@drawable/shape_button_background2"
         android:paddingStart="@dimen/margin_10"
         android:paddingEnd="@dimen/margin_10"
         android:paddingTop="@dimen/margin_5"

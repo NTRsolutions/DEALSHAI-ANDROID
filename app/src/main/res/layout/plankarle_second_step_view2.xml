@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:id="@+id/abc"
+        android:layout_height="@dimen/_150sdp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/shape_curved_rectangle_background3"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.9">
+
+            <ImageView
+                android:id="@+id/index_banner"
+                android:layout_margin="2dp"
+                android:layout_width="match_parent"
+                android:scaleType="centerCrop"
+                android:layout_height="match_parent" />
+
+            <com.ogma.dealshaiapp.utility.OpenSansFontBold
+                android:id="@+id/tv_likes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/rounder_share"
+                android:drawableStart="@drawable/like"
+                android:gravity="center"
+                android:padding="2dp"
+                android:layout_marginStart="4dp"
+                android:layout_alignTop="@+id/index_banner"
+                android:layout_alignStart="@+id/index_banner" />
+        </RelativeLayout>
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/linearLayout"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="1dp"
+            android:layout_weight="1.1"
+            android:orientation="vertical">
+
+            <com.ogma.dealshaiapp.utility.OpenSansFontRegular
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_title"
+                android:minLines="2"
+                android:textColor="#020202"
+                android:text="CORAL THAI SPA"/>
+            <com.ogma.dealshaiapp.utility.OpenSansFontRegular
+                android:id="@+id/tv_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:drawableStart="@drawable/location"
+                android:gravity="start|center"
+                android:maxLines="1"
+                android:paddingStart="1dp"
+                android:text=" Sub Location"
+                android:textSize="@dimen/text_very_small" />
+            <com.ogma.dealshaiapp.utility.OpenSansFontRegular
+                android:id="@+id/tv_lowest_deal_tittle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Choice of Full Body Massage"
+                android:minLines="4"
+                android:textSize="@dimen/text_very_small"
+                android:layout_marginTop="2dp"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.ogma.dealshaiapp.utility.OpenSansFontBold
+                    android:id="@+id/tv_new_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="5dp"
+                    android:textColor="@color/textBlack"
+                    android:text="$2000"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <com.ogma.dealshaiapp.utility.OpenSansFontRegular
+                    android:id="@+id/tv_old_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="$5000"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_alignBaseline="@+id/tv_new_price"
+                    android:layout_alignBottom="@+id/tv_new_price"
+                    android:layout_alignParentStart="true" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="bottom"
+                android:weightSum="2"
+                android:layout_marginBottom="4dp"
+                android:orientation="horizontal">
+
+                <com.ogma.dealshaiapp.utility.OpenSansFontBold
+                    android:id="@+id/tv_discount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignTop="@+id/tv_quick_view"
+                    android:background="@drawable/shape_ecclipse_background"
+                    android:maxLength="10"
+                    android:gravity="center"
+                    android:paddingBottom="2.5dp"
+                    android:layout_weight="1"
+                    android:layout_marginRight="10dp"
+                    android:paddingEnd="1dp"
+                    android:paddingStart="1dp"
+                    android:text="60% Off"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/text_very_small"
+                    android:textStyle="bold" />
+
+                <com.ogma.dealshaiapp.utility.OpenSansFontBold
+                    android:id="@+id/tv_quick_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignTop="@+id/tv_quick_view"
+                    android:background="@drawable/shape_ecclipse_background"
+                    android:maxLength="10"
+                    android:layout_marginRight="10dp"
+                    android:gravity="center"
+                    android:paddingBottom="2.5dp"
+                    android:layout_weight="1"
+                    android:paddingEnd="6dp"
+                    android:paddingStart="6dp"
+                    android:text="Add"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/text_very_small"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

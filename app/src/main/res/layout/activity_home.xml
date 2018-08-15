@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical"
+    tools:context="com.ogma.dealshaiapp.activity.IndexActivity">
+
+    <LinearLayout
+        android:id="@+id/app_bar_with_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/rl_header_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_color"
+            android:gravity="center"
+            android:paddingBottom="2.5dp"
+            android:paddingEnd="0dp"
+            android:paddingStart="5dp">
+
+            <ImageView
+                android:id="@+id/iv_drawer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:paddingBottom="10dp"
+                android:paddingEnd="10dp"
+                android:paddingStart="5dp"
+                android:paddingTop="10dp"
+                android:src="@drawable/dots3" />
+            <ImageView
+                android:id="@+id/iv_home"
+                android:layout_toRightOf="@+id/iv_drawer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:paddingBottom="10dp"
+                android:paddingEnd="15dp"
+                android:paddingStart="5dp"
+                android:paddingTop="10dp"
+                android:src="@drawable/ic_menu_home" />
+
+            <LinearLayout
+                android:id="@+id/ll_area"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:orientation="vertical">
+
+
+                <com.ogma.dealshaiapp.utility.OpenSansFontSemibold
+                    android:id="@+id/tv_area"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginStart="15dp"
+                    android:gravity="center"
+                    android:text="Kolkata"
+                    android:textColor="#ffffff"
+                    android:textSize="27sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <FrameLayout
+                android:id="@+id/frameLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginBottom="@dimen/margin_10"
+                android:visibility="invisible">
+
+                <com.wang.avi.AVLoadingIndicatorView
+                    android:id="@+id/avi"
+                    style="@style/AVLoadingIndicatorView.Small"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:visibility="visible"
+                    app:indicatorColor="#079f32"
+                    app:indicatorName="BallScaleMultipleIndicator" />
+
+                <com.ogma.dealshaiapp.utility.OpenSansFontBold
+                    android:id="@+id/tv_notification"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@android:color/transparent"
+                    android:padding="2dp"
+                    android:text="10"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/text_very_small" />
+
+            </FrameLayout>
+
+            <ImageView
+                android:id="@+id/iv_notification"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/notify"
+                android:layout_alignBottom="@+id/frameLayout"
+                android:layout_alignStart="@+id/frameLayout" />
+
+        </RelativeLayout>
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_scrollFlags="scroll|enterAlways">
+
+            <LinearLayout
+                android:id="@+id/search_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_5"
+                    android:background="@drawable/shape_curved_rectangle_background3"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <android.support.v7.widget.AppCompatEditText
+                        android:id="@+id/et_search"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_toStartOf="@+id/tv_search"
+                        android:background="@android:color/white"
+                        android:padding="5dp"
+                        tools:ignore="RelativeOverlap"
+                        android:layout_marginLeft="@dimen/margin_5"
+                        android:layout_marginRight="@dimen/margin_5"
+                        android:layout_marginTop="@dimen/margin_5"
+                        android:layout_marginBottom="@dimen/margin_5" />
+
+                    <ImageView
+                        android:id="@+id/tv_search"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="7dp"
+                        android:padding="@dimen/margin_5"
+                        android:src="@drawable/search_icon_pink" />
+                </RelativeLayout>
+            </LinearLayout>
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/index_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/app_bar_with_search"
+        android:layout_marginTop="0dp"
+        android:layout_above="@+id/ll_bottom_bar">
+
+    </FrameLayout>
+
+</RelativeLayout>

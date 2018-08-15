@@ -2,7 +2,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/parent_pane"
-    android:background="@drawable/app_bg"
+    android:background="@drawable/background_color"
     android:gravity="center">
 
     <ImageView

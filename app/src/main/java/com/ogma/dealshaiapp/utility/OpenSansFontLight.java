@@ -28,7 +28,7 @@ public class OpenSansFontLight extends AppCompatTextView {
     }
 
     private void init() {
-        Typeface tf = Typeface.createFromAsset(getContext().getAssets(), "OpenSans_Light.ttf");
+        Typeface tf = Typeface.createFromAsset(getContext().getAssets(), "gothic.ttf");
         setTypeface(tf);
     }
 }

@@ -24,7 +24,7 @@
                 android:id="@+id/app_bar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#ececec"
+                android:background="@drawable/background_color"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:paddingBottom="2.5dp"
@@ -35,13 +35,13 @@
 
                 <ImageView
                     android:id="@+id/iv_back"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:layout_centerVertical="true"
 
                     android:gravity="center"
                     android:padding="5dp"
-                    android:src="@drawable/arrow" />
+                    android:src="@drawable/back" />
 
                 <com.ogma.dealshaiapp.utility.OpenSansFontBold
                     android:id="@+id/title_header"
@@ -52,19 +52,19 @@
                     android:gravity="center"
                     android:padding="5dp"
                     android:text="Merchant"
-                    android:textColor="#0b114e"
+                    android:textColor="#ffffff"
                     android:textSize="@dimen/text_medium"
                     android:textStyle="bold" />
 
                 <ImageView
                     android:id="@+id/iv_like"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:layout_alignParentEnd="true"
                     android:layout_marginStart="5dp"
                     android:gravity="center"
                     android:padding="5dp"
-                    android:src="@drawable/like_thumb" />
+                    android:src="@drawable/like" />
 
                 <com.ogma.dealshaiapp.utility.OpenSansFontBold
                     android:id="@+id/tv_total_like"
@@ -147,7 +147,7 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentStart="true"
                             android:layout_below="@+id/title"
-                            android:drawableStart="@drawable/pink_mapicon"
+                            android:drawableStart="@drawable/location"
                             android:gravity="center|start"
                             android:maxLines="1"
                             android:padding="2.5dp"
@@ -158,7 +158,7 @@
                         <com.ogma.dealshaiapp.utility.OpenSansFontRegular
                             android:id="@+id/tv_distance"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="0dp"
                             android:layout_alignParentStart="true"
                             android:layout_below="@+id/tv_location"
                             android:layout_marginTop="5dp"
@@ -176,6 +176,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentTop="true"
+                            android:layout_below="@+id/tv_location"
                             android:layout_marginEnd="11dp"
                             android:layout_marginTop="5dp"
                             android:layout_toStartOf="@+id/iv_share"
@@ -191,16 +192,18 @@
 
                         <ImageView
                             android:id="@+id/iv_share"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:padding="5dp"
+                            android:background="@drawable/rounder_share"
                             android:layout_alignParentEnd="true"
                             android:layout_alignParentTop="true"
                             android:layout_marginTop="@dimen/margin_5"
-                            android:src="@drawable/box_share" />
+                            android:src="@drawable/share" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_below="@+id/tv_distance"
                             android:layout_marginTop="5dp">
 
@@ -211,7 +214,7 @@
                                 android:layout_marginEnd="10dp"
                                 android:layout_marginStart="5dp"
                                 android:layout_weight="1"
-                                android:background="#0C114A"
+                                android:background="@drawable/shape_button_background2"
                                 android:gravity="center"
                                 android:padding="5dp"
                                 android:text="Menu"
@@ -226,7 +229,7 @@
                                 android:layout_marginEnd="10dp"
                                 android:layout_marginStart="10dp"
                                 android:layout_weight="1"
-                                android:background="#0C114A"
+                                android:background="@drawable/shape_button_background2"
                                 android:gravity="center"
                                 android:text="Contact"
                                 android:textColor="@android:color/white"
@@ -239,7 +242,7 @@
                                 android:layout_marginEnd="5dp"
                                 android:layout_marginStart="10dp"
                                 android:layout_weight="1"
-                                android:background="#0C114A"
+                                android:background="@drawable/shape_button_background2"
                                 android:gravity="center"
                                 android:text="More info"
                                 android:textColor="@android:color/white"
@@ -293,7 +296,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
-        android:background="#1B2272">
+        android:background="@drawable/background_color">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -304,7 +307,6 @@
             android:layout_marginEnd="5dp"
             android:layout_marginStart="5dp"
             android:layout_marginTop="2.5dp"
-            android:background="@drawable/shape_signup_background"
             android:gravity="center"
             android:orientation="vertical"
             android:paddingEnd="5dp"

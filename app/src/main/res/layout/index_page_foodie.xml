@@ -30,7 +30,7 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:text="@string/price"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/uber_black"
         android:textSize="16sp"
         android:textStyle="bold" />
 

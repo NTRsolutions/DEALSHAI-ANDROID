@@ -19,7 +19,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorPrimaryDark"
+            android:background="@drawable/background_color"
             app:theme="@style/ToolbarColoredBackArrow"
             app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Dark"
@@ -195,7 +195,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/textView1"
-                android:background="@drawable/shape_plain_rectangle_background"
                 android:orientation="horizontal"
                 android:weightSum="2">
 
@@ -204,7 +203,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1.7"
-                    android:background="@android:color/transparent"
+                    android:background="@drawable/shape_curved_rectangle_background3"
                     android:inputType="textNoSuggestions"
                     android:padding="5dp" />
 
@@ -213,9 +212,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="0.3"
-                    android:background="@color/colorTheme"
+                    android:background="@drawable/shape_button_background2"
                     android:gravity="center"
-                    android:padding="5dp"
                     android:text="Apply"
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/text_medium" />
@@ -271,13 +269,16 @@
 
     <com.ogma.dealshaiapp.utility.OpenSansFontBold
         android:id="@+id/tv_btn_proceed"
+        android:layout_marginLeft="@dimen/_80sdp"
+        android:layout_marginRight="@dimen/_80sdp"
+        android:layout_marginBottom="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/colorTheme"
+        android:background="@drawable/shape_button_background2"
         android:gravity="center"
         android:padding="10dp"
-        android:text="Proceed to pay"
+        android:text="Proceed to Pay"
         android:textColor="@android:color/white"
         android:textSize="@dimen/text_large" />
 

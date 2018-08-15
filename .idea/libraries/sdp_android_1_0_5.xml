@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="sdp-android-1.0.5">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.android/build-cache/20f33cb01a88f8352b15ee70bf3fc5ce92b4302d/output/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.android/build-cache/20f33cb01a88f8352b15ee70bf3fc5ce92b4302d/output/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -1,6 +1,7 @@
 package com.ogma.dealshaiapp.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
@@ -12,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -27,6 +29,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.ogma.dealshaiapp.R;
 import com.ogma.dealshaiapp.activity.IndexActivity;
+import com.ogma.dealshaiapp.activity.MyPurchases;
 import com.ogma.dealshaiapp.adapter.MerchantViewAdapter;
 import com.ogma.dealshaiapp.fragment.dealshai.FragmentDealshaiPlusPackages;
 import com.ogma.dealshaiapp.fragment.plankarle.FragmentPlankarleSelectCategories;
@@ -50,27 +53,27 @@ public class FragmentIndex extends Fragment implements View.OnClickListener, Ind
 
     private AutoScrollViewPager banner_view_pager;
     private JSONArray banner;
-    private JSONArray foodie;
+    //private JSONArray foodie;
     private ArrayList<MerchantDetails> arrayList;
-    private FragmentManager fragmentManager;
-    //    private CircleIndicator banner_indicator;
-    private FoodieAdapter recyclerViewAdapter;
-    private MerchantViewAdapter marchentViewAdapter;
-    private BannerAdapter bannerSlidingAdapter;
-    private ImageView iv_cat1;
-    private ImageView iv_cat2;
-    private ImageView iv_cat3;
-    private ImageView iv_cat4;
-    private TextView tv_cat1;
-    private TextView tv_cat2;
-    private TextView tv_cat3;
-    private TextView tv_cat4;
-    private RelativeLayout ll_cat1;
-    private RelativeLayout ll_cat2;
-    private RelativeLayout ll_cat3;
-    private RelativeLayout ll_cat4;
-    private JSONArray categories;
     private ArrayList<CategoryDetails> categoryDetails;
+    private JSONArray categories;
+    private FragmentManager fragmentManager;
+    private BannerAdapter bannerSlidingAdapter;
+    private MerchantViewAdapter marchentViewAdapter;
+    private LinearLayout dealshai_layout;
+    /**private LinearLayout ll_cat1;
+    private LinearLayout ll_cat2;
+    private LinearLayout ll_cat3;
+    private LinearLayout ll_cat4;
+    private LinearLayout ll_cat5;*/
+    private LinearLayout buffet_deals;
+    private LinearLayout private_and_corporate;
+    private LinearLayout alacarte;
+    private LinearLayout comboDeals;
+    private LinearLayout spa_and_salon;
+    private LinearLayout events;
+    private LinearLayout activities;
+    private LinearLayout planKarle;
     private Session session;
     private String latitude;
     private String longitude;
@@ -83,11 +86,11 @@ public class FragmentIndex extends Fragment implements View.OnClickListener, Ind
     @Nullable
     @Override
     public View onCreateView(final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_index, container, false);
+        View view = inflater.inflate(R.layout.fragment_index2, container, false);
 
         fragmentManager = getChildFragmentManager();
-        foodie = new JSONArray();
-        banner = new JSONArray();
+        //foodie = new JSONArray();
+        //banner = new JSONArray();
         arrayList = new ArrayList<>();
         Session session = new Session(getContext());
 
@@ -106,54 +109,46 @@ public class FragmentIndex extends Fragment implements View.OnClickListener, Ind
                 .build();
 
         parentPanel = view.findViewById(R.id.parentPanel);
-        LinearLayout ll_plankarle = view.findViewById(R.id.ll_plankarle);
-        LinearLayout ll_dealshai = view.findViewById(R.id.ll_dealshai);
-        LinearLayout ll_more = view.findViewById(R.id.ll_more);
-        banner_view_pager = view.findViewById(R.id.banner_view_pager);
-        RecyclerView foodieSubView = view.findViewById(R.id.cat_foodie);
         RecyclerView merchantsView = view.findViewById(R.id.recycler_view);
-//        banner_indicator = view.findViewById(R.id.banner_indicator);
-        iv_cat1 = view.findViewById(R.id.iv_cat1);
-        iv_cat2 = view.findViewById(R.id.iv_cat2);
-        iv_cat3 = view.findViewById(R.id.iv_cat3);
-        iv_cat4 = view.findViewById(R.id.iv_cat4);
-
-        tv_cat1 = view.findViewById(R.id.tv_cat1);
-        tv_cat2 = view.findViewById(R.id.tv_cat2);
-        tv_cat3 = view.findViewById(R.id.tv_cat3);
-        tv_cat4 = view.findViewById(R.id.tv_cat4);
-
-        ll_cat1 = view.findViewById(R.id.ll_cat1);
+        dealshai_layout=view.findViewById(R.id.dealshai_layout);
+        /**ll_cat1 = view.findViewById(R.id.ll_cat1);
         ll_cat2 = view.findViewById(R.id.ll_cat2);
         ll_cat3 = view.findViewById(R.id.ll_cat3);
         ll_cat4 = view.findViewById(R.id.ll_cat4);
-
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        foodieSubView.setLayoutManager(mLayoutManager);
-        foodieSubView.setItemAnimator(new DefaultItemAnimator());
-        recyclerViewAdapter = new FoodieAdapter(getContext(), foodie);
-        foodieSubView.setAdapter(recyclerViewAdapter);
-
+        ll_cat5 = view.findViewById(R.id.ll_cat5);*/
+        banner_view_pager = view.findViewById(R.id.banner_view_pager);
+        buffet_deals = view.findViewById(R.id.buffet_deals);
+        private_and_corporate = view.findViewById(R.id.private_and_corporate);
+        alacarte = view.findViewById(R.id.alacarte);
+        comboDeals = view.findViewById(R.id.comboDeals);
+        spa_and_salon = view.findViewById(R.id.spa_and_salon);
+        events = view.findViewById(R.id.events);
+        activities = view.findViewById(R.id.activities);
+        planKarle = view.findViewById(R.id.planKarle);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         merchantsView.setLayoutManager(layoutManager);
         merchantsView.setItemAnimator(new DefaultItemAnimator());
         marchentViewAdapter = new MerchantViewAdapter(getContext(), (AppCompatActivity) getActivity(), arrayList);
         merchantsView.setAdapter(marchentViewAdapter);
-
         banner_view_pager.setInterval(5000);
         banner_view_pager.startAutoScroll();
         banner_view_pager.setStopScrollWhenTouch(true);
-
-        ll_plankarle.setOnClickListener(this);
-        ll_dealshai.setOnClickListener(this);
-        ll_cat1.setOnClickListener(this);
+        dealshai_layout.setOnClickListener(this);
+        /**ll_cat1.setOnClickListener(this);
         ll_cat2.setOnClickListener(this);
         ll_cat3.setOnClickListener(this);
         ll_cat4.setOnClickListener(this);
-        ll_more.setOnClickListener(this);
+        ll_cat5.setOnClickListener(this);*/
+        activities.setOnClickListener(this);
+        events.setOnClickListener(this);
+        buffet_deals.setOnClickListener(this);
+        private_and_corporate.setOnClickListener(this);
+        comboDeals.setOnClickListener(this);
+        alacarte.setOnClickListener(this);
+        spa_and_salon.setOnClickListener(this);
+        planKarle.setOnClickListener(this);
 
         ((IndexActivity) getActivity()).setOnBackPressedListener(this);
-
         banner_view_pager.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -164,7 +159,6 @@ public class FragmentIndex extends Fragment implements View.OnClickListener, Ind
                 return false;
             }
         });
-
         return view;
     }
 
@@ -214,50 +208,10 @@ public class FragmentIndex extends Fragment implements View.OnClickListener, Ind
                                     details.setImgUrl(jsonObject.getString("img"));
                                     categoryDetails.add(details);
                                 }
-                                if (activity instanceof IndexActivity) {
-                                    activity.runOnUiThread(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            if (categoryDetails.size() > 0) {
-                                                CategoryDetails cat1 = categoryDetails.get(0);
-                                                CategoryDetails cat2 = categoryDetails.get(1);
-                                                CategoryDetails cat3 = categoryDetails.get(2);
-                                                CategoryDetails cat4 = categoryDetails.get(3);
-
-                                                tv_cat1.setText(cat1.getCatName());
-                                                tv_cat2.setText(cat2.getCatName());
-                                                tv_cat3.setText(cat3.getCatName());
-                                                tv_cat4.setText(cat4.getCatName());
-
-                                                imageLoader.displayImage(cat1.getImgUrl(), iv_cat1, options);
-                                                imageLoader.displayImage(cat2.getImgUrl(), iv_cat2, options);
-                                                imageLoader.displayImage(cat3.getImgUrl(), iv_cat3, options);
-                                                imageLoader.displayImage(cat4.getImgUrl(), iv_cat4, options);
-                                            }
-                                        }
-                                    });
-                                }
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Snackbar.make(parentPanel, "Categories not found", Snackbar.LENGTH_SHORT).show();
-                        }
-                        try {
-                            foodie = main.getJSONArray("Foodie");
-                            if (foodie.length() > 0) {
-                                if (activity instanceof IndexActivity) {
-                                    activity.runOnUiThread(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            recyclerViewAdapter.setArray(foodie);
-                                            recyclerViewAdapter.notifyDataSetChanged();
-                                        }
-                                    });
-                                }
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            Snackbar.make(parentPanel, "Foodie subcategories not found", Snackbar.LENGTH_SHORT).show();
                         }
                         try {
                             banner = main.getJSONArray("Slider");
@@ -269,7 +223,14 @@ public class FragmentIndex extends Fragment implements View.OnClickListener, Ind
                                             bannerSlidingAdapter = new BannerAdapter(fragmentManager, banner);
                                             banner_view_pager.setAdapter(bannerSlidingAdapter);
                                             banner_view_pager.setStopScrollWhenTouch(true);
+                                            banner_view_pager.setOnTouchListener(new View.OnTouchListener(){
+                                                @Override
+                                                public boolean onTouch(View v, MotionEvent event){
+                                                    return false;
+                                                }
+                                            });
 //                                            banner_indicator.setViewPager(banner_view_pager);
+                                            //banner_view_pager.setStopScrollWhenTouch(true);
                                             banner_view_pager.setCurrentItem(Integer.MAX_VALUE / 2 - Integer.MAX_VALUE / 2 % banner.length());
                                         }
                                     });
@@ -279,7 +240,6 @@ public class FragmentIndex extends Fragment implements View.OnClickListener, Ind
                             e.printStackTrace();
                             Snackbar.make(parentPanel, "No banner image found", Snackbar.LENGTH_SHORT).show();
                         }
-
                         arrayList.clear();
                         try {
                             JSONArray merchant = main.getJSONArray("merchant");
@@ -329,81 +289,75 @@ public class FragmentIndex extends Fragment implements View.OnClickListener, Ind
         String catId = null;
         Bundle bundle;
         switch (id) {
-            case R.id.ll_plankarle:
-                FragmentPlankarleSelectCategories fsc = new FragmentPlankarleSelectCategories();
-                manager = getFragmentManager();
-                manager.beginTransaction().replace(R.id.index_frame, fsc).commitAllowingStateLoss();
-                break;
-            case R.id.ll_dealshai:
+
+            case R.id.dealshai_layout:
                 FragmentDealshaiPlusPackages fdp = new FragmentDealshaiPlusPackages();
                 manager = getFragmentManager();
                 manager.beginTransaction().replace(R.id.index_frame, fdp).addToBackStack(null).commitAllowingStateLoss();
                 break;
-
-            case R.id.ll_cat1:
-                if (categoryDetails.size() > 0) {
-                    CategoryDetails category = categoryDetails.get(0);
-                    catId = category.getCatId();
-                }
-                if (catId != null) {
-                    bundle = new Bundle();
-                    bundle.putString("categoryId", catId);
-                    FragmentIndivisualCategories fct1 = new FragmentIndivisualCategories();
-                    manager = getFragmentManager();
-                    fct1.setArguments(bundle);
-                    manager.beginTransaction().replace(R.id.index_frame, fct1).commitAllowingStateLoss();
-                }
-                break;
-
-            case R.id.ll_cat2:
-                if (categoryDetails.size() > 0) {
-                    CategoryDetails category = categoryDetails.get(1);
-                    catId = category.getCatId();
-                }
-                if (catId != null) {
-                    bundle = new Bundle();
-                    bundle.putString("categoryId", catId);
-                    FragmentIndivisualCategories fct1 = new FragmentIndivisualCategories();
-                    manager = getFragmentManager();
-                    fct1.setArguments(bundle);
-                    manager.beginTransaction().replace(R.id.index_frame, fct1).commitAllowingStateLoss();
-                }
-                break;
-            case R.id.ll_cat3:
-                if (categoryDetails.size() > 0) {
-                    CategoryDetails category = categoryDetails.get(2);
-                    catId = category.getCatId();
-                }
-                if (catId != null) {
-                    bundle = new Bundle();
-                    bundle.putString("categoryId", catId);
-                    FragmentIndivisualCategories fct1 = new FragmentIndivisualCategories();
-                    manager = getFragmentManager();
-                    fct1.setArguments(bundle);
-                    manager.beginTransaction().replace(R.id.index_frame, fct1).commitAllowingStateLoss();
-                }
-                break;
-            case R.id.ll_cat4:
-                if (categoryDetails.size() > 0) {
-                    CategoryDetails category = categoryDetails.get(3);
-                    catId = category.getCatId();
-                }
-                if (catId != null) {
-                    bundle = new Bundle();
-                    bundle.putString("categoryId", catId);
-                    FragmentIndivisualCategories fct1 = new FragmentIndivisualCategories();
-                    manager = getFragmentManager();
-                    fct1.setArguments(bundle);
-                    manager.beginTransaction().replace(R.id.index_frame, fct1).commitAllowingStateLoss();
-                }
-                break;
-            case R.id.ll_more:
-                FragmentMoreCategories fmc = new FragmentMoreCategories();
-                manager = getFragmentManager();
+            case R.id.buffet_deals:
+                FragmentIndivisualCategories fca = new FragmentIndivisualCategories();
                 bundle = new Bundle();
-                bundle.putSerializable("categoryList", categoryDetails);
-                fmc.setArguments(bundle);
-                manager.beginTransaction().replace(R.id.index_frame, fmc).commitAllowingStateLoss();
+                manager = getFragmentManager();
+                bundle.putString("subCategoryId", "60");
+                bundle.putString("subCategoryName", "Buffet Special");
+                fca.setArguments(bundle);
+                manager.beginTransaction().replace(R.id.index_frame, fca).commitAllowingStateLoss();
+                break;
+            case R.id.private_and_corporate:
+                fca = new FragmentIndivisualCategories();
+                bundle = new Bundle();
+                manager = getFragmentManager();
+                bundle.putString("subCategoryId", "59");
+                bundle.putString("subCategoryName", "Food Lovers");
+                fca.setArguments(bundle);
+                manager.beginTransaction().replace(R.id.index_frame, fca).commitAllowingStateLoss();
+                break;
+            case R.id.alacarte:
+                fca = new FragmentIndivisualCategories();
+                bundle = new Bundle();
+                manager = getFragmentManager();
+                bundle.putString("subCategoryId", "54");
+                bundle.putString("subCategoryName", "Just Cakes");
+                fca.setArguments(bundle);
+                manager.beginTransaction().replace(R.id.index_frame, fca).commitAllowingStateLoss();
+                break;
+            case R.id.comboDeals:
+                    bundle = new Bundle();
+                    bundle.putString("categoryId", "7");
+                    FragmentIndivisualCategories fct1 = new FragmentIndivisualCategories();
+                    manager = getFragmentManager();
+                    fct1.setArguments(bundle);
+                    manager.beginTransaction().replace(R.id.index_frame, fct1).commitAllowingStateLoss();
+                break;
+            case R.id.spa_and_salon:
+                    bundle = new Bundle();
+                    bundle.putString("categoryId", "6");
+                    fct1 = new FragmentIndivisualCategories();
+                    manager = getFragmentManager();
+                    fct1.setArguments(bundle);
+                    manager.beginTransaction().replace(R.id.index_frame, fct1).commitAllowingStateLoss();
+                break;
+            case R.id.events:
+                    bundle = new Bundle();
+                    bundle.putString("categoryId", "8");
+                    fct1 = new FragmentIndivisualCategories();
+                    manager = getFragmentManager();
+                    fct1.setArguments(bundle);
+                    manager.beginTransaction().replace(R.id.index_frame, fct1).commitAllowingStateLoss();
+                break;
+            case R.id.activities:
+                    bundle = new Bundle();
+                    bundle.putString("categoryId", "3");
+                    fct1 = new FragmentIndivisualCategories();
+                    manager = getFragmentManager();
+                    fct1.setArguments(bundle);
+                    manager.beginTransaction().replace(R.id.index_frame, fct1).commitAllowingStateLoss();
+                break;
+            case R.id.planKarle:
+                FragmentPlankarleSelectCategories fsc = new FragmentPlankarleSelectCategories();
+                manager = getFragmentManager();
+                manager.beginTransaction().replace(R.id.index_frame, fsc).commitAllowingStateLoss();
                 break;
         }
     }
@@ -413,7 +367,6 @@ public class FragmentIndex extends Fragment implements View.OnClickListener, Ind
         if (activity instanceof IndexActivity)
             activity.finish();
     }
-
     private class BannerAdapter extends FragmentPagerAdapter {
         private JSONArray banner;
 
@@ -436,101 +389,6 @@ public class FragmentIndex extends Fragment implements View.OnClickListener, Ind
         @Override
         public int getCount() {
             return banner.length();
-        }
-    }
-
-    private class FoodieAdapter extends RecyclerView.Adapter<FoodieAdapter.ViewHolder> {
-        private JSONArray foodie;
-        private Context context;
-        private String id;
-        private String title;
-        private ImageLoader imageLoader;
-        private DisplayImageOptions options;
-
-        FoodieAdapter(Context context, JSONArray foodie) {
-            this.foodie = foodie;
-            this.context = context;
-
-            imageLoader = ImageLoader.getInstance();
-            if (!imageLoader.isInited()) {
-                imageLoader.init(ImageLoaderConfiguration.createDefault(context));
-            }
-            options = new DisplayImageOptions.Builder()
-                    .showStubImage(R.drawable.account_icon)
-                    .cacheInMemory()
-                    .cacheOnDisc()
-                    .build();
-        }
-
-        private void setArray(JSONArray foodie) {
-            this.foodie = foodie;
-        }
-
-        class ViewHolder extends RecyclerView.ViewHolder {
-            private ImageView cat_img;
-            private TextView cat_title;
-            private TextView cat_range;
-
-            ViewHolder(View itemView) {
-                super(itemView);
-                cat_img = itemView.findViewById(R.id.cat_img);
-                cat_title = itemView.findViewById(R.id.cat_title);
-                cat_range = itemView.findViewById(R.id.cat_range);
-
-                itemView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        FragmentIndivisualCategories fca = new FragmentIndivisualCategories();
-                        FragmentManager manager = getFragmentManager();
-                        Bundle bundle = new Bundle();
-                        JSONObject object = null;
-                        try {
-                            object = foodie.getJSONObject(getAdapterPosition());
-                            id = object.getString("id");
-                            title = object.getString("name");
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        bundle.putString("subCategoryId", id);
-                        bundle.putString("subCategoryName", title);
-                        fca.setArguments(bundle);
-                        manager.beginTransaction().replace(R.id.index_frame, fca).commitAllowingStateLoss();
-                    }
-                });
-            }
-        }
-
-        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.index_page_foodie, parent, false);
-            return new ViewHolder(view);
-        }
-
-        @Override
-        public void onBindViewHolder(ViewHolder holder, int position) {
-
-            String imgUri = "";
-            title = "";
-            String range = "";
-
-            try {
-                JSONObject object = foodie.getJSONObject(position);
-                id = object.getString("id");
-                imgUri = object.getString("img");
-                title = object.getString("name");
-                range = object.getString("range");
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            imageLoader.displayImage(imgUri, holder.cat_img, options);
-
-            holder.cat_title.setText(title);
-            holder.cat_range.setText(range);
-        }
-
-        @Override
-        public int getItemCount() {
-            return foodie.length();
         }
     }
 }

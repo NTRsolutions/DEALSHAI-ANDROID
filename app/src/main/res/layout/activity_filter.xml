@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/margin_5"
-        android:background="@color/colorThemeBlue"
+        android:background="@drawable/background_color"
         android:text="Filters"
         android:textColor="@android:color/white"
         android:textSize="@dimen/text_large" />
@@ -56,7 +56,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:background="@color/colorPrimaryDark"
+            android:background="@drawable/shape_button_background2"
             android:padding="@dimen/margin_5"
             android:text="CANCEL"
             android:textColor="@android:color/white"

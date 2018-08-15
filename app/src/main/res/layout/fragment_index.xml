@@ -10,6 +10,7 @@
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
+
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
@@ -168,7 +169,7 @@
                 <LinearLayout
                     android:id="@+id/tab_layout"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="35dp"
                     android:orientation="horizontal">
 
                     <!--<LinearLayout
@@ -232,7 +233,7 @@
                     <LinearLayout
                         android:id="@+id/ll_dealshai"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="35dp"
                         android:layout_weight="1"
                         android:orientation="horizontal"
                         android:background="@drawable/dealshai_button" />
@@ -240,7 +241,7 @@
                     <LinearLayout
                         android:id="@+id/ll_plankarle"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="35dp"
                         android:layout_weight="1"
                         android:background="@drawable/palnkarle_button"
                         android:orientation="horizontal" />

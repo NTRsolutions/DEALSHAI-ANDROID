@@ -3,74 +3,102 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="6dp"
-    android:background="#e4e3e3"
+    android:layout_marginLeft="20dp"
+    android:layout_marginTop="20dp"
+    android:layout_marginRight="20dp"
+    android:id="@+id/my_vouchers"
+    android:background="@drawable/shape_voucher_background"
     android:weightSum="2">
 
-    <RelativeLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1">
-
-        <ImageView
-            android:id="@+id/iv_voucher_type"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scaleType="centerCrop"
-            android:src="@drawable/coupon_blue" />
-
-        <com.ogma.dealshaiapp.utility.OpenSansFontSemibold
-            android:id="@+id/tv_referral_code"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:letterSpacing="0.05"
-            android:gravity="center"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/text_small"
-            tools:ignore="UnusedAttribute" />
-    </RelativeLayout>
-
     <LinearLayout
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="@dimen/margin_16"
-        android:layout_weight="1"
-        android:orientation="vertical">
+        android:layout_weight="1.1">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <com.ogma.dealshaiapp.utility.OpenSansFontBold
-                android:id="@+id/tv_voucher_amount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/colorAccent"
-                android:textSize="@dimen/text_medium" />
-
-            <com.ogma.dealshaiapp.utility.OpenSansFontRegular
-                android:id="@+id/tv_voucher_status"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="@dimen/margin_10"
-                android:drawableStart="@drawable/red_dot"
-                android:gravity="center_vertical"
-                android:textColor="@color/red_dot_color" />
-        </RelativeLayout>
-
+        <!--<ImageView
+            android:id="@+id/iv_voucher_type"
+            android:layout_width="35dp"
+            android:layout_gravity="center"
+            android:layout_height="match_parent"
+            android:src="@drawable/indian_rupee"/> -->
 
         <com.ogma.dealshaiapp.utility.OpenSansFontRegular
-            android:id="@+id/tv_voucher_date"
+            android:id="@+id/tv_voucher_amount"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:maxLines="1"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="@dimen/text_small" />
-
+            android:layout_height="match_parent"
+            android:textSize="50sp"
+            android:fontFamily="gothic.ttf"
+            android:textColor="@color/colorButterWhite"
+            android:gravity="center"
+            android:text="60"/>
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.9"
+        android:orientation="vertical">
+
+       <!-- <com.ogma.dealshaiapp.utility.OpenSansFontRegular
+            android:id="@+id/tv_voucher_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:drawableStart="@drawable/red_dot"
+            android:gravity="center_vertical"
+            android:textColor="@color/red_dot_color" /> -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal">
+
+            <!--<TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="minimum order: "
+                android:textColor="@color/colorButterWhite" /> -->
+
+            <!-- <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/indian_rupee"/> -->
+
+            <com.ogma.dealshaiapp.utility.OpenSansFontRegular
+                android:id="@+id/tv_referral_code"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="minimum order: 1999"
+                android:textColor="@color/colorButterWhite" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <!--<TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="valid till: "
+                android:textColor="@color/colorButterWhite" /> -->
+
+
+            <com.ogma.dealshaiapp.utility.OpenSansFontRegular
+                android:id="@+id/tv_voucher_date"
+                android:layout_width="wrap_content"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:text="valid till: 15th Aug 2018"
+                android:textColor="@color/colorButterWhite" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 </LinearLayout>
