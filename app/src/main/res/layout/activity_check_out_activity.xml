@@ -10,21 +10,48 @@
     tools:context="com.ogma.dealshaiapp.activity.CheckOutActivity">
 
     <android.support.design.widget.AppBarLayout
-        android:id="@+id/app_bar"
         android:layout_width="match_parent"
+        android:id="@+id/app_bar"
         android:layout_height="wrap_content"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
+            android:layout_height="match_parent"
             android:background="@drawable/background_color"
-            app:theme="@style/ToolbarColoredBackArrow"
-            app:layout_scrollFlags="scroll|enterAlways"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Dark"
-            app:title="Checkout"
-            app:titleTextColor="@android:color/white" />
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="28dp"
+                android:id="@+id/back_voucher"
+                android:layout_height="28dp"
+                android:background="@drawable/back"
+                android:layout_marginRight="15dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"/>
+            <com.ogma.dealshaiapp.utility.OpenSansFontBold
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorButterWhite"
+                android:gravity="center|left"
+                android:text="Checkout"/>
+            <android.support.design.widget.CollapsingToolbarLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_scrollFlags="exitUntilCollapsed">
+
+
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="@drawable/background_color"
+                    app:layout_scrollFlags="scroll|enterAlways"
+                    app:titleTextColor="@android:color/black"
+                    app:popupTheme="@style/ThemeOverlay.AppCompat.Dark" />
+            </android.support.design.widget.CollapsingToolbarLayout>
+        </LinearLayout>
+
     </android.support.design.widget.AppBarLayout>
 
     <LinearLayout

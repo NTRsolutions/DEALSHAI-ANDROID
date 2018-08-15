@@ -2,6 +2,7 @@ package com.ogma.dealshaiapp.activity;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -72,16 +73,18 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
     private TextView tv_remove_vouchers;
     private TextView tv_reset_promo_code;
     private RelativeLayout rl_vouchers;
+    private ImageView back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_check_out_activity);
+        Typeface font = Typeface.createFromAsset(getAssets(), "gothic.ttf");
 
         Toolbar toolbar = findViewById(R.id.toolbar);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            toolbar.setTitle("CHECKOUT");
-        }
+        /**if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            toolbar.setTitle("Checkout");
+        }*/
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -123,6 +126,7 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
         rl_vouchers = findViewById(R.id.rl_vouchers);
         tv_remove_vouchers = findViewById(R.id.tv_remove_vouchers);
         tv_reset_promo_code = findViewById(R.id.tv_reset_promo_code);
+        back=findViewById(R.id.back_voucher);
 
         rl_package_qty = findViewById(R.id.rl_package_qty);
         spinner_qty = findViewById(R.id.spinner_qty);
@@ -132,6 +136,7 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
         findViewById(R.id.tv_btn_proceed).setOnClickListener(this);
         findViewById(R.id.tv_remove_vouchers).setOnClickListener(this);
         findViewById(R.id.tv_reset_promo_code).setOnClickListener(this);
+        back.setOnClickListener(this);
 
 
         tv_total_amount.setText("₹ " + totalAmount);
@@ -175,6 +180,9 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
         int id = v.getId();
         switch (id) {
+            case R.id.back_voucher:
+                onBackPressed();
+                break;
             case R.id.tv_btn_apply:
                 NetworkConnection connection = new NetworkConnection(CheckOutActivity.this);
                 promoCode = et_promo_code.getText().toString().trim();

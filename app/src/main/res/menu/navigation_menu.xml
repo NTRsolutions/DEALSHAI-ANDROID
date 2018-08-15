@@ -29,7 +29,7 @@
         android:id="@+id/liked"
         android:actionLayout="@style/AppTheme"
         android:icon="@drawable/like"
-        android:title="Favorites" />
+        android:title="Favourites" />
 
     <item
         android:id="@+id/refer_a_friend"

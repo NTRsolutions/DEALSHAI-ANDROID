@@ -2,6 +2,7 @@ package com.ogma.dealshaiapp.activity;
 
 import android.annotation.SuppressLint;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.location.Location;
 import android.location.LocationListener;
 import android.os.Build;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -62,6 +64,7 @@ public class LocationActivity extends AppCompatActivity implements View.OnClickL
     private LinearLayout ll_city;
     private LinearLayout ll_area;
     private Session session;
+    private ImageView back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,9 +73,9 @@ public class LocationActivity extends AppCompatActivity implements View.OnClickL
 
         locationManagerHelper = new LocationManagerHelper(LocationActivity.this);
         Toolbar toolbar = findViewById(R.id.toolbar);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        /**if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             toolbar.setTitle("Select Location");
-        }
+        }*/
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -82,7 +85,7 @@ public class LocationActivity extends AppCompatActivity implements View.OnClickL
         locationModelCityArea = new ArrayList<>();
 
         parentPanel = findViewById(R.id.parentPanel);
-
+        back=findViewById(R.id.back_voucher);
         rl_area = findViewById(R.id.rl_area);
         tv_city = findViewById(R.id.tv_city);
         tv_area = findViewById(R.id.tv_area);
@@ -194,6 +197,7 @@ public class LocationActivity extends AppCompatActivity implements View.OnClickL
         findViewById(R.id.tv_btn_save).setOnClickListener(this);
         findViewById(R.id.tv_btn_cancel).setOnClickListener(this);
         findViewById(R.id.btn_detect).setOnClickListener(this);
+        back.setOnClickListener(this);
 
         NetworkConnection connection = new NetworkConnection(LocationActivity.this);
         if (connection.isNetworkConnected()) {
@@ -228,6 +232,8 @@ public class LocationActivity extends AppCompatActivity implements View.OnClickL
 
                 startLocationManager();
                 break;
+            case R.id.back_voucher:
+                onBackPressed();
         }
     }
 
