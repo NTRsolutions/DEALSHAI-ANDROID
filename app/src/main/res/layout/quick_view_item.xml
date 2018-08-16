@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    app:cardCornerRadius="10dp"
     android:layout_marginBottom="10dp">
 
     <LinearLayout
@@ -168,8 +169,8 @@
 
                     <ImageView
                         android:id="@+id/iv_minus"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:gravity="center"
                         android:padding="@dimen/margin_5"
                         android:src="@drawable/minus" />
@@ -189,8 +190,8 @@
 
                     <ImageView
                         android:id="@+id/iv_plus"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:gravity="center"
                         android:padding="@dimen/margin_5"
                         android:src="@drawable/plus" />

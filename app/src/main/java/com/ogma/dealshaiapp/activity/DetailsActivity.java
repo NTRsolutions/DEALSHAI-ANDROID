@@ -32,6 +32,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ogma.dealshaiapp.R;
+import com.ogma.dealshaiapp.dialog.MenuInfo;
 import com.ogma.dealshaiapp.dialog.MoreInfoView;
 import com.ogma.dealshaiapp.fragment.FragmentDetailsPageBanner;
 import com.ogma.dealshaiapp.model.CouponsDetails;
@@ -245,14 +246,16 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
                 startActivity(new Intent(DetailsActivity.this, MapsActivity.class).putExtra("merchantId", merchant_id));
                 break;
             case R.id.tv_btn_menu:
-                alertDialogBuilder = new AlertDialog.Builder(this);
+                /**alertDialogBuilder = new AlertDialog.Builder(this);
                 alertDialogBuilder.setTitle("MENU");
                 alertDialogBuilder.setMessage(menuStr);
                 alertDialog = alertDialogBuilder.create();
                 alertDialog.show();
-                alertDialog.setCanceledOnTouchOutside(true);
+                alertDialog.setCanceledOnTouchOutside(true);*/
+                if (content != null) {
+                    new MenuInfo(DetailsActivity.this, menuStr).show();
+                }
                 break;
-
             case R.id.tv_more_info:
                 if (content != null) {
                     new MoreInfoView(DetailsActivity.this, content).show();
@@ -415,6 +418,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
                                 tv_location.setText(" " + area);
                                 tv_total_like.setText(String.valueOf(totalLike));
                                 tv_terms_and_condition.setText("Terms & Condition:\n" + termsCondition);
+                                tv_terms_and_condition.setTextSize(12);
                             }
                         });
                     }

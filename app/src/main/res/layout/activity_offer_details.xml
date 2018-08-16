@@ -38,7 +38,7 @@
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:layout_centerVertical="true"
-                    android:layout_marginEnd="10dp"
+                    android:layout_marginEnd="5dp"
                     android:layout_marginStart="5dp"
                     android:gravity="center"
                     android:padding="5dp"
@@ -389,8 +389,8 @@
 
                         <ImageView
                             android:id="@+id/iv_minus"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
                             android:gravity="center"
                             android:padding="@dimen/margin_5"
                             android:src="@drawable/minus" />
@@ -407,8 +407,8 @@
 
                         <ImageView
                             android:id="@+id/iv_plus"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
                             android:gravity="center"
                             android:padding="@dimen/margin_5"
                             android:src="@drawable/plus" />

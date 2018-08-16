@@ -9,6 +9,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.ogma.dealshaiapp.R;
@@ -24,12 +26,13 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class SearchResultActivity extends AppCompatActivity {
+public class SearchResultActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ArrayList<MerchantDetails> arrayList;
     private MerchantViewAdapter merchentViewAdapter;
     private String searchText;
     private LinearLayout parentPanel;
+    private ImageView back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,10 +42,10 @@ public class SearchResultActivity extends AppCompatActivity {
         arrayList = new ArrayList<>();
 
         Toolbar toolbar = findViewById(R.id.toolbar);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        /**if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             toolbar.setTitle("Search Result");
             // toolbar.setBackgroundColor();
-        }
+        }*/
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -59,6 +62,8 @@ public class SearchResultActivity extends AppCompatActivity {
         merchantsView.setItemAnimator(new DefaultItemAnimator());
         merchentViewAdapter = new MerchantViewAdapter(SearchResultActivity.this, SearchResultActivity.this, arrayList);
         merchantsView.setAdapter(merchentViewAdapter);
+        back=findViewById(R.id.back_voucher);
+        back.setOnClickListener(this);
     }
 
     @Override
@@ -139,5 +144,10 @@ public class SearchResultActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View view) {
+        onBackPressed();
     }
 }

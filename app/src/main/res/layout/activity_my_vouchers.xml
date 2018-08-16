@@ -17,11 +17,11 @@
             android:background="@drawable/background_color"
             android:orientation="horizontal">
             <ImageView
-                android:layout_width="28dp"
+                android:layout_width="35dp"
                 android:id="@+id/back_voucher"
-                android:layout_height="28dp"
+                android:layout_height="35dp"
                 android:background="@drawable/back"
-                android:layout_marginRight="15dp"
+                android:layout_marginRight="8dp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="10dp"/>
             <com.ogma.dealshaiapp.utility.OpenSansFontBold
@@ -31,7 +31,7 @@
                 android:textStyle="bold"
                 android:textColor="@color/colorButterWhite"
                 android:gravity="center|left"
-                android:text="My Vouchers"/>
+                android:text="Vouchers"/>
         <android.support.design.widget.CollapsingToolbarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

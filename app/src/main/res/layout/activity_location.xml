@@ -27,11 +27,11 @@
             android:background="@drawable/background_color"
             android:orientation="horizontal">
             <ImageView
-                android:layout_width="28dp"
+                android:layout_width="35dp"
                 android:id="@+id/back_voucher"
-                android:layout_height="28dp"
+                android:layout_height="35dp"
                 android:background="@drawable/back"
-                android:layout_marginRight="15dp"
+                android:layout_marginRight="8dp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="10dp"/>
             <com.ogma.dealshaiapp.utility.OpenSansFontBold
@@ -134,6 +134,7 @@
             android:layout_toEndOf="@+id/imageView4"
             android:background="@android:color/transparent"
             android:gravity="center_vertical"
+            android:fontFamily="sans-serif-smallcaps"
             android:hint="Select City"
             android:paddingBottom="10dp"
             android:paddingEnd="5dp"
@@ -190,7 +191,7 @@
         android:layout_marginTop="@dimen/margin_25"
         android:gravity="center">
 
-        <com.ogma.dealshaiapp.utility.OpenSansFontBold
+        <com.ogma.dealshaiapp.utility.OpenSansFontRegular
             android:id="@+id/tv_btn_save"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -205,7 +206,7 @@
             android:textSize="@dimen/text_large" />
 
 
-        <com.ogma.dealshaiapp.utility.OpenSansFontBold
+        <com.ogma.dealshaiapp.utility.OpenSansFontRegular
             android:id="@+id/tv_btn_cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -230,15 +231,15 @@
         android:textColor="@android:color/black"
         android:textSize="@dimen/text_medium" />
 
-    <Button
+    <com.ogma.dealshaiapp.utility.OpenSansFontRegular
         android:id="@+id/btn_detect"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:background="@drawable/shape_button_background2"
-        android:drawableStart="@drawable/ic_my_location"
         android:drawableTint="@color/colorTheme"
         android:gravity="center"
+        android:padding="10dp"
         android:paddingEnd="@dimen/margin_10"
         android:paddingStart="@dimen/margin_10"
         android:text=" Detect My Location"

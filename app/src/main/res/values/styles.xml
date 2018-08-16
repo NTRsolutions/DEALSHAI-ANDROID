@@ -9,6 +9,7 @@
     </style>
 
     <style name="BaseText" parent="@android:style/TextAppearance.Small">
+        <item name="android:typeface">sans</item>
         <item name="android:textSize">18sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">#FFFFFF</item>

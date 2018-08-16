@@ -47,6 +47,7 @@ public class MyPurchases extends AppCompatActivity implements View.OnClickListen
     private ArrayList<OrderedItems> arrayList;
     private CoordinatorLayout parentPanel;
     private Button click;
+    private ImageView back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +66,7 @@ public class MyPurchases extends AppCompatActivity implements View.OnClickListen
         session = new Session(MyPurchases.this);
         HashMap<String, String> user = session.getUserDetails();
         userId = user.get(Session.KEY_ID);
-
+        back=findViewById(R.id.back_voucher);
         arrayList = new ArrayList<>();
         recycler_view = findViewById(R.id.recycler_view);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MyPurchases.this);
@@ -74,7 +75,7 @@ public class MyPurchases extends AppCompatActivity implements View.OnClickListen
         adapter = new PurchaseListAdapter(MyPurchases.this, MyPurchases.this, arrayList);
         recycler_view.setAdapter(adapter);
         click=findViewById(R.id.more_purchase);
-        
+        back.setOnClickListener(this);
         click.setOnClickListener(this);
     }
 
@@ -153,8 +154,16 @@ public class MyPurchases extends AppCompatActivity implements View.OnClickListen
 
     @Override
     public void onClick(View view) {
-        startActivity(new Intent(MyPurchases.this, IndexActivity.class));
-
+        int id = view.getId();
+        switch (id)
+        {
+            case R.id.back_voucher:
+                startActivity(new Intent(MyPurchases.this, IndexActivity.class));
+                break;
+            case R.id.more_purchase:
+                startActivity(new Intent(MyPurchases.this, IndexActivity.class));
+                break;
+        }
     }
 
     private class PurchaseListAdapter extends RecyclerView.Adapter<PurchaseListAdapter.ViewHolder> {

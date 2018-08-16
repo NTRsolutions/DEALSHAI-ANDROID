@@ -25,7 +25,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class OrderStatusActivity extends AppCompatActivity {
+public class OrderStatusActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button btn_view_purchase;
     private ArrayList<CouponsDetails> couponsDetails;
@@ -52,6 +52,7 @@ public class OrderStatusActivity extends AppCompatActivity {
     private String CURRENCY = "";
     private String GATEWAYNAME = "";
     private String RESPMSG = "";
+    private ImageView back;
 
     private String voucherId;
     private String voucherType;
@@ -79,6 +80,7 @@ public class OrderStatusActivity extends AppCompatActivity {
         tv_msg = findViewById(R.id.tv_msg);
         tv_msg_desc = findViewById(R.id.tv_msg_desc);
         imageView = findViewById(R.id.imageView);
+        back=findViewById(R.id.back_voucher);
 
 //        couponsDetails = (ArrayList<CouponsDetails>) getIntent().getSerializableExtra("couponsDetails");
 
@@ -125,6 +127,8 @@ public class OrderStatusActivity extends AppCompatActivity {
                 OrderStatusActivity.this.finish();
             }
         });
+
+        back.setOnClickListener(this);
     }
 
     private void completePayment() {
@@ -206,5 +210,10 @@ public class OrderStatusActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View view) {
+        onBackPressed();
     }
 }

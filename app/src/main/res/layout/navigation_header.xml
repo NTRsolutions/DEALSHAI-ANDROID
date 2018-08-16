@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@drawable/background_color">
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -44,9 +43,14 @@
             android:visibility="invisible" />
     </LinearLayout>
 
-    <ImageView
+    <com.ogma.dealshaiapp.utility.OpenSansFontBold
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:src="@drawable/full_dealshai_logo"
-        android:scaleType="centerCrop" />
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="deals\n  hai"
+        android:textSize="70sp"
+        android:textColor="@color/uber_black"
+        />
+        <!--android:src="@drawable/full_dealshai_logo" -->
+
 </RelativeLayout>

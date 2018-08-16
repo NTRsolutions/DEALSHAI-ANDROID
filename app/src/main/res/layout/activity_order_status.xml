@@ -8,14 +8,49 @@
     android:orientation="vertical"
     tools:context="com.ogma.dealshaiapp.activity.OrderStatusActivity">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@drawable/background_color"
-        app:layout_scrollFlags="scroll|enterAlways"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:titleTextColor="@android:color/black" />
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/background_color"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="35dp"
+                android:id="@+id/back_voucher"
+                android:layout_height="35dp"
+                android:src="@drawable/back"
+                android:layout_marginRight="8dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"/>
+            <com.ogma.dealshaiapp.utility.OpenSansFontBold
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorButterWhite"
+                android:gravity="center|left"
+                android:text="Transaction Status"/>
+            <android.support.design.widget.CollapsingToolbarLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_scrollFlags="exitUntilCollapsed">
+
+
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="@drawable/background_color"
+                    app:layout_scrollFlags="scroll|enterAlways"
+                    app:titleTextColor="@android:color/black"
+                    app:popupTheme="@style/ThemeOverlay.AppCompat.Dark" />
+            </android.support.design.widget.CollapsingToolbarLayout>
+        </LinearLayout>
+
+    </android.support.design.widget.AppBarLayout>
 
     <LinearLayout
         android:id="@+id/ll_body"

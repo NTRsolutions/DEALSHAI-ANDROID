@@ -22,7 +22,11 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatEditText;
+import android.text.SpannableStringBuilder;
+import android.text.style.TypefaceSpan;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -50,6 +54,8 @@ import org.json.JSONObject;
 import java.util.HashMap;
 
 import me.anwarshahriar.calligrapher.Calligrapher;
+
+import static java.security.AccessController.getContext;
 
 public class IndexActivity extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
     private static final int REQUEST_LOCATION = 1;
@@ -521,4 +527,5 @@ public class IndexActivity extends AppCompatActivity implements View.OnClickList
         };
         webServiceHandler.getCurrentLocationInfo(lat, lng);
     }
+
 }

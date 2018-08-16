@@ -10,7 +10,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.ogma.dealshaiapp.R;
 import com.ogma.dealshaiapp.adapter.MerchantViewAdapter;
@@ -27,13 +30,14 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class LikedProductActivity extends AppCompatActivity {
+public class LikedProductActivity extends AppCompatActivity implements View.OnClickListener{
 
     private ArrayList<MerchantDetails> arrayList;
     private MerchantViewAdapter marchentViewAdapter;
     private String userId;
     private LinearLayout parentPanel;
     private SwipeRefreshLayout swipe_refresh_layout;
+    ImageView back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,17 +47,16 @@ public class LikedProductActivity extends AppCompatActivity {
         arrayList = new ArrayList<>();
 
         parentPanel = findViewById(R.id.parentPanel);
+        TextView text_toolbar=findViewById(R.id.text_toolbar);
         Toolbar toolbar = findViewById(R.id.toolbar);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            toolbar.setTitle("My Favorites");
+        text_toolbar.setText("Favorites");
             // toolbar.setBackgroundColor();
-        }
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Session session = new Session(LikedProductActivity.this);
         HashMap<String, String> user = session.getUserDetails();
-
+        back=findViewById(R.id.back_voucher);
         userId = user.get(Session.KEY_ID);
 
         swipe_refresh_layout = findViewById(R.id.swipe_refresh_layout);
@@ -73,6 +76,7 @@ public class LikedProductActivity extends AppCompatActivity {
         merchantsView.setItemAnimator(new DefaultItemAnimator());
         marchentViewAdapter = new MerchantViewAdapter(LikedProductActivity.this, LikedProductActivity.this, arrayList);
         merchantsView.setAdapter(marchentViewAdapter);
+        back.setOnClickListener(this);
     }
 
     @Override
@@ -162,5 +166,10 @@ public class LikedProductActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View view) {
+        onBackPressed();
     }
 }

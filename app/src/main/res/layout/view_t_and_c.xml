@@ -27,7 +27,7 @@
         android:id="@+id/tv_t_and_c"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="4sp"
+        android:textSize="@dimen/text_very_small"
         android:minHeight="100dp"
         android:padding="6dp"
         android:textColor="@color/textBlack" />
