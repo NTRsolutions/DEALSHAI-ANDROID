@@ -3,16 +3,13 @@ package com.ogma.dealshaiapp.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -20,7 +17,6 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.ogma.dealshaiapp.R;
 import com.ogma.dealshaiapp.activity.DetailsActivity;
 import com.ogma.dealshaiapp.dialog.QuickView;
-import com.ogma.dealshaiapp.fragment.FragmentIndex;
 import com.ogma.dealshaiapp.model.MerchantDetails;
 import com.ogma.dealshaiapp.network.WebServiceHandler;
 import com.ogma.dealshaiapp.network.WebServiceListener;
@@ -31,8 +27,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import static android.support.constraint.R.id.parent;
 
 /**
  * Created by AndroidDev on 16-11-2017.
@@ -79,7 +73,7 @@ public class MerchantViewAdapter extends RecyclerView.Adapter<MerchantViewAdapte
         private TextView tv_old_price;
         private TextView tv_new_price;
 
-        ViewHolder(final View itemView) {
+        ViewHolder(View itemView) {
             super(itemView);
             index_banner = itemView.findViewById(R.id.index_banner);
             tv_likes = itemView.findViewById(R.id.tv_likes);
@@ -106,7 +100,6 @@ public class MerchantViewAdapter extends RecyclerView.Adapter<MerchantViewAdapte
                     MerchantDetails merchantDetails = arrayList.get(getAdapterPosition());
                     merchantId = Integer.parseInt(merchantDetails.getMerchantId());
                     new QuickView(activity, merchantId).show();
-
                 }
             });
 
@@ -117,15 +110,6 @@ public class MerchantViewAdapter extends RecyclerView.Adapter<MerchantViewAdapte
                     merchant_id = merchantDetails.getMerchantId();
                     totalLike = Integer.parseInt(merchantDetails.getLikes());
                     hitlLike(userId, merchant_id, getAdapterPosition(), totalLike);
-                    int t=Integer.parseInt(merchantDetails.getLikes());
-                    Log.d("value",String.valueOf(t));
-                    /**if(t-totalLike>0)
-                        Toast.makeText(itemView.getContext(),"You Liked "+tv_title.getText(),Toast.LENGTH_SHORT).show();
-                    else
-                        Toast.makeText(itemView.getContext(),"You Disliked "+tv_title.getText(),Toast.LENGTH_SHORT).show();*/
-
-                    //Snackbar.make(itemView,"You Liked "+tv_title, Snackbar.LENGTH_SHORT).show();
-                    //Toast.makeText(itemView.getContext(),"You Liked "+tv_title.getText(),Toast.LENGTH_SHORT).show();
                 }
             });
         }
@@ -152,11 +136,9 @@ public class MerchantViewAdapter extends RecyclerView.Adapter<MerchantViewAdapte
                     switch (msg) {
                         case "Like Successfully":
                             like += 1;
-                            //Toast.makeText(itemView.getContext(),"You Liked "+tv_title.getText(),Toast.LENGTH_SHORT).show();
                             break;
                         case "Dislike Successfully":
                             like -= 1;
-                            //Toast.makeText(itemView.getContext(),"You Disliked "+tv_title.getText(),Toast.LENGTH_SHORT).show();
                             break;
                     }
                     merchantDetails.setLikes(String.valueOf(like));
@@ -174,13 +156,13 @@ public class MerchantViewAdapter extends RecyclerView.Adapter<MerchantViewAdapte
         webServiceHandler.hitLike(merchant_id, userId);
     }
 
-    public MerchantViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.index_page_merchant_view3, parent, false);
-        return new MerchantViewAdapter.ViewHolder(view);
+        return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(MerchantViewAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, int position) {
 
         MerchantDetails merchantDetails = arrayList.get(position);
 

@@ -293,7 +293,6 @@ public class WebServiceHandler {
         Map<String, String> params = new HashMap<>();
         params.put("user_id", userId);
         JSONObject parameter = new JSONObject(params);
-
         newCall(parameter, ServicesURls.Notification);
     }
 

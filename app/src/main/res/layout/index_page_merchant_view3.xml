@@ -40,6 +40,23 @@
                 android:layout_marginStart="4dp"
                 android:layout_alignTop="@+id/index_banner"
                 android:layout_alignStart="@+id/index_banner" />
+
+            <!--<ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_likes"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/rounder_share"
+                android:src="@drawable/heart_coupon"
+                android:gravity="center"
+                android:paddingRight="4.25dp"
+                android:paddingLeft="3.75dp"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:layout_marginStart="4dp"
+                android:layout_alignTop="@+id/index_banner"
+                android:layout_alignStart="@+id/index_banner"
+                /> -->
         </RelativeLayout>
 
 

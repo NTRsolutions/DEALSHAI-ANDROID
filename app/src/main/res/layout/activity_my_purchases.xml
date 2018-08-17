@@ -66,18 +66,6 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:visibility="gone"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:background="@color/colorAccent"
-        android:id="@+id/more_purchase"
-        android:layout_marginBottom="40dp"
-        android:text="click for more purchase" />
-
     <android.support.v7.widget.RecyclerView
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:padding="@dimen/margin_5"

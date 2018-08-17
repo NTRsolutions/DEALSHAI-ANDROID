@@ -46,7 +46,7 @@ public class MyPurchases extends AppCompatActivity implements View.OnClickListen
     private PurchaseListAdapter adapter;
     private ArrayList<OrderedItems> arrayList;
     private CoordinatorLayout parentPanel;
-    private Button click;
+   // private Button click;
     private ImageView back;
 
     @Override
@@ -74,9 +74,9 @@ public class MyPurchases extends AppCompatActivity implements View.OnClickListen
         recycler_view.setItemAnimator(new DefaultItemAnimator());
         adapter = new PurchaseListAdapter(MyPurchases.this, MyPurchases.this, arrayList);
         recycler_view.setAdapter(adapter);
-        click=findViewById(R.id.more_purchase);
+        //click=findViewById(R.id.more_purchase);
         back.setOnClickListener(this);
-        click.setOnClickListener(this);
+        //click.setOnClickListener(this);
     }
 
     @Override
@@ -160,9 +160,9 @@ public class MyPurchases extends AppCompatActivity implements View.OnClickListen
             case R.id.back_voucher:
                 startActivity(new Intent(MyPurchases.this, IndexActivity.class));
                 break;
-            case R.id.more_purchase:
+            /**case R.id.more_purchase:
                 startActivity(new Intent(MyPurchases.this, IndexActivity.class));
-                break;
+                break;*/
         }
     }
 

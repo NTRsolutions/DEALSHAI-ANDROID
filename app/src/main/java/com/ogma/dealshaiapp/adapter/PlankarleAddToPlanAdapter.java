@@ -16,6 +16,11 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.ogma.dealshaiapp.R;
 import com.ogma.dealshaiapp.dialog.AddToPlan;
 import com.ogma.dealshaiapp.model.MerchantDetails;
+import com.ogma.dealshaiapp.network.WebServiceHandler;
+import com.ogma.dealshaiapp.network.WebServiceListener;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -56,6 +61,9 @@ public class PlankarleAddToPlanAdapter extends RecyclerView.Adapter<PlankarleAdd
         private TextView tv_quick_view;
         private TextView tv_old_price;
         private TextView tv_new_price;
+        private String merchant_id;
+        private String userId;
+        private int totalLike;
 
         ViewHolder(View itemView) {
             super(itemView);
@@ -68,6 +76,7 @@ public class PlankarleAddToPlanAdapter extends RecyclerView.Adapter<PlankarleAdd
             tv_quick_view = itemView.findViewById(R.id.tv_quick_view);
             tv_old_price = itemView.findViewById(R.id.tv_old_price);
             tv_new_price = itemView.findViewById(R.id.tv_new_price);
+            tv_likes = itemView.findViewById(R.id.tv_likes);
 
 
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -90,12 +99,65 @@ public class PlankarleAddToPlanAdapter extends RecyclerView.Adapter<PlankarleAdd
                     new AddToPlan(activity, merchantId).show();
                 }
             });
+
+            tv_likes.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    MerchantDetails merchantDetails = arrayList.get(getAdapterPosition());
+                    merchant_id = merchantDetails.getMerchantId();
+                    totalLike = Integer.parseInt(merchantDetails.getLikes());
+                    hitlLike(userId, merchant_id, getAdapterPosition(), totalLike);
+                }
+            });
         }
     }
 
     public PlankarleAddToPlanAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.plankarle_second_step_view2, parent, false);
         return new PlankarleAddToPlanAdapter.ViewHolder(view);
+    }
+
+    private void hitlLike(String userId, String merchant_id, final int adapterPosition, int totalLike) {
+        WebServiceHandler webServiceHandler = new WebServiceHandler(context);
+        webServiceHandler.serviceListener = new WebServiceListener() {
+            @Override
+            public void onResponse(String response) {
+                String msg = null;
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    int isErr = Integer.parseInt(jsonObject.getString("err"));
+                    if (isErr == 0) {
+                        msg = jsonObject.getString("msg");
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                if (msg != null) {
+                    MerchantDetails merchantDetails = arrayList.get(adapterPosition);
+                    int like = Integer.parseInt(merchantDetails.getLikes());
+                    switch (msg) {
+                        case "Like Successfully":
+                            like += 1;
+                            //Toast.makeText(itemView.getContext(),"You Liked "+tv_title.getText(),Toast.LENGTH_SHORT).show();
+                            break;
+                        case "Dislike Successfully":
+                            like -= 1;
+                            //Toast.makeText(itemView.getContext(),"You Disliked "+tv_title.getText(),Toast.LENGTH_SHORT).show();
+                            break;
+                    }
+                    merchantDetails.setLikes(String.valueOf(like));
+                }
+
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        notifyDataSetChanged();
+                    }
+                });
+
+            }
+        };
+        webServiceHandler.hitLike(merchant_id, userId);
     }
 
     @Override
