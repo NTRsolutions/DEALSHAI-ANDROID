@@ -6,11 +6,11 @@
     <!--<string name="google_api_key">AIzaSyBq85wZMoc2VhxJc0NAl7pg5EclcTgHN34</string>-->
     <string name="google_api_key">AIzaSyAxM66ZAq4slRWv04YKMOzOyFM-8c7siYI</string>
     <string name="sha">1D:63:05:29:AD:B6:54:D0:05:DF:EE:5B:59:18:3F:3B:37:AB:E2:0C</string>
-    <string name="client_id">TOOZoBaYx35sskiTlpcs_pOrWcYZtUi</string>
+    <string name="client_id">cti9N18aUQOGfWasTL67Woi4Ozg9hXT3</string>
     <string name="code">crd.EA.CAESEAT1uaJ0xkgflDEV5H2ix8IiATE.4-BfJZ4ZO_QULPX2jwWN6KzK844K5cP5R7a4KyoIPK8#_</string>
-    <string name="server_token">DrywEooMHBzlk3LgoEr1ntR8MDqUJRBa8aneZ6o0</string>
-    <string name="client_secret">l_dOIV5npuuwq2WXJrsLHNsa4O1hU8KEtOCIkSeB</string>
-    <string name="access_token">KA.eyJ2ZXJzaW9uIjoyLCJpZCI6InFrbXVhV3laUUJtZjlFTUVHNk9wSUE9PSIsImV4cGlyZXNfYXQiOjE1MzY5MTUyMDUsInBpcGVsaW5lX2tleV9pZCI6Ik1RPT0iLCJwaXBlbGluZV9pZCI6MX0.Ad635YyTyBSUURHmBwmCgQ9B1jsoUdSF-vjafu9K-Ac</string>
+    <string name="server_token">AYSXdPTV5WaNSa5tGCuhi9gf2Cb3KDYLgzIR3gwt</string>
+    <string name="client_secret">Tm7a9Xds3Ozopuvmy7DRivle3k1sR0JxFyTsHu95</string>
+    <string name="access_token">KA.eyJ2ZXJzaW9uIjoyLCJpZCI6IkhsV0J3bk9jUXE2WFk4a2hTM2NWQ3c9PSIsImV4cGlyZXNfYXQiOjE1MzcwMTA0MTIsInBpcGVsaW5lX2tleV9pZCI6Ik1RPT0iLCJwaXBlbGluZV9pZCI6MX0.bOZkJSWMQJDWdgkFRruUUkp1z2iVAbEJ3nI_aAvIdfg</string>
     <string name="redirect_url">https://www.uber.com/en-IN</string>
     <string name="title_activity_welcome_screen">WelcomeScreen</string>
     <string name="dummy_button">Dummy Button</string>

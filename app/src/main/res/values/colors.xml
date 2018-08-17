@@ -6,6 +6,7 @@
     <color name="colorTheme">#de4e19</color>
     <color name="colorThemeBlue">#611b72</color>
     <color name="colorHeaderBar">#ECECEC</color>
+    <color name="color_heart">#DD0E0E</color>
 
     <color name="black_overlay">#66000000</color>
     <color name="hint_text_color">#A8A6A7</color>

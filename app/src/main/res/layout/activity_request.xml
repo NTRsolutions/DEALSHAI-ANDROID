@@ -48,6 +48,16 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             uber:ub__style="white" />
+        <Button
+            android:id="@+id/to_custom_activity"
+            android:layout_width="@dimen/_272sdp"
+            android:layout_height="@dimen/_57sdp"
+            android:layout_gravity="right|center_vertical"
+            android:onClick="toCustomActivity"
+            android:layout_marginTop="@dimen/_279sdp"
+            android:text="To Log In"
+            />
+
 
     </RelativeLayout>
 

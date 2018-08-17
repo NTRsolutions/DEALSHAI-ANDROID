@@ -31,8 +31,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
                 android:background="@drawable/rounder_share"
-                android:drawableStart="@drawable/like"
+                android:drawableStart="@drawable/heart_coupon"
                 android:gravity="center"
+                android:paddingRight="4.25dp"
+                android:paddingLeft="3.75dp"
+                android:paddingTop="2dp"
+
+                android:paddingBottom="1dp"
                 android:layout_marginStart="4dp"
                 android:layout_alignTop="@+id/index_banner"
                 android:layout_alignStart="@+id/index_banner" />

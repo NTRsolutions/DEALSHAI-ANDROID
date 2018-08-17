@@ -91,6 +91,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
     private static final int REQUEST_CALL = 1;
     private String menuStr;
     private boolean flagCanBuy;
+    private ImageView iv_like;
 
 
     @Override
@@ -130,7 +131,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
         TextView tv_distance = findViewById(R.id.tv_distance);
         TextView tv_btn_buy_now = findViewById(R.id.tv_btn_buy_now);
         ImageView iv_share = findViewById(R.id.iv_share);
-        ImageView iv_like = findViewById(R.id.iv_like);
+        iv_like = findViewById(R.id.iv_like);
 
 
         banner_indicator = findViewById(R.id.banner_indicator);
@@ -237,7 +238,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
                 break;
             case R.id.iv_like:
             case R.id.tv_total_like:
-                hitLike(merchant_id, userId);
+                hitLike(merchant_id, userId, title);
                 break;
             case R.id.iv_share:
                 share_via_app();
@@ -298,7 +299,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
-    private void hitLike(String merchant_id, String userId) {
+    private void hitLike(String merchant_id, String userId, final TextView title) {
         WebServiceHandler webServiceHandler = new WebServiceHandler(DetailsActivity.this);
         webServiceHandler.serviceListener = new WebServiceListener() {
             @Override
@@ -314,11 +315,15 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
                                 switch (msg) {
                                     case "Like Successfully":
                                         totalLike = totalLike + 1;
+                                        iv_like.setColorFilter(getBaseContext().getResources().getColor(R.color.color_heart));
                                         tv_total_like.setText(String.valueOf(totalLike));
+                                        Toast.makeText(DetailsActivity.this,"You Liked "+title.getText(),Toast.LENGTH_SHORT).show();
                                         break;
                                     case "Dislike Successfully":
                                         totalLike = totalLike - 1;
+                                        iv_like.setColorFilter(getBaseContext().getResources().getColor(R.color.uber_white));
                                         tv_total_like.setText(String.valueOf(totalLike));
+                                        Toast.makeText(DetailsActivity.this,"You Disliked "+title.getText(),Toast.LENGTH_SHORT).show();
                                         break;
                                 }
                             }
@@ -361,6 +366,8 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
                             menuStr = main.getString("menu");
                             setMenu(menuStr);
                         }
+                        else
+                            setButton();
                         deals = main.getJSONArray("deals");
                         if (deals.length() > 0) {
                             couponsDetails.clear();
@@ -442,6 +449,19 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
             @Override
             public void run() {
                 tv_btn_menu.setVisibility(View.VISIBLE);
+                tv_btn_contact.setVisibility(View.VISIBLE);
+                tv_more_info.setVisibility(View.VISIBLE);
+            }
+        });
+    }
+    private void setButton()
+    {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                //tv_btn_menu.setVisibility(View.VISIBLE);
+                tv_btn_contact.setVisibility(View.VISIBLE);
+                tv_more_info.setVisibility(View.VISIBLE);
             }
         });
     }

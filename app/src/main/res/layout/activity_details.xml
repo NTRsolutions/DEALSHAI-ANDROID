@@ -79,12 +79,10 @@
                             android:layout_height="34dp"
                             android:layout_alignEnd="@+id/iv_like"
                             android:layout_centerVertical="true"
-                            android:layout_marginEnd="22dp"
-                            android:background="@drawable/shape_rounded_pink_shape"
+                            android:layout_marginEnd="24dp"
                             android:gravity="center"
-                            android:text="0"
                             android:textColor="@android:color/white"
-                            android:textSize="12sp"
+                            android:textSize="14sp"
                             android:textStyle="bold" />
 
                     </RelativeLayout>
@@ -209,7 +207,7 @@
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
+                                    android:layout_height="30dp"
                                     android:layout_below="@+id/tv_distance"
                                     android:layout_marginTop="5dp">
 
@@ -219,6 +217,7 @@
                                         android:layout_height="match_parent"
                                         android:layout_marginEnd="10dp"
                                         android:layout_marginStart="5dp"
+                                        android:layout_gravity="center"
                                         android:layout_weight="1"
                                         android:background="@drawable/shape_button_background2"
                                         android:gravity="center"
@@ -232,6 +231,7 @@
                                         android:id="@+id/tv_btn_contact"
                                         android:layout_width="0dp"
                                         android:layout_height="match_parent"
+                                        android:layout_gravity="center"
                                         android:layout_marginEnd="10dp"
                                         android:layout_marginStart="10dp"
                                         android:layout_weight="1"
@@ -246,6 +246,7 @@
                                         android:layout_width="0dp"
                                         android:layout_height="match_parent"
                                         android:layout_marginEnd="5dp"
+                                        android:layout_gravity="center"
                                         android:layout_marginStart="10dp"
                                         android:layout_weight="1"
                                         android:background="@drawable/shape_button_background2"

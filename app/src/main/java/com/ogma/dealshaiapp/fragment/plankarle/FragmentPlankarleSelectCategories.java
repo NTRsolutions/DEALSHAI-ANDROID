@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -24,6 +25,7 @@ import com.ogma.dealshaiapp.R;
 import com.ogma.dealshaiapp.activity.IndexActivity;
 import com.ogma.dealshaiapp.fragment.FragmentIndex;
 import com.ogma.dealshaiapp.model.CategoryDetails;
+import com.ogma.dealshaiapp.model.MerchantDetails;
 import com.ogma.dealshaiapp.network.NetworkConnection;
 import com.ogma.dealshaiapp.network.WebServiceHandler;
 import com.ogma.dealshaiapp.network.WebServiceListener;
@@ -43,6 +45,7 @@ public class FragmentPlankarleSelectCategories extends Fragment implements Index
     private CategoryAdapter categoryAdapter;
     private ArrayList<CategoryDetails> categoryList;
     private RelativeLayout parentPanel;
+    //private ImageView like;
 
 
     @Nullable
@@ -172,12 +175,14 @@ public class FragmentPlankarleSelectCategories extends Fragment implements Index
             private ImageView index_banner;
             private TextView cat_title;
             private ImageView tick_icon;
+            //private TextView tv_likes;
 
-            ViewHolder(View itemView) {
+            ViewHolder(final View itemView) {
                 super(itemView);
                 index_banner = itemView.findViewById(R.id.index_banner);
                 cat_title = itemView.findViewById(R.id.cat_title);
                 tick_icon = itemView.findViewById(R.id.tick_icon);
+                //tv_likes = itemView.findViewById(R.id.tv_likes);
 
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -192,6 +197,7 @@ public class FragmentPlankarleSelectCategories extends Fragment implements Index
                         notifyDataSetChanged();
                     }
                 });
+
             }
         }
 

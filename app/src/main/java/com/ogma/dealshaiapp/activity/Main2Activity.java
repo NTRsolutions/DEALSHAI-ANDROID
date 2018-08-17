@@ -47,7 +47,7 @@ import retrofit2.Response;
 
 public class Main2Activity extends AppCompatActivity {
 
-    public static final String CLIENT_ID = "TOOZoBaYx35sskiTlpcs_pOrWcYZtUi";
+    public static final String CLIENT_ID = "cti9N18aUQOGfWasTL67Woi4Ozg9hXT3";
     public static final String REDIRECT_URI = "https://www.uber.com/en-IN";
     private static final String SERVER_TOKEN = "DrywEooMHBzlk3LgoEr1ntR8MDqUJRBa8aneZ6o0";
 
@@ -67,67 +67,48 @@ public class Main2Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
-//        configuration = new SessionConfiguration.Builder()
-//                .setClientId(CLIENT_ID)
-//                .setRedirectUri(REDIRECT_URI)
-//                .setScopes(Arrays.asList(Scope.PROFILE, Scope.RIDE_WIDGETS, Scope.PLACES))
-//                .build();
-//
-//        validateConfiguration(configuration);
-//
-//        accessTokenManager = new AccessTokenManager(this);
-//
-//        //Create a button with a custom request code
-//        whiteButton = (LoginButton) findViewById(R.id.uber_button_white);
-//        whiteButton.setCallback(new SampleLoginCallback())
-//                .setSessionConfiguration(configuration);
-//
-//        //Create a button using a custom AccessTokenManager
-//        //Custom Scopes are set using XML for this button as well in R.layout.activity_sample
-//
+        configuration = new SessionConfiguration.Builder()
+                .setClientId(CLIENT_ID)
+                .setRedirectUri(REDIRECT_URI)
+                .setScopes(Arrays.asList(Scope.PROFILE, Scope.RIDE_WIDGETS, Scope.PLACES))
+                .build();
+
+        validateConfiguration(configuration);
+
+        accessTokenManager = new AccessTokenManager(this);
+
+        //Create a button with a custom request code
+
+
+
+
+
+
+        //Create a button using a custom AccessTokenManager
+        //Custom Scopes are set using XML for this button as well in R.layout.activity_sample
+
+        //Use a custom button with an onClickListener to call the LoginManager directly
+        loginManager = new LoginManager(accessTokenManager,
+                new SampleLoginCallback(),
+                configuration,
+                CUSTOM_BUTTON_REQUEST_CODE);
+
+
+    }//Create a button using a custom AccessTokenManager
+        //Custom Scopes are set using XML for this button as well in R.layout.activity_sam
 //        //Use a custom button with an onClickListener to call the LoginManager directly
-//        loginManager = new LoginManager(accessTokenManager,
-//                new SampleLoginCallback(),
-//                configuration,
-//                CUSTOM_BUTTON_REQUEST_CODE);
-//
-//        customButton = (Button) findViewById(R.id.custom_uber_button);
-//        customButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                loginManager.login(MainActivity.this);
-//            }
-//        });
-        printKeyhash();
-
-    }
 
 
 
-    private void printKeyhash() {
 
-        try {
-            PackageInfo info = getPackageManager().getPackageInfo("com.ogma.dealshaiapp", PackageManager.GET_SIGNATURES);
-            for (Signature signature : info.signatures) {
-                MessageDigest md = MessageDigest.getInstance("SHA");
-                md.update(signature.toByteArray());
-                Log.d("KeyHash", Base64.encodeToString(md.digest(), Base64.DEFAULT));
-            }
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-
-    }
 
 
     @Override
     protected void onResume() {
         super.onResume();
-//        if (loginManager.isAuthenticated()) {
-//            loadProfileInfo();
-//        }
+       if (loginManager.isAuthenticated()) {
+           loadProfileInfo();
+        }
     }
 
     @Override

@@ -14,13 +14,7 @@
         android:background="@android:color/black"
         android:padding="10dp">
 
-        <com.uber.sdk.android.core.auth.LoginButton
-            android:id="@+id/uber_button_white"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            uber:ub__request_code="1111"
-            uber:ub__style="white" />
+
 
     </FrameLayout>
 
@@ -37,15 +31,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="left|center_vertical"
             android:onClick="toNextActivity"
+            android:layout_marginLeft="@dimen/_70sdp"
             android:text="To request activity"
-            />
-        <Button
-            android:id="@+id/to_custom_activity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right|center_vertical"
-            android:onClick="toCustomActivity"
-            android:text="To custom activity"
             />
 
     </FrameLayout>
@@ -57,12 +44,7 @@
         android:background="@android:color/black"
         android:padding="10dp">
 
-        <Button
-            android:id="@+id/custom_uber_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Login" />
+
 
     </FrameLayout>
 

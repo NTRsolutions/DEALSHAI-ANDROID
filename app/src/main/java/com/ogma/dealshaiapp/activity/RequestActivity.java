@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.ogma.dealshaiapp.R;
@@ -40,9 +41,9 @@ public class RequestActivity extends AppCompatActivity implements RideRequestBut
     private static final String UBERX_PRODUCT_ID = "a1111c8c-c720-46c3-8534-2fcdd730040d";
     private static final int WIDGET_REQUEST_CODE = 1234;
 
-    public static final String CLIENT_ID = "TOOZoBaYx35sskiTlpcs_pOrWcYZtUi";
+    public static final String CLIENT_ID = "cti9N18aUQOGfWasTL67Woi4Ozg9hXT3";
     public static final String REDIRECT_URI = "https://www.uber.com/en-IN";
-    private static final String SERVER_TOKEN = "DrywEooMHBzlk3LgoEr1ntR8MDqUJRBa8aneZ6o0";
+    private static final String SERVER_TOKEN = "AYSXdPTV5WaNSa5tGCuhi9gf2Cb3KDYLgzIR3gwt";
 
     private SessionConfiguration configuration;
 
@@ -93,6 +94,10 @@ public class RequestActivity extends AppCompatActivity implements RideRequestBut
                 .loadRideInformation();
 
     }
+    public void toCustomActivity(View view) {
+        startActivity(new Intent(this, CustomActivity2.class));
+    }
+
 
     @Override
     public void onRideInformationLoaded() {
