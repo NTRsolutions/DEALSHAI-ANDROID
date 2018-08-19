@@ -1,10 +1,15 @@
 package com.ogma.dealshaiapp.dialog;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +23,8 @@ public class ContactInfo extends Dialog {
 
     private final Context context;
     private final String content;
+    private TextView call;
+    private TextView cancel;
     private Activity activity;
 
     public ContactInfo(Context context, String content) {

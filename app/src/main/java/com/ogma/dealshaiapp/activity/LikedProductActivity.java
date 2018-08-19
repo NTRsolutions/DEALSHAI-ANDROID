@@ -49,7 +49,7 @@ public class LikedProductActivity extends AppCompatActivity implements View.OnCl
         parentPanel = findViewById(R.id.parentPanel);
         TextView text_toolbar=findViewById(R.id.text_toolbar);
         Toolbar toolbar = findViewById(R.id.toolbar);
-        text_toolbar.setText("Favorites");
+        text_toolbar.setText("Favourites");
             // toolbar.setBackgroundColor();
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

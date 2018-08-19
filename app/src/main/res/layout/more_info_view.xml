@@ -35,7 +35,7 @@
             android:layout_alignParentTop="true"
             android:textSize="18sp"
             android:id="@+id/title_header"
-            android:background="@drawable/background_color" />
+            android:background="@drawable/shape" />
 
         <com.ogma.dealshaiapp.utility.OpenSansFontBold
             android:id="@+id/tv_content_main"
@@ -53,11 +53,11 @@
         <ImageView
             android:id="@+id/iv_esc"
             android:layout_alignParentEnd="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:src="@drawable/cross_icon"
             android:layout_marginEnd="@dimen/margin_5"
-            android:layout_marginTop="@dimen/margin_5" />
+            android:layout_marginTop="8dp" />
 
     </RelativeLayout>
 

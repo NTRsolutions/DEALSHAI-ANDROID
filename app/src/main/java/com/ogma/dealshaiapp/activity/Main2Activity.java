@@ -49,7 +49,7 @@ public class Main2Activity extends AppCompatActivity {
 
     public static final String CLIENT_ID = "cti9N18aUQOGfWasTL67Woi4Ozg9hXT3";
     public static final String REDIRECT_URI = "https://www.uber.com/en-IN";
-    private static final String SERVER_TOKEN = "DrywEooMHBzlk3LgoEr1ntR8MDqUJRBa8aneZ6o0";
+    private static final String SERVER_TOKEN = "AYSXdPTV5WaNSa5tGCuhi9gf2Cb3KDYLgzIR3gwt";
 
     private static final String LOG_TAG = "LoginSampleActivity";
 

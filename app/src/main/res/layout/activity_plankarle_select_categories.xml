@@ -25,18 +25,18 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <android.support.v7.widget.AppCompatTextView
+                    <com.ogma.dealshaiapp.utility.OpenSansFontRegular
                         android:id="@+id/appCompatTextView4"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:padding="5dp"
                         android:text="What would you like to include in your plan?"
-                        android:textColor="@color/colorTheme"
+                        android:textColor="@color/uber_black"
                         android:textSize="@dimen/text_medium"
                         android:textStyle="bold" />
 
-                    <com.ogma.dealshaiapp.utility.OpenSansFontBold
+                    <com.ogma.dealshaiapp.utility.OpenSansFontRegular
                         android:id="@+id/openSansFontBold"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

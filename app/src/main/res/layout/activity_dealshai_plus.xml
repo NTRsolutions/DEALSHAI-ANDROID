@@ -24,8 +24,7 @@
                 android:gravity="center"
                 android:paddingBottom="@dimen/margin_5"
                 android:paddingTop="@dimen/margin_5"
-                android:text="Dealshai+"
-                android:textAllCaps="true"
+                android:text="DealsHai+"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/text_medium" />
 

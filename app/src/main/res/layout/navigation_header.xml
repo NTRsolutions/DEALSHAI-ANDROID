@@ -43,14 +43,20 @@
             android:visibility="invisible" />
     </LinearLayout>
 
-    <com.ogma.dealshaiapp.utility.OpenSansFontBold
+    <!--<com.ogma.dealshaiapp.utility.OpenSansFontBold
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
         android:text="deals\n  hai"
         android:textSize="70sp"
         android:textColor="@color/uber_black"
-        />
+        /> -->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitCenter"
+        android:padding="15dp"
+        android:src="@drawable/splash_logo"/>
         <!--android:src="@drawable/full_dealshai_logo" -->
 
 </RelativeLayout>

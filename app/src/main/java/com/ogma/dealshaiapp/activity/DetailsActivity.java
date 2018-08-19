@@ -32,6 +32,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ogma.dealshaiapp.R;
+import com.ogma.dealshaiapp.dialog.ContactInfo;
+import com.ogma.dealshaiapp.dialog.MenuInfo;
 import com.ogma.dealshaiapp.dialog.MoreInfoView;
 import com.ogma.dealshaiapp.fragment.FragmentDetailsPageBanner;
 import com.ogma.dealshaiapp.model.CouponsDetails;
@@ -90,6 +92,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
     private static final int REQUEST_CALL = 1;
     private String menuStr;
     private boolean flagCanBuy;
+    private ImageView iv_like;
 
 
     @Override
@@ -129,7 +132,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
         TextView tv_distance = findViewById(R.id.tv_distance);
         TextView tv_btn_buy_now = findViewById(R.id.tv_btn_buy_now);
         ImageView iv_share = findViewById(R.id.iv_share);
-        ImageView iv_like = findViewById(R.id.iv_like);
+        iv_like = findViewById(R.id.iv_like);
 
 
         banner_indicator = findViewById(R.id.banner_indicator);
@@ -236,7 +239,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
                 break;
             case R.id.iv_like:
             case R.id.tv_total_like:
-                hitLike(merchant_id, userId);
+                hitLike(merchant_id, userId, title);
                 break;
             case R.id.iv_share:
                 share_via_app();
@@ -245,14 +248,16 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
                 startActivity(new Intent(DetailsActivity.this, MapsActivity.class).putExtra("merchantId", merchant_id));
                 break;
             case R.id.tv_btn_menu:
-                alertDialogBuilder = new AlertDialog.Builder(this);
-                alertDialogBuilder.setTitle("MENU");
-                alertDialogBuilder.setMessage(menuStr);
-                alertDialog = alertDialogBuilder.create();
-                alertDialog.show();
-                alertDialog.setCanceledOnTouchOutside(true);
+                /**alertDialogBuilder = new AlertDialog.Builder(this);
+                 alertDialogBuilder.setTitle("MENU");
+                 alertDialogBuilder.setMessage(menuStr);
+                 alertDialog = alertDialogBuilder.create();
+                 alertDialog.show();
+                 alertDialog.setCanceledOnTouchOutside(true);*/
+                if (content != null) {
+                    new MenuInfo(DetailsActivity.this, menuStr).show();
+                }
                 break;
-
             case R.id.tv_more_info:
                 if (content != null) {
                     new MoreInfoView(DetailsActivity.this, content).show();
@@ -287,6 +292,27 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
                         alertDialog = alertDialogBuilder.create();
                         alertDialog.show();
                         alertDialog.setCanceledOnTouchOutside(false);
+
+
+                        /**new ContactInfo(DetailsActivity.this, contact).show();
+                        TextView cancel=findViewById(R.id.cancel);
+                        TextView call=findViewById(R.id.call);
+                        cancel.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                //alertDialog.dismiss();
+                            }
+                        });
+                        call.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Intent callIntent = new Intent(Intent.ACTION_CALL);
+                                callIntent.setData(Uri.parse("tel:" + contact));
+                                startActivity(callIntent);
+                            }
+                        });*/
+
+
                     } else
                         Snackbar.make(parentPanel, "No contact available", Snackbar.LENGTH_SHORT).show();
 
@@ -295,7 +321,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
-    private void hitLike(String merchant_id, String userId) {
+    private void hitLike(String merchant_id, String userId, final TextView title) {
         WebServiceHandler webServiceHandler = new WebServiceHandler(DetailsActivity.this);
         webServiceHandler.serviceListener = new WebServiceListener() {
             @Override
@@ -311,11 +337,15 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
                                 switch (msg) {
                                     case "Like Successfully":
                                         totalLike = totalLike + 1;
+                                        iv_like.setColorFilter(getBaseContext().getResources().getColor(R.color.color_heart));
                                         tv_total_like.setText(String.valueOf(totalLike));
+                                        Toast.makeText(DetailsActivity.this,"You Liked "+title.getText(),Toast.LENGTH_SHORT).show();
                                         break;
                                     case "Dislike Successfully":
                                         totalLike = totalLike - 1;
+                                        iv_like.setColorFilter(getBaseContext().getResources().getColor(R.color.uber_white));
                                         tv_total_like.setText(String.valueOf(totalLike));
+                                        Toast.makeText(DetailsActivity.this,"You Disliked "+title.getText(),Toast.LENGTH_SHORT).show();
                                         break;
                                 }
                             }
@@ -358,6 +388,8 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
                             menuStr = main.getString("menu");
                             setMenu(menuStr);
                         }
+                        else
+                            setButton();
                         deals = main.getJSONArray("deals");
                         if (deals.length() > 0) {
                             couponsDetails.clear();
@@ -415,6 +447,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
                                 tv_location.setText(" " + area);
                                 tv_total_like.setText(String.valueOf(totalLike));
                                 tv_terms_and_condition.setText("Terms & Condition:\n" + termsCondition);
+                                tv_terms_and_condition.setTextSize(12);
                             }
                         });
                     }
@@ -438,6 +471,17 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
             @Override
             public void run() {
                 tv_btn_menu.setVisibility(View.VISIBLE);
+                tv_btn_contact.setVisibility(View.VISIBLE);
+                tv_more_info.setVisibility(View.VISIBLE);
+            }
+        });
+    }
+    private void setButton()
+    {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                //tv_btn_menu.setVisibility(View.VISIBLE);
                 tv_btn_contact.setVisibility(View.VISIBLE);
                 tv_more_info.setVisibility(View.VISIBLE);
             }
@@ -579,13 +623,13 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
             }
         }
 
-        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        public CouponsListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.quick_view_item, parent, false);
-            return new ViewHolder(view);
+            return new CouponsListAdapter.ViewHolder(view);
         }
 
         @Override
-        public void onBindViewHolder(final ViewHolder holder, int position) {
+        public void onBindViewHolder(final CouponsListAdapter.ViewHolder holder, int position) {
 
             String coupon_id = "";
             String deals_id = "";
@@ -641,7 +685,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void requestCallPermission() {
-        if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CALL_PHONE)) {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.CALL_PHONE)) {
             Snackbar.make(parentPanel, "Call Permission Required.", Snackbar.LENGTH_INDEFINITE).setAction(android.R.string.ok, new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

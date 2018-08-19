@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:id="@+id/parentPanel"
-    android:layout_marginTop="7dp"
+    android:layout_marginTop="5dp"
     android:layout_width="match_parent"
     android:background="@android:color/white"
     android:paddingLeft="5dp"
@@ -250,7 +250,7 @@
                             android:layout_height="@dimen/_30sdp"
                             android:layout_gravity="center"
                             android:src="@drawable/table"/>
-                        <com.ogma.dealshaiapp.utility.OpenSansFontBold
+                        <com.ogma.dealshaiapp.utility.OpenSansFontRegular
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Buffet\nDeals"
@@ -275,7 +275,7 @@
                             android:layout_height="@dimen/_30sdp"
                             android:layout_gravity="center"
                             android:src="@drawable/party_app"/>
-                        <com.ogma.dealshaiapp.utility.OpenSansFontBold
+                        <com.ogma.dealshaiapp.utility.OpenSansFontRegular
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Private &amp;\nCorporate"
@@ -301,7 +301,7 @@
                             android:layout_gravity="center"
                             android:src="@drawable/alacarte"/>
 
-                        <com.ogma.dealshaiapp.utility.OpenSansFontBold
+                        <com.ogma.dealshaiapp.utility.OpenSansFontRegular
                             android:layout_width="wrap_content"
                             android:textSize="12sp"
                             android:layout_height="wrap_content"
@@ -325,7 +325,7 @@
                             android:layout_height="@dimen/_30sdp"
                             android:layout_gravity="center"
                             android:src="@drawable/combo_app"/>
-                        <com.ogma.dealshaiapp.utility.OpenSansFontBold
+                        <com.ogma.dealshaiapp.utility.OpenSansFontRegular
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Combo\nDeals"
@@ -362,7 +362,7 @@
                             android:layout_height="@dimen/_30sdp"
                             android:layout_gravity="center"
                             android:src="@drawable/spa_app"/>
-                        <com.ogma.dealshaiapp.utility.OpenSansFontBold
+                        <com.ogma.dealshaiapp.utility.OpenSansFontRegular
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Spa &amp;\nSalons"
@@ -387,7 +387,7 @@
                             android:layout_height="@dimen/_30sdp"
                             android:layout_gravity="center"
                             android:src="@drawable/events_app"/>
-                        <com.ogma.dealshaiapp.utility.OpenSansFontBold
+                        <com.ogma.dealshaiapp.utility.OpenSansFontRegular
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Events"
@@ -413,7 +413,7 @@
                             android:layout_height="@dimen/_35sdp"
                             android:layout_gravity="center"
                             android:src="@drawable/activity"/>
-                        <com.ogma.dealshaiapp.utility.OpenSansFontBold
+                        <com.ogma.dealshaiapp.utility.OpenSansFontRegular
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Activities"
@@ -437,7 +437,7 @@
                             android:layout_height="@dimen/_30sdp"
                             android:layout_gravity="center"
                             android:src="@drawable/plan"/>
-                        <com.ogma.dealshaiapp.utility.OpenSansFontBold
+                        <com.ogma.dealshaiapp.utility.OpenSansFontRegular
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="#PlanKarLe"
