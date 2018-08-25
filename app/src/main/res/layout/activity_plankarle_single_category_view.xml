@@ -39,7 +39,7 @@
                         android:layout_margin="@dimen/margin_5"
                         android:layout_toStartOf="@+id/iv_search"
                         android:background="@android:color/white"
-                        android:padding="5dp"
+                        android:padding="1dp"
                         tools:ignore="RelativeOverlap" />
 
                     <ImageView
