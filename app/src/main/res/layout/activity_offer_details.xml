@@ -218,7 +218,6 @@
                                 android:layout_weight="1"
                                 android:background="@drawable/shape_button_background2"
                                 android:gravity="center"
-                                android:padding="5dp"
                                 android:text="Menu"
                                 android:textColor="@android:color/white"
                                 android:textSize="16sp"
@@ -235,6 +234,7 @@
                                 android:background="@drawable/shape_button_background2"
                                 android:gravity="center"
                                 android:text="Contact"
+                                android:visibility="gone"
                                 android:textColor="@android:color/white"
                                 android:textSize="16sp" />
 
@@ -248,7 +248,8 @@
                                 android:layout_weight="1"
                                 android:background="@drawable/shape_button_background2"
                                 android:gravity="center"
-                                android:text="More info"
+                                android:visibility="gone"
+                                android:text="More Info"
                                 android:textColor="@android:color/white"
                                 android:textSize="16sp" />
 
@@ -302,14 +303,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content">
 
-                            <com.ogma.dealshaiapp.utility.OpenSansFontSemibold
+                            <com.ogma.dealshaiapp.utility.OpenSansFontRegular
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Valid For:"
                                 android:textColor="@android:color/black"
                                 android:textSize="@dimen/text_very_small" />
 
-                            <com.ogma.dealshaiapp.utility.OpenSansFontBold
+                            <com.ogma.dealshaiapp.utility.OpenSansFontRegular
                                 android:id="@+id/tv_valid_for"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -324,14 +325,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content">
 
-                            <com.ogma.dealshaiapp.utility.OpenSansFontSemibold
+                            <com.ogma.dealshaiapp.utility.OpenSansFontRegular
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Valid On:"
                                 android:textColor="@android:color/black"
                                 android:textSize="@dimen/text_very_small" />
 
-                            <com.ogma.dealshaiapp.utility.OpenSansFontBold
+                            <com.ogma.dealshaiapp.utility.OpenSansFontRegular
                                 android:id="@+id/tv_valid_on"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -390,8 +391,8 @@
 
                         <ImageView
                             android:id="@+id/iv_minus"
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
                             android:gravity="center"
                             android:padding="@dimen/margin_5"
                             android:src="@drawable/minus" />
@@ -408,8 +409,8 @@
 
                         <ImageView
                             android:id="@+id/iv_plus"
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
                             android:gravity="center"
                             android:padding="@dimen/margin_5"
                             android:src="@drawable/plus" />

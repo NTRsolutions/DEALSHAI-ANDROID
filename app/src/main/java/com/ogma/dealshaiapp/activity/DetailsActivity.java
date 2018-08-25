@@ -270,7 +270,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
 
                     if (contact != null) {
 
-                        alertDialogBuilder = new AlertDialog.Builder(this);
+                        /**alertDialogBuilder = new AlertDialog.Builder(this);
                         alertDialogBuilder.setTitle(R.string.contact);
                         alertDialogBuilder.setMessage(contact);
                         alertDialogBuilder.setPositiveButton(R.string.call, new DialogInterface.OnClickListener() {
@@ -291,11 +291,11 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
                                 });
                         alertDialog = alertDialogBuilder.create();
                         alertDialog.show();
-                        alertDialog.setCanceledOnTouchOutside(false);
+                        alertDialog.setCanceledOnTouchOutside(false);*/
 
 
-                        /**new ContactInfo(DetailsActivity.this, contact).show();
-                        TextView cancel=findViewById(R.id.cancel);
+                        new ContactInfo(DetailsActivity.this, contact).show();
+                        /**TextView cancel=findViewById(R.id.cancel);
                         TextView call=findViewById(R.id.call);
                         cancel.setOnClickListener(new View.OnClickListener() {
                             @Override

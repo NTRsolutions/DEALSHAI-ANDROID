@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">bundle</string>
+    <string name="app_name">DealsHai</string>
 
     <string name="facebook_app_id">500344570329113</string>
     <string name="fb_login_protocol_scheme">fb500344570329113</string>

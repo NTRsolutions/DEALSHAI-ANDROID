@@ -25,6 +25,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ogma.dealshaiapp.R;
+import com.ogma.dealshaiapp.dialog.ContactInfo;
+import com.ogma.dealshaiapp.dialog.MenuInfo;
 import com.ogma.dealshaiapp.dialog.MoreInfoView;
 import com.ogma.dealshaiapp.fragment.FragmentDetailsPageBanner;
 import com.ogma.dealshaiapp.model.CouponsDetails;
@@ -56,6 +58,7 @@ public class OfferActivity extends AppCompatActivity implements View.OnClickList
     private TextView tv_title;
     private TextView tv_location;
     private TextView tv_outlets;
+    private ImageView iv_like;
     private TextView tv_total_amount;
     private String couponId;
     private String merchantName;
@@ -126,6 +129,7 @@ public class OfferActivity extends AppCompatActivity implements View.OnClickList
         tv_outlets = findViewById(R.id.tv_outlets);
         tv_btn_contact = findViewById(R.id.tv_btn_contact);
         tv_more_info = findViewById(R.id.tv_more_info);
+        iv_like = findViewById(R.id.iv_like);
 
         tv_btn_menu = findViewById(R.id.tv_btn_menu);
         TextView tv_btn_contact = findViewById(R.id.tv_btn_contact);
@@ -196,6 +200,7 @@ public class OfferActivity extends AppCompatActivity implements View.OnClickList
         iv_minus.setOnClickListener(this);
         tv_outlets.setOnClickListener(this);
         tv_btn_menu.setOnClickListener(this);
+        iv_like.setOnClickListener(this);
         tv_more_info.setOnClickListener(this);
         tv_btn_contact.setOnClickListener(this);
     }
@@ -243,16 +248,20 @@ public class OfferActivity extends AppCompatActivity implements View.OnClickList
             case R.id.iv_like:
             case R.id.tv_total_like:
                 String msg = hitLike(couponId, userId);
-                switch (msg) {
+                /**switch (msg) {
                     case "Like Successfully":
                         totalLike = totalLike + 1;
+                        iv_like.setColorFilter(getBaseContext().getResources().getColor(R.color.color_heart));
                         tv_total_like.setText(String.valueOf(totalLike));
+                        Toast.makeText(OfferActivity.this,"You Liked "+tv_title.getText(),Toast.LENGTH_SHORT).show();
                         break;
                     case "Dislike Successfully":
                         totalLike = totalLike - 1;
+                        iv_like.setColorFilter(getBaseContext().getResources().getColor(R.color.uber_white));
                         tv_total_like.setText(String.valueOf(totalLike));
+                        Toast.makeText(OfferActivity.this,"You Disliked "+tv_title.getText(),Toast.LENGTH_SHORT).show();
                         break;
-                }
+                }*/
                 break;
             case R.id.iv_share:
                 share_via_app();
@@ -309,12 +318,7 @@ public class OfferActivity extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.tv_btn_menu:
 
-                alertDialogBuilder = new AlertDialog.Builder(this);
-                alertDialogBuilder.setTitle("MENU");
-                alertDialogBuilder.setMessage(menuStr);
-                alertDialog = alertDialogBuilder.create();
-                alertDialog.show();
-                alertDialog.setCanceledOnTouchOutside(true);
+                new MenuInfo(OfferActivity.this, menuStr).show();
                 break;
             case R.id.tv_more_info:
                 if (content != null) {
@@ -327,7 +331,7 @@ public class OfferActivity extends AppCompatActivity implements View.OnClickList
                 } else {
 
                     if (contact != null) {
-                        alertDialogBuilder = new AlertDialog.Builder(this);
+                        /**alertDialogBuilder = new AlertDialog.Builder(this);
                         alertDialogBuilder.setTitle(R.string.contact);
                         alertDialogBuilder.setMessage(contact);
                         alertDialogBuilder.setPositiveButton(R.string.call, new DialogInterface.OnClickListener() {
@@ -348,7 +352,8 @@ public class OfferActivity extends AppCompatActivity implements View.OnClickList
                                 });
                         alertDialog = alertDialogBuilder.create();
                         alertDialog.show();
-                        alertDialog.setCanceledOnTouchOutside(false);
+                        alertDialog.setCanceledOnTouchOutside(false);*/
+                        new ContactInfo(OfferActivity.this, contact).show();
                     } else
                         Snackbar.make(parentPanel, "No contact available", Snackbar.LENGTH_SHORT).show();
                 }
@@ -366,6 +371,26 @@ public class OfferActivity extends AppCompatActivity implements View.OnClickList
                     int isErr = Integer.parseInt(jsonObject.getString("err"));
                     if (isErr == 0) {
                         msg = jsonObject.getString("msg");
+                        OfferActivity.this.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                switch (msg)
+                                {
+                                    case "Like Successfully":
+                                        totalLike = totalLike + 1;
+                                        iv_like.setColorFilter(getBaseContext().getResources().getColor(R.color.color_heart));
+                                        tv_total_like.setText(String.valueOf(totalLike));
+                                        Toast.makeText(OfferActivity.this,"You Liked "+tv_title.getText(),Toast.LENGTH_SHORT).show();
+                                        break;
+                                    case "Dislike Successfully":
+                                        totalLike = totalLike - 1;
+                                        iv_like.setColorFilter(getBaseContext().getResources().getColor(R.color.uber_white));
+                                        tv_total_like.setText(String.valueOf(totalLike));
+                                        Toast.makeText(OfferActivity.this,"You Disliked "+tv_title.getText(),Toast.LENGTH_SHORT).show();
+                                        break;
+                                }
+                            }
+                        });
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -404,6 +429,8 @@ public class OfferActivity extends AppCompatActivity implements View.OnClickList
                                 menuStr = main.getString("menu");
                                 setMenu(menuStr);
                             }
+                            else
+                                setButton();
                             banner = main.getJSONArray("slider");
                             if (banner.length() > 0) {
                                 slidingViewAdapter = new BannerAdapter(fragmentManager, banner);
@@ -513,6 +540,19 @@ public class OfferActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void run() {
                 tv_btn_menu.setVisibility(View.VISIBLE);
+                tv_btn_contact.setVisibility(View.VISIBLE);
+                tv_more_info.setVisibility(View.VISIBLE);
+            }
+        });
+    }
+    private void setButton()
+    {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                //tv_btn_menu.setVisibility(View.VISIBLE);
+                tv_btn_contact.setVisibility(View.VISIBLE);
+                tv_more_info.setVisibility(View.VISIBLE);
             }
         });
     }
