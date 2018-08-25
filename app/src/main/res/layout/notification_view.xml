@@ -43,7 +43,7 @@
         android:background="@drawable/shape"
         android:layout_alignParentBottom="true"
         android:gravity="center"
-        android:padding="7dp"
+        android:padding="1dp"
         android:text="Close"
         android:textColor="@android:color/white"
         android:textSize="18sp" />

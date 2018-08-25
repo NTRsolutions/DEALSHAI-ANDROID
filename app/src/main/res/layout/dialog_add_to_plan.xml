@@ -13,6 +13,7 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:padding="10dp"
         android:layout_alignParentStart="true"
         android:background="@drawable/shape_curved_rectangle_background4">
 
@@ -21,9 +22,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/margin_5"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
             android:background="@drawable/shape"
             android:text="Your Plan"
             android:gravity="center"
@@ -37,9 +35,8 @@
             android:layout_alignParentStart="true"
             android:layout_below="@+id/title_header"
             android:layout_above="@+id/tv_add_to_plan"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="2dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:scrollbarSize="5dp"
             android:scrollbarStyle="insideOverlay"
             android:scrollbarThumbVertical="@color/colorTheme"
@@ -54,10 +51,8 @@
             android:layout_alignParentBottom="true"
             android:background="@drawable/shape"
             android:gravity="center"
-            android:padding="7dp"
+            android:padding="5dp"
             android:text="Add To Plan"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
             android:textColor="@android:color/white"
             android:textSize="18sp" />
 
@@ -67,8 +62,8 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:src="@drawable/cross_icon"
-            android:layout_marginEnd="15dp"
-            android:layout_marginTop="18dp" />
+            android:layout_marginEnd="5dp"
+            android:layout_marginTop="8dp" />
     </RelativeLayout>
 
     <FrameLayout
