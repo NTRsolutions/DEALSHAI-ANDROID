@@ -171,6 +171,7 @@
             android:imeOptions="actionNone"
             android:maxLines="1"
             android:layout_marginStart="@dimen/margin_10"
+            android:fontFamily="sans-serif-smallcaps"
             android:layout_toEndOf="@+id/imageView5"
             android:background="@android:color/transparent"
             android:gravity="center_vertical"

@@ -37,6 +37,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import me.anwarshahriar.calligrapher.Calligrapher;
+
 public class LocationActivity extends AppCompatActivity implements View.OnClickListener {
 
     private LocationManagerHelper locationManagerHelper;
@@ -70,6 +72,9 @@ public class LocationActivity extends AppCompatActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location);
+
+        Calligrapher calligrapher=new Calligrapher(this);
+        calligrapher.setFont(this, "gothic.ttf",true);
 
         locationManagerHelper = new LocationManagerHelper(LocationActivity.this);
         Toolbar toolbar = findViewById(R.id.toolbar);

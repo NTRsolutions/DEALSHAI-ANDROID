@@ -56,7 +56,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:text="VIEW PLAN"
+            android:text="View Plan"
             android:textColor="@android:color/white"
             android:textSize="@dimen/text_medium"
             android:textStyle="bold" />

@@ -33,6 +33,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import me.anwarshahriar.calligrapher.Calligrapher;
+
 /**
  * Created by AndroidDev on 06-10-2017.
  */
@@ -52,6 +54,8 @@ public class FragmentCategoryList extends Fragment implements IndexActivity.OnBa
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_plankarle_category_items, container, false);
+        Calligrapher calligrapher=new Calligrapher(this.getActivity());
+        calligrapher.setFont(this.getActivity(), "gothic.ttf",true);
 
         Session session = new Session(getContext());
         HashMap<String, String> user = session.getUserDetails();

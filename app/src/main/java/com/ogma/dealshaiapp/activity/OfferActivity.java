@@ -242,7 +242,7 @@ public class OfferActivity extends AppCompatActivity implements View.OnClickList
                             .putExtra("couponList", arrayList)
                             .putExtra("totalAmount", String.valueOf(totalAmount)));
                 } else {
-                    Snackbar.make(parentPanel, "Please add a deals into cart please!", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(parentPanel, "Please add some deals!", Snackbar.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.iv_like:
